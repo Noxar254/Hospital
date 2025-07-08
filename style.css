@@ -1701,6 +1701,12 @@ html {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    align-items: center;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    max-width: 600px;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .description-left p {
@@ -1708,6 +1714,9 @@ html {
     font-size: 1.1rem;
     line-height: 1.8;
     color: var(--gray-dark);
+    margin: 0 0 1.2rem 0;
+    text-align: center;
+    word-break: break-word;
     margin: 0;
     text-align: justify;
 }
@@ -1725,24 +1734,38 @@ html {
 }
 
 .emergency-call-btn {
-    background: none;
-    border: none;
-    color: var(--primary-blue);
+    background: var(--white);
+    border: 2px solid var(--pink-accent);
+    color: var(--pink-accent);
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 1.05rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-flex;
+    transition: all 0.3s cubic-bezier(.4,1,.7,1.2);
+    display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.7rem 1.2rem 0.7rem 0;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 0.85rem 2.2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 16px rgba(37,99,235,0.08);
     position: relative;
+    margin: 0 auto;
+    outline: none;
+}
+
+.description-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 }
 
 .emergency-call-btn i {
     font-size: 1rem;
     color: var(--pink-accent);
+    margin-left: 0.3rem;
+    margin-right: 0.7rem;
 }
 
 .emergency-call-btn::after {
@@ -1758,7 +1781,15 @@ html {
 }
 
 .emergency-call-btn:hover {
-    color: var(--pink-accent);
+    color: var(--white);
+    background: var(--pink-accent);
+    border-color: var(--pink-hover);
+    box-shadow: 0 4px 24px rgba(236,72,153,0.18);
+}
+
+.emergency-call-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(37,99,235,0.10);
 }
 
 .emergency-call-btn:hover::after {
