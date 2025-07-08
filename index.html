@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hopewell Hospital - Quality Healthcare Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <!-- Top Navigation (Desktop Only) -->
+        <div class="nav-top">
+            <div class="nav-container">
+                <div class="logo-section">
+                    <div class="logo">
+                        <img src="images/logo.png" alt="Hopewell Hospital Logo" class="logo-image">
+                        <span class="logo-text">Hopewell Hospital</span>
+                    </div>
+                </div>
+                <div class="social-media">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation (Desktop) / Main Navigation (Mobile) -->
+        <div class="nav-bottom">
+            <div class="nav-container">
+                <!-- Mobile Logo and Toggle -->
+                <div class="mobile-header">
+                    <div class="mobile-logo">
+                        <img src="images/logo.png" alt="Hopewell Hospital Logo" class="logo-image">
+                        <span class="logo-text">Hopewell Hospital</span>
+                    </div>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+
+                <!-- Navigation Menu -->
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link active">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#services" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#obstetrics-gynecology">OBS & Gynecology</a></li>
+                            <li><a href="#pediatrics">Pediatrics</a></li>
+                            <li><a href="#dental-services">Dental Services</a></li>
+                            <li><a href="#minor-surgery">Minor Surgery</a></li>
+                            <li><a href="#major-surgery">Major Surgery</a></li>
+                            <li><a href="#referrals">Referrals</a></li>
+                            <li><a href="#specialist-doctors">Specialists</a></li>
+                            <li><a href="#inpatient">In-Patient</a></li>
+                            <li><a href="#outpatient">Out-Patient</a></li>
+                            <li><a href="#family-planning">Family Planning</a></li>
+                            <li><a href="#mother-child-care">Mother & Child Care</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#mental-health" class="nav-link">Mental Health</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#home-care" class="nav-link">Home Care</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#medical-tourism" class="nav-link">Medical Tourism</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link contact-btn">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <video class="hero-video" autoplay muted loop>
+                <source src="images/hero.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>Welcome to Hopewell Hospital</h1>
+                <p>Providing exceptional healthcare services with compassion and excellence</p>
+                <div class="hero-buttons">
+                    <button class="cta-button primary-btn">Book Appointment</button>
+                    <button class="cta-button secondary-btn">Safe Space</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Placeholder sections for navigation links -->
+        <section id="about" class="section about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="images/about us.jpg" alt="Professional Medical Team" class="doctor-image">
+                        <div class="image-overlay">
+                            <div class="stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">4+</span>
+                                    <span class="stat-label">Years Experience</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">5k+</span>
+                                    <span class="stat-label">Happy Patients</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-text">
+                        <h2>About Hopewell Hospital</h2>
+                        <div class="section-subtitle">Founded in 2021 - A Beacon of Healing</div>
+                        <p class="lead-text">Hopewell Hospital was founded in 2021 during the COVID-19 pandemic, starting as a telehealth initiative to reach patients remotely. What began as virtual consultations quickly evolved into a trusted name in accessible, patient-centered care.</p>
+                        
+                        <p class="lead-text">Today, Hopewell stands as a beacon of healing — combining modern medical practices, compassionate care, and a commitment to excellence in our full-service medical center.</p>
+                        
+                        <div class="about-actions">
+                            <button class="learn-more-btn">
+                                <span>Learn More</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <div class="contact-info">
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:+254796780345" class="emergency-number">Emergency: +254 796 780 345</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section services-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Medical Services</h2>
+                    <p>Comprehensive healthcare services delivered with excellence and compassion</p>
+                    <!-- Desktop View All Services Button -->
+                    <div class="desktop-view-all">
+                        <button class="desktop-view-all-btn">
+                            <span>View All Services</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="services-grid">
+                    <!-- Out-Patient Services -->
+                    <div class="service-card">
+                        <div class="service-background">
+                            <div class="service-overlay"></div>
+                            <div class="service-content">
+                                <h3>Out-Patient Services</h3>
+                                <p>Same-day consultations and treatments</p>
+                                <button class="enquire-btn">Enquire</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OBS & Gynecology -->
+                    <div class="service-card">
+                        <div class="service-background">
+                            <div class="service-overlay"></div>
+                            <div class="service-content">
+                                <h3>OBS & Gynecology</h3>
+                                <p>Women's health and maternity care</p>
+                                <button class="enquire-btn">Enquire</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dental Services -->
+                    <div class="service-card">
+                        <div class="service-background">
+                            <div class="service-overlay"></div>
+                            <div class="service-content">
+                                <h3>Dental Services</h3>
+                                <p>Complete oral health care</p>
+                                <button class="enquire-btn">Enquire</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pediatrics (Desktop only initially) -->
+                    <div class="service-card desktop-card">
+                        <div class="service-background">
+                            <div class="service-overlay"></div>
+                            <div class="service-content">
+                                <h3>Pediatrics</h3>
+                                <p>Specialized children's medical care</p>
+                                <button class="enquire-btn">Enquire</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- In-Patient Care (Desktop only initially) -->
+                    <div class="service-card desktop-card">
+                        <div class="service-background">
+                            <div class="service-overlay"></div>
+                            <div class="service-content">
+                                <h3>In-Patient Care</h3>
+                                <p>24/7 hospital care and monitoring</p>
+                                <button class="enquire-btn">Enquire</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Minor Surgery (Desktop only initially) -->
+                    <div class="service-card desktop-card">
+                        <div class="service-background">
+                            <div class="service-overlay"></div>
+                            <div class="service-content">
+                                <h3>Minor Surgery</h3>
+                                <p>Outpatient surgical procedures</p>
+                                <button class="enquire-btn">Enquire</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View All Services Button (Mobile Only) -->
+                <div class="view-all-container">
+                    <button class="view-all-btn" id="viewAllServicesBtn">
+                        <span>View All Services</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Services Description (Edge-to-edge) -->
+            <div class="services-description">
+                <p>At Hopewell Hospital, we offer a full range of medical services — from outpatient care, diagnostics, and pharmacy to emergency and specialist consultations. Our team is dedicated to delivering timely, personalized treatment using both modern technology and compassionate care. Whether online or in-person, your health is always our highest priority. We combine excellence with empathy to ensure every patient receives the best possible care... <a href="#about" class="learn-more-link">Learn More</a></p>
+            </div>
+        </section>
+
+        <section id="mental-health" class="section mental-health-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Mental Health Professionals</h2>
+                    <p>Expert mental health care with compassionate professionals dedicated to your wellbeing</p>
+                </div>
+                
+                <div class="mental-health-grid">
+                    <!-- Psychiatrist -->
+                    <div class="professional-card">
+                        <div class="professional-image">
+                            <img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Psychiatrist" class="professional-photo">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                        </div>
+                        <div class="professional-info">
+                            <h3>Psychiatrist</h3>
+                            <h4 class="professional-name">Dr. Sarah Mitchell</h4>
+                            <p class="professional-bio">Medical doctor specializing in mental health disorders, providing diagnosis and medication management.</p>
+                            <button class="consult-btn">Consult Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Psychologist -->
+                    <div class="professional-card">
+                        <div class="professional-image">
+                            <img src="https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Psychologist" class="professional-photo">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                        </div>
+                        <div class="professional-info">
+                            <h3>Psychologist</h3>
+                            <h4 class="professional-name">Dr. James Anderson</h4>
+                            <p class="professional-bio">Expert in human behavior and mental processes, offering therapy and psychological assessments.</p>
+                            <button class="consult-btn">Consult Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Therapist -->
+                    <div class="professional-card">
+                        <div class="professional-image">
+                            <img src="https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Therapist" class="professional-photo">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                            </div>
+                        </div>
+                        <div class="professional-info">
+                            <h3>Therapist</h3>
+                            <h4 class="professional-name">Maria Rodriguez</h4>
+                            <p class="professional-bio">Licensed professional providing therapeutic interventions for emotional and behavioral challenges.</p>
+                            <button class="consult-btn">Consult Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Counsellors -->
+                    <div class="professional-card">
+                        <div class="professional-image">
+                            <img src="https://images.pexels.com/photos/5428833/pexels-photo-5428833.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Counsellor" class="professional-photo">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                        </div>
+                        <div class="professional-info">
+                            <h3>Counsellors</h3>
+                            <h4 class="professional-name">Michael Thompson</h4>
+                            <p class="professional-bio">Supportive guidance professionals helping individuals navigate life challenges and personal growth.</p>
+                            <button class="consult-btn">Consult Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mental Health Description (Edge-to-edge) -->
+            <div class="mental-health-description">
+                <div class="description-content">
+                    <div class="description-left">
+                        <p>We also provide robust mental health services, both online and in-person — ensuring support is always within reach. From counseling and therapy to psychiatric care, our dedicated mental health team walks with you through every step of your healing journey. At Hopewell, we believe mental wellness is just as important as physical health... <a href="#contact" class="safe-space-link">join our safe space</a></p>
+                        <button class="emergency-call-btn" onclick="window.location.href='tel:+254796780345'">
+                            <i class="fas fa-phone"></i>
+                            <span>Emergency Call</span>
+                        </button>
+                    </div>
+                    <div class="description-right">
+                        <img src="images/mental health.jpg" alt="Mental Health" class="mental-health-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="home-care" class="section">
+            <div class="container">
+                <h2>Home Care</h2>
+                <p>Quality healthcare in the comfort of your home.</p>
+            </div>
+        </section>
+
+        <section id="medical-tourism" class="section">
+            <div class="container">
+                <h2>Medical Tourism</h2>
+                <p>World-class medical care for international patients.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our team for any inquiries.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
