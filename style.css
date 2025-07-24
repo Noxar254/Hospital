@@ -2073,41 +2073,56 @@ body.no-scroll {
 }
 
 .home-care-cta {
-    background: transparent;
-    color: var(--primary-blue);
-    border: 2px solid var(--primary-blue);
-    padding: 0.75rem 1.5rem;
-    border-radius: 0;
+    background: none;
+    color: var(--pink-accent);
+    border: none;
+    padding: 0.5rem 0;
     font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    outline: none;
 }
 
 .home-care-cta::before {
     content: '';
     position: absolute;
-    top: 50%;
+    bottom: -2px;
     left: 50%;
     width: 0;
-    height: 0;
-    background: var(--primary-blue);
-    transform: translate(-50%, -50%);
+    height: 2px;
+    background: linear-gradient(90deg, var(--pink-accent), #db2777);
+    transform: translateX(-50%);
     transition: all 0.3s ease;
-    z-index: -1;
+    z-index: 1;
+}
+
+.home-care-cta::after {
+    content: "→";
+    font-size: 1.1rem;
+    color: var(--pink-accent);
+    transition: transform 0.3s ease;
 }
 
 .home-care-cta:hover::before {
     width: 100%;
-    height: 100%;
 }
 
 .home-care-cta:hover {
-    color: var(--white);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    color: #db2777;
+    transform: translateY(-1px);
+}
+
+.home-care-cta:hover::after {
+    transform: translateX(3px);
+    color: #db2777;
 }
 
 .view-more-container {
@@ -2333,6 +2348,8 @@ body.no-scroll {
         align-self: center;
         width: auto;
         margin: 0 auto;
+        padding: 0.5rem 0;
+        justify-content: center;
     }
     
     .mobile-hidden {
