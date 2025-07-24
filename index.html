@@ -566,13 +566,230 @@
             </div>
         </section>
 
-        <section id="contact" class="section">
+        <section id="contact" class="section contact-section">
             <div class="container">
-                <h2>Contact Us</h2>
-                <p>Get in touch with our team for any inquiries.</p>
+                <div class="contact-content">
+                    <!-- Contact Info -->
+                    <div class="contact-info">
+                        <div class="section-header">
+                            <h2>Get In Touch</h2>
+                            <p>Ready to take the next step in your healthcare journey? We're here to help.</p>
+                        </div>
+                        
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Emergency Hotline</h4>
+                                    <a href="tel:+254796780345">+254 796 780 345</a>
+                                    <span>24/7 Available</span>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Email Us</h4>
+                                    <a href="mailto:info@hopewellhospital.com">info@hopewellhospital.com</a>
+                                    <span>Quick Response</span>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Visit Us</h4>
+                                    <span>Nairobi, Kenya</span>
+                                    <span>Mon - Sun: Open 24/7</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form">
+                        <form class="thin-form" id="contactForm">
+                            <div class="form-group">
+                                <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
+                                <i class="fas fa-user form-icon"></i>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Email Address" required>
+                                <i class="fas fa-envelope form-icon"></i>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                                <i class="fas fa-phone form-icon"></i>
+                            </div>
+                            
+                            <div class="form-group">
+                                <select id="service" name="service" required>
+                                    <option value="">Select Service Type</option>
+                                    <option value="general-consultation">General Consultation</option>
+                                    <option value="emergency">Emergency Care</option>
+                                    <option value="mental-health">Mental Health</option>
+                                    <option value="home-care">Home Care</option>
+                                    <option value="medical-tourism">Medical Tourism</option>
+                                    <option value="obs-gynecology">OBS & Gynecology</option>
+                                    <option value="pediatrics">Pediatrics</option>
+                                    <option value="dental">Dental Services</option>
+                                    <option value="other">Other Services</option>
+                                </select>
+                                <i class="fas fa-chevron-down form-select-icon"></i>
+                            </div>
+                            
+                            <div class="form-group">
+                                <textarea id="message" name="message" placeholder="How can we help you today?" rows="4" required></textarea>
+                                <i class="fas fa-comment form-icon"></i>
+                            </div>
+                            
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" id="privacy" name="privacy" required>
+                                    <span class="checkmark"></span>
+                                    <span class="checkbox-text">I agree to the <a href="#" class="privacy-link">Privacy Policy</a> and consent to data processing for medical services.</span>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">
+                                <span>Send Message</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="container">
+                <div class="footer-grid">
+                    <!-- Hospital Info -->
+                    <div class="footer-section">
+                        <div class="footer-logo">
+                            <img src="images/logo.png" alt="Hopewell Hospital Logo" class="footer-logo-image">
+                            <span class="footer-logo-text">Hopewell Hospital</span>
+                        </div>
+                        <p class="footer-description">
+                            Your trusted healthcare partner since 2021. Providing exceptional medical services with compassion, excellence, and cutting-edge technology.
+                        </p>
+                        <div class="footer-social">
+                            <a href="#" class="footer-social-link" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="footer-social-link" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="footer-social-link" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="footer-social-link" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="footer-social-link" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="footer-section">
+                        <h4 class="footer-title">Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#services">Our Services</a></li>
+                            <li><a href="#mental-health">Mental Health</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
+                        </ul>
+                        <div class="footer-buttons">
+                            <div class="footer-careers">
+                                <a href="#careers" class="careers-btn">
+                                    <span>Work with Us</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                            <div class="footer-partner">
+                                <a href="#partnership" class="partner-btn">
+                                    <span>Partner with Us</span>
+                                    <i class="fas fa-handshake"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Services -->
+                    <div class="footer-section">
+                        <h4 class="footer-title">Our Services</h4>
+                        <ul class="footer-links">
+                            <li><a href="#services">Emergency Care</a></li>
+                            <li><a href="#services">OBS & Gynecology</a></li>
+                            <li><a href="#services">Pediatrics</a></li>
+                            <li><a href="#home-care">Home Care</a></li>
+                            <li><a href="#medical-tourism">Medical Tourism</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="footer-section">
+                        <h4 class="footer-title">Contact Info</h4>
+                        <div class="footer-contact">
+                            <div class="footer-contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Nairobi, Kenya</span>
+                            </div>
+                            <div class="footer-contact-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:+254796780345">+254 796 780 345</a>
+                            </div>
+                            <div class="footer-contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:info@hopewellhospital.com">info@hopewellhospital.com</a>
+                            </div>
+                            <div class="footer-contact-item">
+                                <i class="fas fa-clock"></i>
+                                <span>24/7 Emergency Services</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <div class="footer-copyright">
+                        <p>&copy; 2025 Hopewell Hospital. All rights reserved.</p>
+                    </div>
+                    <div class="footer-legal">
+                        <a href="#" class="footer-legal-link">Privacy Policy</a>
+                        <a href="#" class="footer-legal-link">Terms of Service</a>
+                        <a href="#" class="footer-legal-link">Medical Disclaimer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Contact Button -->
+    <div class="floating-contact">
+        <button class="floating-contact-btn" id="floatingContactBtn" title="WhatsApp Us">
+            <i class="fab fa-whatsapp"></i>
+        </button>
+    </div>
 
     <script src="script.js"></script>
 </body>
