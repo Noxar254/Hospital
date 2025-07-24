@@ -338,3 +338,112 @@ if (!document.querySelector('#service-animations')) {
     `;
     document.head.appendChild(animationStyle);
 }
+
+// Home Care View More/Less functionality
+const viewMoreHomeCareBtn = document.getElementById('viewMoreHomeCareBtn');
+if (viewMoreHomeCareBtn) {
+    viewMoreHomeCareBtn.addEventListener('click', function() {
+        const hiddenCards = document.querySelectorAll('.home-care-card.mobile-hidden');
+        const btnText = this.querySelector('span');
+        const btnIcon = this.querySelector('i');
+        
+        if (!this.classList.contains('expanded')) {
+            // Show more cards
+            hiddenCards.forEach((card, index) => {
+                card.classList.add('show');
+                card.style.animation = `slideDown 0.3s ease ${index * 0.1}s forwards`;
+            });
+            
+            btnText.textContent = 'View Less Services';
+            btnIcon.className = 'fas fa-chevron-up';
+            this.classList.add('expanded');
+        } else {
+            // Hide cards
+            hiddenCards.forEach((card, index) => {
+                card.style.animation = `slideUp 0.3s ease ${index * 0.1}s forwards`;
+                setTimeout(() => {
+                    card.classList.remove('show');
+                }, 300 + (index * 100));
+            });
+            
+            btnText.textContent = 'View More Services';
+            btnIcon.className = 'fas fa-chevron-down';
+            this.classList.remove('expanded');
+        }
+    });
+}
+
+// Add animation styles for home care
+if (!document.querySelector('#home-care-animations')) {
+    const homeCareAnimationStyle = document.createElement('style');
+    homeCareAnimationStyle.id = 'home-care-animations';
+    homeCareAnimationStyle.textContent = `
+        @keyframes slideUp {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+    `;
+    document.head.appendChild(homeCareAnimationStyle);
+}
+
+// Desktop Horizontal Scroll functionality for Home Care
+const scrollLeftBtn = document.getElementById('scrollLeft');
+const scrollRightBtn = document.getElementById('scrollRight');
+const homeCareGrid = document.getElementById('homeCareGrid');
+
+if (scrollLeftBtn && scrollRightBtn && homeCareGrid) {
+    // Scroll amount - about one card width
+    const scrollAmount = 365; // updated card width + gap
+    
+    scrollLeftBtn.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent any card click events
+        homeCareGrid.scrollBy({
+            left: -scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+    
+    scrollRightBtn.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent any card click events
+        homeCareGrid.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Update button states based on scroll position
+    function updateScrollButtons() {
+        if (window.innerWidth > 768) { // Only on desktop
+            const scrollLeft = homeCareGrid.scrollLeft;
+            const maxScroll = homeCareGrid.scrollWidth - homeCareGrid.clientWidth;
+            
+            const leftBtn = document.getElementById('scrollLeft');
+            const rightBtn = document.getElementById('scrollRight');
+            
+            if (leftBtn) {
+                leftBtn.style.opacity = scrollLeft <= 0 ? '0.3' : '1';
+                leftBtn.style.pointerEvents = scrollLeft <= 0 ? 'none' : 'auto';
+            }
+            
+            if (rightBtn) {
+                rightBtn.style.opacity = scrollLeft >= maxScroll - 1 ? '0.3' : '1';
+                rightBtn.style.pointerEvents = scrollLeft >= maxScroll - 1 ? 'none' : 'auto';
+            }
+        }
+    }
+    
+    // Listen for scroll events to update button states
+    homeCareGrid.addEventListener('scroll', updateScrollButtons);
+    
+    // Initial update
+    updateScrollButtons();
+    
+    // Update on window resize
+    window.addEventListener('resize', updateScrollButtons);
+}
