@@ -9,7 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileToggle.addEventListener('click', function() {
         this.classList.toggle('active');
         navMenu.classList.toggle('active');
-        
+        // Prevent background scroll when menu is open
+        if (navMenu.classList.contains('active')) {
+            document.body.classList.add('no-scroll');
+        } else {
+            document.body.classList.remove('no-scroll');
+        }
         // Add animation delay for menu items
         const menuItems = navMenu.querySelectorAll('.nav-item');
         menuItems.forEach((item, index) => {
@@ -30,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!this.parentElement.classList.contains('dropdown')) {
                     mobileToggle.classList.remove('active');
                     navMenu.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
                 }
             }
         });
@@ -140,6 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!isClickInsideNav && navMenu.classList.contains('active')) {
             mobileToggle.classList.remove('active');
             navMenu.classList.remove('active');
+            document.body.classList.remove('no-scroll');
         }
     });
 
@@ -149,6 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Reset mobile menu state on desktop
             mobileToggle.classList.remove('active');
             navMenu.classList.remove('active');
+            document.body.classList.remove('no-scroll');
             
             // Reset dropdown states
             dropdowns.forEach(dropdown => {

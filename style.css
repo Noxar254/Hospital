@@ -1846,3 +1846,25 @@ html {
         padding: 0.6rem 0.8rem 0.6rem 0;
     }
 }
+
+body.no-scroll {
+    overflow: hidden !important;
+    position: fixed;
+    width: 100vw;
+}
+
+@media (max-width: 768px) {
+    .about-image,
+    .about-text {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        left: 0;
+        right: 0;
+        box-sizing: border-box;
+        position: static;
+    }
+    .about-text {
+        padding: 1rem;
+    }
+}
