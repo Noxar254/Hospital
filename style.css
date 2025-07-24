@@ -1868,3 +1868,32 @@ body.no-scroll {
         padding: 1rem;
     }
 }
+
+@media (max-width: 768px) {
+    .container {
+        max-width: none !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+    .section {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+    .about-content,
+    .services-grid,
+    .mental-health-grid,
+    .description-content {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-sizing: border-box;
+    }
+}
