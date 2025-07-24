@@ -2521,3 +2521,263 @@ body.no-scroll {
         opacity: 0.7;
     }
 }
+
+/* Medical Tourism Section - Simple & Clean */
+.medical-tourism-section {
+    padding: 4rem 0;
+    background: #f8fafc;
+}
+
+.medical-tourism-section .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.medical-tourism-section .section-header h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.medical-tourism-section .section-header p {
+    font-size: 1.1rem;
+    color: #64748b;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.tourism-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.tourism-intro h3 {
+    font-size: 1.8rem;
+    color: var(--gray-dark);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.tourism-intro p {
+    font-size: 1rem;
+    color: #64748b;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.tourism-intro p:last-of-type {
+    margin-bottom: 2.5rem;
+}
+
+.tourism-cta-btn {
+    background: transparent;
+    color: var(--pink-accent);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    text-decoration: underline;
+    text-decoration-color: var(--pink-accent);
+    text-underline-offset: 4px;
+}
+
+.tourism-cta-btn:hover {
+    color: var(--pink-hover);
+    text-decoration-color: var(--pink-hover);
+    transform: translateY(-2px);
+}
+
+.tourism-cta-btn i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+    color: var(--pink-accent);
+}
+
+.tourism-cta-btn:hover i {
+    transform: translateX(5px);
+    color: var(--pink-hover);
+}
+
+.partner-hospitals h4 {
+    font-size: 1.5rem;
+    color: var(--gray-dark);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.hospitals-grid {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.hospital-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.hospital-item:hover {
+    background: rgba(236, 72, 153, 0.05);
+}
+
+.hospital-content {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex: 1;
+}
+
+.hospital-flag {
+    font-size: 1.2rem;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 0;
+    flex-shrink: 0;
+}
+
+.hospital-details {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+}
+
+.hospital-details h5 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gray-dark);
+    margin: 0 0 0.2rem 0;
+    line-height: 1.2;
+}
+
+.hospital-details span {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.hospital-specialty {
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 400;
+    margin: 0;
+    opacity: 0.8;
+    line-height: 1.3;
+}
+
+.hospital-learn-more {
+    background: transparent;
+    color: var(--pink-accent);
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    text-decoration: underline;
+    text-decoration-color: var(--pink-accent);
+    text-underline-offset: 2px;
+}
+
+.hospital-learn-more:hover {
+    color: var(--pink-hover);
+    text-decoration-color: var(--pink-hover);
+    transform: translateX(3px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .tourism-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    
+    .medical-tourism-section .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .tourism-intro h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .tourism-intro p {
+        font-size: 0.95rem;
+        text-align: left;
+        margin-bottom: 1.2rem;
+    }
+    
+    .tourism-cta-btn {
+        padding: 0.9rem 1.8rem;
+        font-size: 1rem;
+        width: auto;
+        justify-content: flex-start;
+        border-radius: 0;
+        text-align: left;
+    }
+    
+    .hospital-item {
+        padding: 0.8rem;
+        flex-direction: row;
+        gap: 0.8rem;
+    }
+    
+    .hospital-content {
+        gap: 0.6rem;
+    }
+    
+    .hospital-details {
+        text-align: left;
+    }
+    
+    .hospital-flag {
+        width: 25px;
+        height: 25px;
+        font-size: 1rem;
+    }
+    
+    .hospital-details h5 {
+        font-size: 0.9rem;
+    }
+    
+    .hospital-specialty {
+        font-size: 0.7rem;
+    }
+    
+    .hospital-learn-more {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+    }
+}
