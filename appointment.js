@@ -418,34 +418,153 @@ function submitAppointmentForm() {
     const originalText = submitBtn.innerHTML;
     
     // Show loading state
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Booking Appointment...</span>';
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Booking...</span>';
     submitBtn.disabled = true;
     form.classList.add('form-loading');
     
-    // Simulate form submission (replace with actual API call)
-    setTimeout(() => {
-        // Collect form data
-        const formData = new FormData(form);
-        const appointmentData = {};
-        
-        for (let [key, value] of formData.entries()) {
-            appointmentData[key] = value;
+    // Use Firebase if available, otherwise fallback to original behavior
+    if (window.firebase && window.firebase.db) {
+        submitToFirebase();
+    } else {
+        // Fallback to original simulation
+        simulateFormSubmission();
+    }
+    
+    async function submitToFirebase() {
+        try {
+            // Collect comprehensive form data
+            const formData = {
+                // Personal Information
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                dateOfBirth: document.getElementById('dateOfBirth').value,
+                gender: document.getElementById('gender').value,
+                
+                // Appointment Details
+                appointmentType: document.getElementById('appointmentType').value,
+                department: document.getElementById('department').value,
+                preferredDate: document.getElementById('preferredDate').value,
+                preferredTime: document.getElementById('preferredTime').value,
+                urgency: document.getElementById('urgency').value,
+                reasonForVisit: document.getElementById('reasonForVisit').value,
+                
+                // Medical Information
+                currentMedications: document.getElementById('currentMedications')?.value || '',
+                allergies: document.getElementById('allergies')?.value || '',
+                medicalHistory: document.getElementById('medicalHistory')?.value || '',
+                
+                // Insurance & Emergency Contact
+                insuranceProvider: document.getElementById('insuranceProvider')?.value || '',
+                policyNumber: document.getElementById('policyNumber')?.value || '',
+                emergencyContactName: document.getElementById('emergencyContactName')?.value || '',
+                emergencyContactPhone: document.getElementById('emergencyContactPhone')?.value || '',
+                emergencyContactRelation: document.getElementById('emergencyContactRelation')?.value || '',
+                
+                // Additional Information
+                specialRequests: document.getElementById('specialRequests')?.value || '',
+                preferredLanguage: document.getElementById('preferredLanguage')?.value || '',
+                hearAboutUs: document.getElementById('hearAboutUs')?.value || '',
+                
+                // Consent
+                hipaaConsent: document.getElementById('hipaaConsent')?.checked || false,
+                telemedicineConsent: document.getElementById('telemedicineConsent')?.checked || false,
+                
+                // Metadata
+                timestamp: window.firebase.serverTimestamp(),
+                formType: 'appointment',
+                source: 'appointment-page',
+                status: 'pending'
+            };
+            
+            console.log("📋 Appointment data to submit:", formData);
+            
+            // Add to Firestore
+            const docRef = await window.firebase.addDoc(
+                window.firebase.collection(window.firebase.db, "appointment-bookings"), 
+                formData
+            );
+            
+            console.log("✅ Appointment booked successfully with ID: ", docRef.id);
+            
+            // Show success message
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> <span>✓ Booked</span>';
+            submitBtn.style.backgroundColor = '#10b981';
+            
+            // Show success modal after short delay
+            setTimeout(() => {
+                showSuccessMessage();
+                
+                // Reset form
+                form.reset();
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.backgroundColor = '';
+                submitBtn.disabled = false;
+                form.classList.remove('form-loading');
+            }, 2000);
+            
+        } catch (error) {
+            console.error("❌ Detailed error booking appointment:");
+            console.error("Error code:", error.code);
+            console.error("Error message:", error.message);
+            console.error("Full error:", error);
+            
+            // Show specific error state
+            let errorText = '✗ Error';
+            if (error.code === 'permission-denied') {
+                errorText = '✗ Permission';
+                console.error("🔒 PERMISSION DENIED: Check Firebase security rules!");
+            } else if (error.code === 'unavailable') {
+                errorText = '✗ Offline';
+            } else if (error.code === 'invalid-argument') {
+                errorText = '✗ Invalid';
+            }
+            
+            submitBtn.innerHTML = `<i class="fas fa-exclamation-triangle"></i> <span>${errorText}</span>`;
+            submitBtn.style.backgroundColor = '#ef4444';
+            
+            // Reset button after 3 seconds
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.backgroundColor = '';
+                submitBtn.disabled = false;
+                form.classList.remove('form-loading');
+            }, 3000);
+            
+            // Show error notification
+            showNotification('❌ Error booking appointment. Please try again or call our hotline.', 'error');
         }
-        
-        console.log('Appointment Data:', appointmentData);
-        
-        // Show success message
-        showSuccessMessage();
-        
-        // Reset form
-        form.reset();
-        
-        // Reset button
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        form.classList.remove('form-loading');
-        
-    }, 2000);
+    }
+    
+    function simulateFormSubmission() {
+        // Original simulation code for fallback
+        setTimeout(() => {
+            // Collect form data
+            const formData = new FormData(form);
+            const appointmentData = {};
+            
+            for (let [key, value] of formData.entries()) {
+                appointmentData[key] = value;
+            }
+            
+            console.log('Appointment Data:', appointmentData);
+            
+            // Show success message
+            showSuccessMessage();
+            
+            // Reset form
+            form.reset();
+            
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            form.classList.remove('form-loading');
+            
+        }, 2000);
+    }
 }
 
 // Show success message

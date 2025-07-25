@@ -643,40 +643,175 @@ function submitHomeCareForm() {
     const originalText = submitBtn.innerHTML;
     
     // Show loading state
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Scheduling Service...</span>';
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Scheduling...</span>';
     submitBtn.disabled = true;
     form.classList.add('form-loading');
     
-    // Simulate form submission (replace with actual API call)
-    setTimeout(() => {
-        // Collect form data
-        const formData = new FormData(form);
-        const homecareData = {};
-        
-        for (let [key, value] of formData.entries()) {
-            homecareData[key] = value;
+    // Use Firebase if available, otherwise fallback to original behavior
+    if (window.firebase && window.firebase.db) {
+        submitToFirebase();
+    } else {
+        // Fallback to original simulation
+        simulateFormSubmission();
+    }
+    
+    async function submitToFirebase() {
+        try {
+            // Collect comprehensive form data
+            const formData = {
+                // Personal Information
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                age: document.getElementById('age')?.value || '',
+                
+                // Service Details
+                serviceType: document.getElementById('serviceType').value,
+                preferredDate: document.getElementById('preferredDate').value,
+                preferredTime: document.getElementById('preferredTime').value,
+                urgency: document.getElementById('urgency').value,
+                
+                // Address Information
+                address: document.getElementById('address').value,
+                city: document.getElementById('city')?.value || '',
+                county: document.getElementById('county')?.value || '',
+                
+                // Medical Information
+                medicalCondition: document.getElementById('medicalCondition')?.value || '',
+                medications: document.getElementById('medications')?.value || '',
+                allergies: document.getElementById('allergies')?.value || '',
+                
+                // Additional Information
+                specialRequests: document.getElementById('specialRequests')?.value || '',
+                previousService: document.getElementById('previousService')?.value || '',
+                
+                // Consent
+                privacyConsent: document.getElementById('privacyConsent')?.checked || false,
+                communicationConsent: document.getElementById('communicationConsent')?.checked || false,
+                
+                // Metadata
+                timestamp: window.firebase.serverTimestamp(),
+                formType: 'homecare',
+                source: 'homecare-page',
+                status: 'pending'
+            };
+            
+            console.log("🏠 Home care data to submit:", formData);
+            
+            // Add to Firestore
+            const docRef = await window.firebase.addDoc(
+                window.firebase.collection(window.firebase.db, "homecare-bookings"), 
+                formData
+            );
+            
+            console.log("✅ Home care service booked successfully with ID: ", docRef.id);
+            
+            // Show success message
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> <span>✓ Scheduled</span>';
+            submitBtn.style.backgroundColor = '#10b981';
+            
+            // Prepare email data
+            const emailData = {
+                fullName: formData.fullName,
+                email: formData.email,
+                serviceType: formData.serviceType,
+                serviceDate: formData.preferredDate,
+                serviceTime: formData.preferredTime,
+                bookingId: docRef.id,
+                address: formData.address,
+                urgency: formData.urgency
+            };
+            
+            // Send confirmation email
+            let emailSent = false;
+            if (window.sendConfirmationEmail) {
+                emailSent = await window.sendConfirmationEmail(emailData);
+            }
+            
+            // Show success modal after short delay
+            setTimeout(() => {
+                showSuccessMessage(emailSent);
+                
+                // Reset form
+                form.reset();
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.backgroundColor = '';
+                submitBtn.disabled = false;
+                form.classList.remove('form-loading');
+            }, 2000);
+            
+        } catch (error) {
+            console.error("❌ Detailed error booking home care service:");
+            console.error("Error code:", error.code);
+            console.error("Error message:", error.message);
+            console.error("Full error:", error);
+            
+            // Show specific error state
+            let errorText = '✗ Error';
+            if (error.code === 'permission-denied') {
+                errorText = '✗ Permission';
+                console.error("🔒 PERMISSION DENIED: Check Firebase security rules!");
+            } else if (error.code === 'unavailable') {
+                errorText = '✗ Offline';
+            } else if (error.code === 'invalid-argument') {
+                errorText = '✗ Invalid';
+            }
+            
+            submitBtn.innerHTML = `<i class="fas fa-exclamation-triangle"></i> <span>${errorText}</span>`;
+            submitBtn.style.backgroundColor = '#ef4444';
+            
+            // Reset button after 3 seconds
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.backgroundColor = '';
+                submitBtn.disabled = false;
+                form.classList.remove('form-loading');
+            }, 3000);
+            
+            // Show error notification
+            showNotification('❌ Error scheduling service. Please try again or call our hotline.', 'error');
         }
-        
-        console.log('Home Care Data:', homecareData);
-        
-        // Show success message
-        showSuccessMessage();
-        
-        // Reset form
-        form.reset();
-        
-        // Reset button
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        form.classList.remove('form-loading');
-        
-    }, 2000);
+    }
+    
+    function simulateFormSubmission() {
+        // Original simulation code for fallback
+        setTimeout(() => {
+            // Collect form data
+            const formData = new FormData(form);
+            const homecareData = {};
+            
+            for (let [key, value] of formData.entries()) {
+                homecareData[key] = value;
+            }
+            
+            console.log('Home Care Data:', homecareData);
+            
+            // Show success message
+            showSuccessMessage(false);
+            
+            // Reset form
+            form.reset();
+            
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            form.classList.remove('form-loading');
+            
+        }, 2000);
+    }
 }
 
 // Show success message
-function showSuccessMessage() {
+function showSuccessMessage(emailSent = false) {
     const successModal = document.createElement('div');
     successModal.className = 'success-modal';
+    
+    const emailStatusHtml = emailSent 
+        ? '<li><i class="fas fa-envelope" style="color: #10b981;"></i> Confirmation email sent to your inbox</li>'
+        : '<li><i class="fas fa-envelope" style="color: #f59e0b;"></i> Confirmation will be sent via phone call</li>';
+    
     successModal.innerHTML = `
         <div class="success-modal-content">
             <div class="success-icon">
@@ -687,6 +822,7 @@ function showSuccessMessage() {
             <div class="success-details">
                 <p><strong>What's Next?</strong></p>
                 <ul>
+                    ${emailStatusHtml}
                     <li>Our team will call you to confirm service details</li>
                     <li>We'll verify your address and requirements</li>
                     <li>You'll receive a confirmation with the assigned healthcare professional</li>

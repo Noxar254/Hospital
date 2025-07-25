@@ -21,6 +21,216 @@
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Firebase v9 SDK -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js';
+        import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbqzF5Yxgy-_O13bNeRogIkLb4MThlBYE",
+            authDomain: "hopewell-health-3bf9a.firebaseapp.com",
+            projectId: "hopewell-health-3bf9a",
+            storageBucket: "hopewell-health-3bf9a.firebasestorage.app",
+            messagingSenderId: "500281950350",
+            appId: "1:500281950350:web:0a77ec2c5ec06a76bc49df",
+            measurementId: "G-RS8YX8146F"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        // Make Firebase available globally
+        window.firebase = { db, collection, addDoc, serverTimestamp };
+        
+        // Contact Form Handler
+        window.handleContactForm = async function(event) {
+            event.preventDefault();
+            
+            const submitBtn = event.target.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            try {
+                // Show loading state
+                submitBtn.innerHTML = '<span>Sending...</span>';
+                submitBtn.disabled = true;
+                
+                // Debug: Check if Firebase is properly initialized
+                console.log("Firebase db:", db);
+                console.log("Firebase functions:", { collection, addDoc, serverTimestamp });
+                
+                // Get form data
+                const formData = {
+                    fullName: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    service: document.getElementById('service').value,
+                    message: document.getElementById('message').value,
+                    timestamp: serverTimestamp(),
+                    formType: 'contact',
+                    source: 'index-page'
+                };
+                
+                console.log("Form data to submit:", formData);
+                
+                // Add to Firestore
+                const docRef = await addDoc(collection(db, "contact-submissions"), formData);
+                console.log("✅ Contact form submitted successfully with ID: ", docRef.id);
+                
+                // Show success message
+                submitBtn.innerHTML = '<span>✓ Sent</span>';
+                submitBtn.style.backgroundColor = '#10b981';
+                
+                // Reset form after 2 seconds
+                setTimeout(() => {
+                    event.target.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.backgroundColor = '';
+                    submitBtn.disabled = false;
+                }, 2000);
+                
+            } catch (error) {
+                console.error("❌ Detailed error submitting contact form:");
+                console.error("Error code:", error.code);
+                console.error("Error message:", error.message);
+                console.error("Full error:", error);
+                
+                // Show specific error state
+                let errorText = '✗ Error';
+                if (error.code === 'permission-denied') {
+                    errorText = '✗ Permission';
+                    console.error("🔒 PERMISSION DENIED: Check Firebase security rules!");
+                } else if (error.code === 'unavailable') {
+                    errorText = '✗ Offline';
+                } else if (error.code === 'invalid-argument') {
+                    errorText = '✗ Invalid';
+                }
+                
+                submitBtn.innerHTML = `<span>${errorText}</span>`;
+                submitBtn.style.backgroundColor = '#ef4444';
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.backgroundColor = '';
+                    submitBtn.disabled = false;
+                }, 3000);
+            }
+        };
+
+        // Newsletter Subscription Handler
+        window.handleNewsletterSubscription = async function() {
+            const emailInput = document.getElementById('newsletterEmail');
+            const submitBtn = document.querySelector('.newsletter-cta-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            if (!emailInput.value || !emailInput.checkValidity()) {
+                submitBtn.innerHTML = '<span>✗ Invalid</span>';
+                submitBtn.style.backgroundColor = '#ef4444';
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.backgroundColor = '';
+                }, 2000);
+                return;
+            }
+            
+            try {
+                // Show loading state
+                submitBtn.innerHTML = '<span>Subscribing...</span>';
+                submitBtn.disabled = true;
+                
+                // Debug: Check if Firebase is properly initialized
+                console.log("Newsletter - Firebase db:", db);
+                
+                // Get form data
+                const formData = {
+                    email: emailInput.value,
+                    timestamp: serverTimestamp(),
+                    formType: 'newsletter',
+                    source: 'index-page'
+                };
+                
+                console.log("Newsletter data to submit:", formData);
+                
+                // Add to Firestore
+                const docRef = await addDoc(collection(db, "newsletter-subscriptions"), formData);
+                console.log("✅ Newsletter subscription submitted successfully with ID: ", docRef.id);
+                
+                // Show success message
+                submitBtn.innerHTML = '<span>✓ Done</span>';
+                submitBtn.style.backgroundColor = '#10b981';
+                
+                // Reset form after 2 seconds
+                setTimeout(() => {
+                    emailInput.value = '';
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.backgroundColor = '';
+                    submitBtn.disabled = false;
+                }, 2000);
+                
+            } catch (error) {
+                console.error("❌ Detailed error submitting newsletter subscription:");
+                console.error("Error code:", error.code);
+                console.error("Error message:", error.message);
+                console.error("Full error:", error);
+                
+                // Show specific error state
+                let errorText = '✗ Error';
+                if (error.code === 'permission-denied') {
+                    errorText = '✗ Permission';
+                    console.error("🔒 PERMISSION DENIED: Check Firebase security rules!");
+                } else if (error.code === 'unavailable') {
+                    errorText = '✗ Offline';
+                } else if (error.code === 'invalid-argument') {
+                    errorText = '✗ Invalid';
+                }
+                
+                submitBtn.innerHTML = `<span>${errorText}</span>`;
+                submitBtn.style.backgroundColor = '#ef4444';
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.backgroundColor = '';
+                    submitBtn.disabled = false;
+                }, 3000);
+            }
+        };
+
+        // Initialize form handlers when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Contact form
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', handleContactForm);
+            }
+            
+            // Newsletter form
+            const newsletterBtn = document.querySelector('.newsletter-cta-btn');
+            const newsletterInput = document.getElementById('newsletterEmail');
+            
+            if (newsletterBtn) {
+                newsletterBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    handleNewsletterSubscription();
+                });
+            }
+            
+            if (newsletterInput) {
+                newsletterInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleNewsletterSubscription();
+                    }
+                });
+            }
+        });
+    </script>
 </head>
 <body>
     <!-- Navigation Bar -->
