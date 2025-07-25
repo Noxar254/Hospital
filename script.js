@@ -1101,4 +1101,76 @@ if (window.innerWidth <= 768) {
         const img = new Image();
         img.src = src;
     });
+
+    // Initialize testimonials auto-scroll
+    initTestimonialsScroll();
+}
+
+// Testimonials Auto-Scroll Functionality
+function initTestimonialsScroll() {
+    const testimonialsScroll = document.getElementById('testimonialsScroll');
+    if (!testimonialsScroll) return;
+
+    let isScrolling = false;
+    let scrollSpeed = 1; // pixels per frame
+    let currentPosition = 0;
+    let animationId;
+
+    // Calculate total scroll width (half since we duplicate for seamless loop)
+    const scrollWidth = testimonialsScroll.scrollWidth / 2;
+
+    function autoScroll() {
+        if (!isScrolling) {
+            currentPosition += scrollSpeed;
+            
+            // Reset position when we've scrolled through half the content
+            if (currentPosition >= scrollWidth) {
+                currentPosition = 0;
+            }
+            
+            testimonialsScroll.style.transform = `translateX(-${currentPosition}px)`;
+        }
+        
+        animationId = requestAnimationFrame(autoScroll);
+    }
+
+    // Start auto-scroll
+    autoScroll();
+
+    // Pause on hover
+    testimonialsScroll.addEventListener('mouseenter', () => {
+        isScrolling = true;
+    });
+
+    // Resume on mouse leave
+    testimonialsScroll.addEventListener('mouseleave', () => {
+        isScrolling = false;
+    });
+
+    // Pause on touch/tap for mobile
+    testimonialsScroll.addEventListener('touchstart', () => {
+        isScrolling = true;
+    });
+
+    testimonialsScroll.addEventListener('touchend', () => {
+        setTimeout(() => {
+            isScrolling = false;
+        }, 2000); // Resume after 2 seconds
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        // Recalculate on resize
+        const newScrollWidth = testimonialsScroll.scrollWidth / 2;
+        if (currentPosition >= newScrollWidth) {
+            currentPosition = 0;
+        }
+    });
+
+    // Cleanup function
+    window.addEventListener('beforeunload', () => {
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+        }
+    });
 }
