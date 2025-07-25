@@ -659,8 +659,42 @@ body {
     transform: translateX(3px);
 }
 
-/* Mobile Responsive */
+/* Mobile Responsive - Enhanced for Better Mobile Experience */
 @media (max-width: 768px) {
+    /* Global Mobile Optimizations - Stable Layout */
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+        position: relative;
+        overflow-x: hidden;
+    }
+    
+    .container {
+        padding: 0 1rem;
+        max-width: 100%;
+        margin: 0 auto;
+        position: relative;
+    }
+    
+    .section {
+        padding: 3rem 0;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+        line-height: 1.3;
+        margin-bottom: 0.8rem;
+    }
+    
+    .section-header p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Navigation Optimizations */
     .nav-top {
         display: none;
     }
@@ -673,29 +707,33 @@ body {
         z-index: 1000;
         background: var(--white);
         box-shadow: 0 2px 20px var(--shadow);
+        padding: 0.75rem 0;
     }
 
     .nav-bottom .nav-container {
         justify-content: flex-start;
+        padding: 0 1rem;
     }
 
     .mobile-header {
         display: flex;
         width: 100%;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .mobile-logo {
         display: flex !important;
         align-items: center;
         gap: 0.75rem;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-weight: 700;
         color: var(--primary-blue);
         z-index: 1001;
     }
 
     .mobile-logo i {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
         color: var(--pink-accent);
     }
 
@@ -703,9 +741,46 @@ body {
         display: block !important;
         color: var(--primary-blue) !important;
         font-weight: 700 !important;
-        font-size: 1.1rem !important;
+        font-size: 1.2rem !important;
         visibility: visible !important;
         opacity: 1 !important;
+    }
+
+    .mobile-logo .logo-image {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--pink-accent);
+    }
+
+    .mobile-toggle {
+        background: none;
+        border: none;
+        width: 2.5rem;
+        height: 2.5rem;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: background 0.3s ease;
+    }
+
+    .mobile-toggle:hover {
+        background: rgba(37, 99, 235, 0.1);
+    }
+
+    .mobile-toggle span {
+        width: 1.5rem;
+        height: 2px;
+        background: var(--primary-blue);
+        transition: all 0.3s ease;
+        border-radius: 1px;
     }
 
     .nav-menu {
@@ -719,11 +794,12 @@ body {
         max-height: 0;
         overflow: hidden;
         transition: all 0.3s ease;
-        box-shadow: 0 5px 20px var(--shadow);
+        box-shadow: 0 8px 30px var(--shadow);
+        border-radius: 0 0 12px 12px;
     }
 
     .nav-menu.active {
-        max-height: 500px;
+        max-height: 600px;
         padding: 1rem 0;
     }
 
@@ -733,9 +809,14 @@ body {
 
     .nav-link {
         justify-content: space-between;
-        padding: 1rem 1.5rem;
+        padding: 1.2rem 1.5rem;
         border-radius: 0;
         border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+        font-size: 1rem;
+        font-weight: 500;
+        min-height: 48px; /* Better touch target */
+        display: flex;
+        align-items: center;
     }
 
     .nav-link::before {
@@ -752,36 +833,97 @@ body {
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease;
+        margin: 0;
+        border-radius: 0;
     }
 
     .dropdown.active .dropdown-menu {
-        max-height: 300px;
+        max-height: 350px;
+    }
+
+    .dropdown-menu li a {
+        padding: 1rem 2rem;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(37, 99, 235, 0.05);
     }
 
     .contact-btn {
-        margin: 0.5rem 1.5rem;
+        margin: 1rem 1.5rem 0.5rem;
         text-align: center;
-        border-radius: 8px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--pink-accent), var(--pink-hover));
+        color: var(--white) !important;
+        font-weight: 600;
+        padding: 1rem 1.5rem;
+        min-height: 48px;
     }
 
-    .mobile-logo .logo-image {
-        width: 2rem;
-        height: 2rem;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid var(--pink-accent);
+    /* Hero Section Mobile Optimizations */
+    .hero {
+        height: 100vh;
+        margin-top: 80px; /* Adjusted for mobile navbar */
+        position: relative;
+        overflow: hidden;
     }
 
     .hero-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         object-position: center center;
+        z-index: 1;
     }
 
     .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background: linear-gradient(
             135deg,
             rgba(37, 99, 235, 0.85),
             rgba(30, 64, 175, 0.75)
         );
+        z-index: 2;
+    }
+
+    .hero-content {
+        padding: 0 1.5rem;
+        max-width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        line-height: 1.5;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        width: 100%;
+    }
+
+    .cta-button {
+        width: 100%;
+        max-width: 280px;
+        padding: 1.2rem 2rem;
+        font-size: 1rem;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     /* About Us Mobile Styles */
@@ -791,71 +933,92 @@ body {
 
     .about-content {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
         padding: 0;
         max-width: none;
         margin: 0;
     }
 
     .about-image {
-        transform: none;
         border-radius: 0;
         order: 1;
         margin: 0;
-        width: 100vw;
+        width: 100%;
         position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
     }
 
     .about-text {
         order: 2;
         text-align: center;
-        padding: 0;
+        padding: 2rem 1rem;
         max-width: none;
         margin: 0;
-        width: 100vw;
-        position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
-        padding: 1rem;
-        box-sizing: border-box;
+        width: 100%;
     }
 
     .about-text h2 {
         font-size: 2.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
     }
 
     .lead-text {
         font-size: 1rem;
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
+        text-align: left;
     }
 
     .about-actions {
         flex-direction: column;
         align-items: center;
         gap: 1.5rem;
-        margin-top: 1.5rem;
+        margin-top: 2rem;
     }
 
     .learn-more-btn {
         width: 100%;
+        max-width: 280px;
         justify-content: center;
-        padding: 1.25rem 2rem;
+        padding: 1.2rem 2rem;
+        min-height: 48px;
+    }
+
+    .contact-info {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .emergency-number {
+        font-size: 1rem;
     }
 
     .stats {
         justify-content: center;
+        gap: 2rem;
+    }
+
+    .stat-item {
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
     }
 
     .doctor-image {
         height: 300px;
+        object-fit: cover;
     }
 
+    /* Services Section Mobile */
     .services-section .container {
         padding: 0;
     }
@@ -872,6 +1035,101 @@ body {
     .view-all-container {
         padding: 0 1rem;
         margin-top: 1.5rem;
+    }
+
+    .services-grid {
+        padding: 0 1rem;
+        gap: 1rem;
+    }
+
+    .service-card {
+        min-height: 200px;
+    }
+
+    .service-content h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .service-content p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .enquire-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        min-height: 44px;
+    }
+
+    /* Services Description Mobile */
+    .services-description {
+        padding: 2rem 1rem;
+        margin-top: 2rem;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .services-description p {
+        font-size: 1rem;
+        line-height: 1.6;
+        text-align: left;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    /* Mental Health Description Mobile - Fix Background Issues */
+    .mental-health-description {
+        padding: 2rem 1rem;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .description-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .description-left p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        text-align: left;
+        margin-bottom: 1.5rem;
+    }
+
+    .emergency-call-btn {
+        width: 100%;
+        max-width: 200px;
+        padding: 1rem;
+        font-size: 0.9rem;
+        margin: 0 auto;
+    }
+
+    .mental-health-image {
+        max-height: 200px;
+        border-radius: 8px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    /* Home Care Description Mobile - Fix Background Issues */
+    .home-care-description {
+        padding: 2rem 1rem;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .home-care-description p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        text-align: left;
+        max-width: 100%;
+        margin: 0 auto;
     }
 }
 
@@ -4301,5 +4559,683 @@ body.no-scroll {
     .slim-footer .footer-legal {
         gap: 1rem;
         justify-content: flex-start;
+    }
+}
+
+/* ===========================
+   ENHANCED MOBILE OPTIMIZATIONS
+   =========================== */
+
+/* Comprehensive Mobile Improvements for Better UX */
+@media (max-width: 480px) {
+    /* Global Mobile Enhancements */
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Improved Touch Targets */
+    button, .btn, .cta-button, .learn-more-btn, .enquire-btn, .consult-btn, 
+    .home-care-cta, .submit-btn, .nav-link, a {
+        min-height: 44px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Better Typography Hierarchy */
+    h1 { font-size: 2.2rem; line-height: 1.2; }
+    h2 { font-size: 1.8rem; line-height: 1.3; }
+    h3 { font-size: 1.4rem; line-height: 1.3; }
+    h4 { font-size: 1.2rem; line-height: 1.4; }
+    h5 { font-size: 1.1rem; line-height: 1.4; }
+    h6 { font-size: 1rem; line-height: 1.4; }
+
+    /* Enhanced Section Spacing */
+    .section {
+        padding: 2.5rem 0;
+    }
+
+    .section + .section {
+        padding-top: 3rem;
+    }
+
+    /* Improved Navigation Experience */
+    .mobile-header {
+        padding: 0 1rem;
+        min-height: 60px;
+    }
+
+    .mobile-logo {
+        font-size: 1.1rem;
+        gap: 0.6rem;
+    }
+
+    .mobile-logo .logo-image {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+
+    .mobile-toggle {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-toggle:active {
+        transform: scale(0.95);
+        background: rgba(37, 99, 235, 0.15);
+    }
+
+    .nav-menu {
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .nav-link {
+        padding: 1.2rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .contact-btn {
+        margin: 1rem 1.5rem 0.5rem;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 600;
+    }
+
+    /* Hero Section Mobile Perfection */
+    .hero {
+        margin-top: 70px;
+        min-height: 70vh;
+        padding: 2rem 0;
+    }
+
+    .hero-content {
+        padding: 0 1rem;
+        max-width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+        margin-bottom: 1.8rem;
+        opacity: 0.95;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .cta-button {
+        width: 100%;
+        max-width: 280px;
+        padding: 1.2rem 2rem;
+        font-size: 1rem;
+        border-radius: 12px;
+    }
+
+    /* About Section Mobile Polish */
+    .about-text {
+        padding: 2rem 1rem;
+    }
+
+    .about-text h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        color: var(--pink-accent);
+    }
+
+    .lead-text {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1.2rem;
+        text-align: left;
+    }
+
+    .about-actions {
+        margin-top: 2rem;
+        gap: 1.5rem;
+    }
+
+    .learn-more-btn {
+        max-width: 260px;
+        padding: 1.1rem 2rem;
+        font-size: 0.95rem;
+        border-radius: 10px;
+    }
+
+    .emergency-number {
+        font-size: 0.95rem;
+        padding: 0.5rem 0;
+    }
+
+    /* Services Section Mobile Enhancement */
+    .services-section .section-header {
+        padding: 0 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .services-grid {
+        padding: 0 1rem;
+        gap: 1rem;
+    }
+
+    .service-card {
+        min-height: 200px;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .service-content {
+        padding: 1.2rem;
+    }
+
+    .service-content h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .service-content p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+
+    .enquire-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        border-radius: 8px;
+        width: 100%;
+    }
+
+    .view-all-btn {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        font-size: 0.95rem;
+        border-radius: 10px;
+    }
+
+    /* Services Description Mobile */
+    .services-description {
+        padding: 2rem 1rem;
+    }
+
+    .services-description p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        text-align: left;
+    }
+
+    /* Mental Health Section Mobile */
+    .mental-health-grid {
+        padding: 0 1rem;
+        gap: 1rem;
+    }
+
+    .professional-card {
+        padding: 1.2rem;
+        border-radius: 12px;
+    }
+
+    .professional-info h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .professional-name {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .professional-bio {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+
+    .consult-btn {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+
+    .rating {
+        font-size: 0.8rem;
+    }
+
+    /* Mental Health Description Mobile */
+    .mental-health-description {
+        padding: 2rem 1rem;
+    }
+
+    .description-content {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .description-left p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        text-align: left;
+        margin-bottom: 1.5rem;
+    }
+
+    .emergency-call-btn {
+        width: 100%;
+        max-width: 220px;
+        padding: 1rem 1.5rem;
+        font-size: 0.95rem;
+        border-radius: 10px;
+        margin: 0 auto;
+    }
+
+    .mental-health-image {
+        max-height: 220px;
+        border-radius: 12px;
+        object-fit: cover;
+    }
+
+    /* Home Care Section Mobile */
+    .home-care-grid {
+        padding: 0 1rem;
+        gap: 1rem;
+    }
+
+    .home-care-card {
+        padding: 1.2rem;
+        border-radius: 12px;
+    }
+
+    .card-content h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .card-content p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+
+    .card-features {
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature-tag {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+    }
+
+    .home-care-cta {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+
+    .view-more-btn {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        font-size: 0.95rem;
+        border-radius: 10px;
+    }
+
+    /* Home Care Description Mobile */
+    .home-care-description {
+        padding: 2rem 1rem;
+    }
+
+    .home-care-description p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        text-align: left;
+    }
+
+    /* Medical Tourism Mobile */
+    .tourism-intro {
+        padding: 0 1rem;
+    }
+
+    .tourism-intro h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    .tourism-intro p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+        text-align: left;
+    }
+
+    .tourism-cta-btn {
+        width: 100%;
+        max-width: 260px;
+        padding: 1rem 1.5rem;
+        font-size: 0.95rem;
+        border-radius: 10px;
+        margin: 1rem auto 0;
+    }
+
+    .partner-hospitals {
+        padding: 0 1rem;
+    }
+
+    .partner-hospitals h4 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .hospitals-grid {
+        gap: 1rem;
+    }
+
+    .hospital-item {
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
+    .hospital-details h5 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .hospital-details span {
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hospital-specialty {
+        font-size: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .hospital-learn-more {
+        width: 100%;
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        border-radius: 6px;
+    }
+
+    /* Contact Section Mobile */
+    .contact-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .contact-info,
+    .contact-form {
+        width: 100%;
+    }
+
+    .contact-details {
+        gap: 1rem;
+    }
+
+    .contact-item {
+        padding: 1rem;
+        border-radius: 10px;
+        background: rgba(37, 99, 235, 0.05);
+        border: 1px solid rgba(37, 99, 235, 0.1);
+    }
+
+    .contact-text h4 {
+        font-size: 1rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .contact-text a,
+    .contact-text span {
+        font-size: 0.9rem;
+    }
+
+    /* Contact Form Mobile Enhancement */
+    .thin-form {
+        padding: 0;
+    }
+
+    .form-group {
+        margin-bottom: 1.2rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 1rem 3.5rem 1rem 1rem;
+        font-size: 1rem;
+        min-height: 48px;
+        border-radius: 10px;
+        border: 2px solid rgba(37, 99, 235, 0.1);
+    }
+
+    .form-group textarea {
+        min-height: 120px;
+        padding: 1rem;
+        resize: vertical;
+    }
+
+    .form-icon {
+        font-size: 1rem;
+        right: 1rem;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 1.2rem 2rem;
+        font-size: 1rem;
+        margin-top: 1rem;
+        border-radius: 12px;
+    }
+
+    .checkbox-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    /* Floating Contact Enhancement */
+    .floating-contact-btn {
+        width: 3.5rem;
+        height: 3.5rem;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        font-size: 1.3rem;
+        border-radius: 50%;
+        box-shadow: 0 6px 25px rgba(37, 99, 235, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .floating-contact-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Accessibility & Performance Enhancements */
+    * {
+        scroll-behavior: smooth;
+    }
+
+    /* Improved Focus States for Mobile */
+    button:focus,
+    .btn:focus,
+    input:focus,
+    select:focus,
+    textarea:focus,
+    a:focus {
+        outline: 2px solid var(--pink-accent);
+        outline-offset: 2px;
+    }
+}
+
+/* ===========================
+   ULTRA-SMALL MOBILE DEVICES
+   =========================== */
+
+@media (max-width: 360px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 0.95rem;
+    }
+
+    .cta-button {
+        max-width: 240px;
+        padding: 1rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .mobile-logo {
+        font-size: 1rem;
+    }
+
+    .mobile-logo .logo-image {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.6rem;
+    }
+
+    .about-text {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .services-grid,
+    .mental-health-grid,
+    .home-care-grid {
+        padding: 0 0.75rem;
+    }
+
+    .slim-footer {
+        padding: 1.5rem 0 0;
+    }
+
+    .slim-footer .container {
+        padding: 0 0.75rem;
+    }
+}
+
+/* ===========================
+   MOBILE STABILITY FIXES
+   =========================== */
+
+/* Additional mobile fixes to prevent background scrolling issues */
+@media (max-width: 768px) {
+    /* Ensure stable background on all mobile devices */
+    html, body {
+        position: relative;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Fix any fullwidth sections that cause horizontal scroll */
+    .services-description,
+    .mental-health-description,
+    .home-care-description {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        left: auto !important;
+        right: auto !important;
+        position: relative !important;
+        overflow: hidden;
+        padding: 2rem 1rem;
+    }
+
+    /* Ensure hero video is stable */
+    .hero-video {
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        z-index: 1;
+        transform: none;
+    }
+
+    .hero {
+        position: relative;
+        overflow: hidden;
+        height: 100vh;
+        width: 100%;
+    }
+
+    /* Stable about section */
+    .about-image,
+    .about-text {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        left: auto !important;
+        right: auto !important;
+        position: relative !important;
+    }
+
+    /* Ensure all cards are contained */
+    .services-grid,
+    .mental-health-grid,
+    .home-care-grid {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        padding: 0 1rem;
+    }
+
+    /* Fix container overflow */
+    .container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 1rem;
+        overflow: hidden;
+    }
+
+    /* Prevent horizontal scrolling */
+    .nav-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+
+    /* Stable footer */
+    .slim-footer {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .slim-footer .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 1rem;
     }
 }

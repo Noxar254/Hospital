@@ -780,3 +780,325 @@ document.addEventListener('DOMContentLoaded', function() {
         floatingBtn.style.transition = 'opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease';
     }
 });
+
+// ===========================
+// ENHANCED MOBILE OPTIMIZATIONS
+// ===========================
+
+// Mobile-specific enhancements for better UX
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Detect mobile device
+    const isMobile = window.innerWidth <= 768;
+    const isSmallMobile = window.innerWidth <= 480;
+    
+    // Enhanced touch interactions
+    if (isMobile) {
+        
+        // Add touch feedback to buttons
+        const buttons = document.querySelectorAll('button, .btn, .cta-button, .learn-more-btn, .enquire-btn, .consult-btn, .home-care-cta, .submit-btn');
+        
+        buttons.forEach(button => {
+            button.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
+                this.style.transition = 'transform 0.1s ease';
+            });
+            
+            button.addEventListener('touchend', function() {
+                this.style.transform = 'scale(1)';
+                setTimeout(() => {
+                    this.style.transition = '';
+                }, 100);
+            });
+            
+            button.addEventListener('touchcancel', function() {
+                this.style.transform = 'scale(1)';
+                this.style.transition = '';
+            });
+        });
+        
+        // Enhanced navigation for mobile
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('touchstart', function() {
+                this.style.backgroundColor = 'rgba(37, 99, 235, 0.1)';
+                this.style.transition = 'background-color 0.2s ease';
+            });
+            
+            link.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.backgroundColor = '';
+                    this.style.transition = '';
+                }, 200);
+            });
+        });
+        
+        // Improved form interactions for mobile
+        const formInputs = document.querySelectorAll('input, select, textarea');
+        formInputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.borderColor = 'var(--pink-accent)';
+                this.style.boxShadow = '0 0 0 3px rgba(236, 72, 153, 0.1)';
+                this.style.transform = 'scale(1.02)';
+                this.style.transition = 'all 0.3s ease';
+                
+                // Scroll input into view on small screens
+                if (isSmallMobile) {
+                    setTimeout(() => {
+                        this.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }, 100);
+                }
+            });
+            
+            input.addEventListener('blur', function() {
+                this.style.borderColor = '';
+                this.style.boxShadow = '';
+                this.style.transform = '';
+                this.style.transition = '';
+            });
+        });
+        
+        // Enhanced card interactions
+        const cards = document.querySelectorAll('.service-card, .professional-card, .home-care-card, .hospital-item');
+        cards.forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+                this.style.transition = 'transform 0.2s ease';
+            });
+            
+            card.addEventListener('touchend', function() {
+                this.style.transform = 'scale(1)';
+                setTimeout(() => {
+                    this.style.transition = '';
+                }, 200);
+            });
+        });
+        
+        // Smooth scrolling enhancement for mobile
+        const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
+        smoothScrollLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const offsetTop = targetElement.offsetTop - 80; // Account for fixed header
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Enhanced floating contact button for mobile
+        const floatingBtn = document.getElementById('floatingContactBtn');
+        if (floatingBtn) {
+            floatingBtn.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(1.1)';
+                this.style.transition = 'transform 0.2s ease';
+            });
+            
+            floatingBtn.addEventListener('touchend', function() {
+                this.style.transform = 'scale(1)';
+                setTimeout(() => {
+                    this.style.transition = '';
+                }, 200);
+            });
+            
+            // Add ripple effect
+            floatingBtn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        }
+        
+        // Mobile-specific animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const animateOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                }
+            });
+        }, observerOptions);
+        
+        // Add fade-in animations to sections on mobile
+        const sectionsToAnimate = document.querySelectorAll('.section-header, .service-card, .professional-card, .home-care-card, .about-text, .contact-item');
+        sectionsToAnimate.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            animateOnScroll.observe(section);
+        });
+        
+        // Improved hamburger menu animation
+        const mobileToggle = document.getElementById('mobileToggle');
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', function() {
+                const spans = this.querySelectorAll('span');
+                
+                if (this.classList.contains('active')) {
+                    // Animate to X
+                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    spans[1].style.opacity = '0';
+                    spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                } else {
+                    // Animate back to hamburger
+                    spans[0].style.transform = '';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = '';
+                }
+                
+                spans.forEach(span => {
+                    span.style.transition = 'all 0.3s ease';
+                });
+            });
+        }
+        
+        // Mobile-optimized video loading
+        const videos = document.querySelectorAll('video');
+        videos.forEach(video => {
+            // Pause video when not in viewport to save battery
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            videoObserver.observe(video);
+        });
+        
+        // Add swipe gestures for home care cards (if applicable)
+        const homeCarGrid = document.getElementById('homeCareGrid');
+        if (homeCarGrid && isSmallMobile) {
+            let startX = 0;
+            let currentX = 0;
+            let isScrolling = false;
+            
+            homeCarGrid.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+                isScrolling = false;
+            }, { passive: true });
+            
+            homeCarGrid.addEventListener('touchmove', function(e) {
+                if (!startX) return;
+                currentX = e.touches[0].clientX;
+                const diffX = startX - currentX;
+                
+                if (Math.abs(diffX) > 10) {
+                    isScrolling = true;
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            homeCarGrid.addEventListener('touchend', function(e) {
+                if (!isScrolling || !startX) return;
+                
+                const diffX = startX - currentX;
+                
+                if (Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        // Swipe left - next card
+                        this.scrollBy({ left: 300, behavior: 'smooth' });
+                    } else {
+                        // Swipe right - previous card
+                        this.scrollBy({ left: -300, behavior: 'smooth' });
+                    }
+                }
+                
+                startX = 0;
+                currentX = 0;
+                isScrolling = false;
+            });
+        }
+    }
+    
+    // Add CSS keyframes for ripple effect
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .no-scroll {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+        }
+    `;
+    document.head.appendChild(style);
+});
+
+// Optimize performance for mobile
+if (window.innerWidth <= 768) {
+    // Debounce scroll events
+    let ticking = false;
+    
+    function updateOnScroll() {
+        // Your scroll-based updates here
+        ticking = false;
+    }
+    
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateOnScroll);
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', requestTick, { passive: true });
+    
+    // Preload critical images
+    const criticalImages = ['images/logo.png', 'images/about us.jpg'];
+    criticalImages.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+}
