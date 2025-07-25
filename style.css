@@ -448,6 +448,176 @@ body {
     color: var(--pink-accent);
 }
 
+/* Pharmacy Promotional Banner - Slim Rectangle with Sharp Edges */
+.pharmacy-promo-banner {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background: #f8fafc;
+    overflow: hidden;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.pharmacy-banner-container {
+    display: flex;
+    align-items: center;
+    height: 200px;
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background: var(--white);
+    border: 1px solid #e2e8f0;
+}
+
+.pharmacy-banner-image {
+    flex: 0 0 35%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 0;
+    position: relative;
+}
+
+.pharmacy-promo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(1.1) contrast(1.15) saturate(1.1);
+    border-radius: 0;
+    transition: transform 0.3s ease;
+}
+
+.pharmacy-banner-image:hover .pharmacy-promo-image {
+    transform: scale(1.05);
+}
+
+.pharmacy-banner-content {
+    flex: 1;
+    padding: 2.5rem 3rem;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 50%, var(--dark-blue) 100%);
+    color: var(--white);
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0;
+    position: relative;
+}
+
+.pharmacy-banner-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.pharmacy-banner-text {
+    flex: 1;
+    z-index: 2;
+    position: relative;
+}
+
+.pharmacy-banner-text h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 0.8rem 0;
+    color: var(--white);
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.pharmacy-banner-text p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 0 1.2rem 0;
+    opacity: 0.95;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 85%;
+}
+
+.pharmacy-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--pink-accent);
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.pharmacy-cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.pharmacy-cta-btn:hover::before {
+    left: 100%;
+}
+
+.pharmacy-cta-btn:hover {
+    background: var(--pink-hover);
+    border-color: var(--pink-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+}
+
+.pharmacy-cta-btn i {
+    font-size: 0.85rem;
+    transition: transform 0.3s ease;
+}
+
+.pharmacy-cta-btn:hover i {
+    transform: translateX(4px);
+}
+
+.pharmacy-banner-contact {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    margin-left: 2.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.pharmacy-banner-contact i {
+    color: #fbbf24;
+    font-size: 1rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
 /* Mobile Responsive for Rectangle Home Care Banner */
 @media (max-width: 768px) {
     .homecare-promo-banner {
@@ -523,6 +693,150 @@ body {
         height: 70px;
         border-radius: 0;
     }
+
+    .promo-image {
+        border-radius: 0;
+    }
+
+    .homecare-banner-content {
+        padding: 1rem 1.25rem;
+        border-radius: 0;
+    }
+
+    .banner-text h3 {
+        font-size: 1.1rem;
+    }
+
+    .banner-text p {
+        font-size: 0.8rem;
+    }
+
+    .homecare-cta-btn {
+        padding: 0.45rem 0.9rem;
+        font-size: 0.8rem;
+        border-radius: 0;
+    }
+
+    .banner-contact {
+        font-size: 0.75rem;
+    }
+}
+
+/* Mobile Responsive for Rectangle Pharmacy Banner */
+@media (max-width: 768px) {
+    .pharmacy-promo-banner {
+        padding: 0;
+    }
+
+    .pharmacy-banner-container {
+        flex-direction: column;
+        height: auto;
+        border-radius: 0;
+        border: 1px solid #e2e8f0;
+        margin: 0;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .pharmacy-banner-image {
+        flex: none;
+        width: 100%;
+        height: 100px;
+        order: 1;
+        border-radius: 0;
+    }
+
+    .pharmacy-promo-image {
+        border-radius: 0;
+        filter: brightness(1.1) contrast(1.15) saturate(1.1);
+    }
+
+    .pharmacy-banner-content {
+        order: 2;
+        height: auto;
+        padding: 1.5rem 1.8rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        border-radius: 0;
+    }
+
+    .pharmacy-banner-text {
+        width: 100%;
+    }
+
+    .pharmacy-banner-text h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.25;
+    }
+
+    .pharmacy-banner-text p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+        max-width: 100%;
+    }
+
+    .pharmacy-cta-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+        align-self: flex-start;
+        border-radius: 0;
+        border: 2px solid #f59e0b;
+    }
+
+    .pharmacy-banner-contact {
+        font-size: 0.8rem;
+        margin-left: 0;
+        align-self: center;
+        padding: 0.4rem 0.8rem;
+        width: fit-content;
+    }
+}
+
+@media (max-width: 480px) {
+    .pharmacy-banner-container {
+        border-radius: 0;
+        margin: 0;
+        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .pharmacy-banner-image {
+        height: 80px;
+        border-radius: 0;
+    }
+
+    .pharmacy-promo-image {
+        border-radius: 0;
+    }
+
+    .pharmacy-banner-content {
+        padding: 1.2rem 1.5rem;
+        border-radius: 0;
+        gap: 0.8rem;
+    }
+
+    .pharmacy-banner-text h3 {
+        font-size: 1.15rem;
+        line-height: 1.2;
+    }
+
+    .pharmacy-banner-text p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .pharmacy-cta-btn {
+        padding: 0.55rem 1.1rem;
+        font-size: 0.8rem;
+        border-radius: 0;
+    }
+
+    .pharmacy-banner-contact {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.7rem;
+    }
+}
 
     .promo-image {
         border-radius: 0;
