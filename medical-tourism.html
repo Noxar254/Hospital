@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="format-detection" content="telephone=yes">
+    <title>Medical Tourism - Start Your Medical Journey | Hopewell Hospital</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Optimized font loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="medical-tourism.css">
+    
+    <!-- Firebase v9 SDK -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js';
+        import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbqzF5Yxgy-_O13bNeRogIkLb4MThlBYE",
+            authDomain: "hopewell-health-3bf9a.firebaseapp.com",
+            projectId: "hopewell-health-3bf9a",
+            storageBucket: "hopewell-health-3bf9a.firebasestorage.app",
+            messagingSenderId: "500281950350",
+            appId: "1:500281950350:web:0a77ec2c5ec06a76bc49df",
+            measurementId: "G-RS8YX8146F"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        // Make Firebase available globally
+        window.firebase = { db, collection, addDoc, serverTimestamp };
+        
+        console.log("🔥 Firebase initialized for medical tourism page");
+    </script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <!-- Top Navigation (Desktop Only) -->
+        <div class="nav-top">
+            <div class="nav-container">
+                <div class="logo-section">
+                    <div class="logo">
+                        <img src="images/logo.png" alt="Hopewell Hospital Logo" class="logo-image">
+                        <span class="logo-text">Hopewell Hospital</span>
+                    </div>
+                </div>
+                <div class="social-media">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation (Desktop) / Main Navigation (Mobile) -->
+        <div class="nav-bottom">
+            <div class="nav-container">
+                <!-- Mobile Logo and Toggle -->
+                <div class="mobile-header">
+                    <div class="mobile-logo">
+                        <img src="images/logo.png" alt="Hopewell Hospital Logo" class="logo-image">
+                        <span class="logo-text">Hopewell Hospital</span>
+                    </div>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+
+                <!-- Navigation Menu -->
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#about" class="nav-link">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="index.html#services" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html#obstetrics-gynecology">OBS & Gynecology</a></li>
+                            <li><a href="index.html#pediatrics">Pediatrics</a></li>
+                            <li><a href="index.html#dental-services">Dental Services</a></li>
+                            <li><a href="index.html#minor-surgery">Minor Surgery</a></li>
+                            <li><a href="index.html#major-surgery">Major Surgery</a></li>
+                            <li><a href="index.html#referrals">Referrals</a></li>
+                            <li><a href="index.html#specialist-doctors">Specialists</a></li>
+                            <li><a href="index.html#inpatient">In-Patient</a></li>
+                            <li><a href="index.html#outpatient">Out-Patient</a></li>
+                            <li><a href="index.html#family-planning">Family Planning</a></li>
+                            <li><a href="index.html#mother-child-care">Mother & Child Care</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#mental-health" class="nav-link">Mental Health</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#home-care" class="nav-link">Home Care</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="medical-tourism.html" class="nav-link active">Medical Tourism</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#contact" class="nav-link contact-btn">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="medical-tourism-main">
+        <!-- Hero Section -->
+        <section class="medical-tourism-hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="container">
+                    <h1><i class="fas fa-plane-departure"></i> Start Your Medical Journey</h1>
+                    <p>Access world-class healthcare across the globe with our trusted medical tourism services</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-globe"></i>
+                        <span>Global Network</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Trusted Partners</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-headset"></i>
+                        <span>24/7 Support</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Medical Tourism Form Section -->
+        <section class="tourism-form-section">
+            <div class="container">
+                <div class="tourism-content">
+                    <!-- Left Column - Information -->
+                    <div class="tourism-info">
+                        <h2><i class="fas fa-heart"></i> Why Choose Medical Tourism?</h2>
+                        <div class="info-cards">
+                            <div class="info-card">
+                                <i class="fas fa-dollar-sign"></i>
+                                <h3>Cost-Effective</h3>
+                                <p>Save up to 70% on medical procedures without compromising quality</p>
+                            </div>
+                            <div class="info-card">
+                                <i class="fas fa-clock"></i>
+                                <h3>No Waiting Lists</h3>
+                                <p>Access immediate treatment and bypass lengthy waiting periods</p>
+                            </div>
+                            <div class="info-card">
+                                <i class="fas fa-award"></i>
+                                <h3>World-Class Care</h3>
+                                <p>Partner with internationally accredited hospitals and specialists</p>
+                            </div>
+                            <div class="info-card">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <h3>Complete Support</h3>
+                                <p>Full travel coordination, accommodation, and medical arrangements</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column - Form -->
+                    <div class="tourism-form-container">
+                        <div class="form-header">
+                            <h2><i class="fas fa-clipboard-list"></i> Begin Your Journey</h2>
+                            <p>Tell us about your medical needs and we'll connect you with the best specialists worldwide</p>
+                        </div>
+
+                        <form class="tourism-form" id="medicalTourismForm">
+                            <!-- Personal Information -->
+                            <div class="form-group">
+                                <label for="fullName">Full Name *</label>
+                                <input type="text" id="fullName" name="fullName" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number *</label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="country">Country of Residence *</label>
+                                    <input type="text" id="country" name="country" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="age">Age</label>
+                                    <input type="number" id="age" name="age" min="1" max="120">
+                                </div>
+                            </div>
+
+                            <!-- Medical Condition -->
+                            <div class="form-group">
+                                <label for="medicalCondition">Medical Condition *</label>
+                                <select id="medicalCondition" name="medicalCondition" required>
+                                    <option value="">Select your condition</option>
+                                    
+                                    <!-- Chronic Diseases -->
+                                    <optgroup label="Chronic Diseases">
+                                        <option value="diabetes">Diabetes Management</option>
+                                        <option value="hypertension">Hypertension Treatment</option>
+                                        <option value="heart-disease">Heart Disease</option>
+                                        <option value="kidney-disease">Kidney Disease</option>
+                                        <option value="liver-disease">Liver Disease</option>
+                                        <option value="arthritis">Arthritis Treatment</option>
+                                        <option value="copd">COPD Treatment</option>
+                                        <option value="asthma">Asthma Management</option>
+                                        <option value="cancer-treatment">Cancer Treatment</option>
+                                        <option value="stroke-recovery">Stroke Recovery</option>
+                                    </optgroup>
+                                    
+                                    <!-- IVF & Fertility -->
+                                    <optgroup label="IVF & Fertility">
+                                        <option value="ivf-treatment">IVF Treatment</option>
+                                        <option value="fertility-consultation">Fertility Consultation</option>
+                                        <option value="egg-freezing">Egg Freezing</option>
+                                        <option value="sperm-analysis">Sperm Analysis & Treatment</option>
+                                        <option value="fertility-surgery">Fertility Surgery</option>
+                                        <option value="donor-programs">Donor Programs</option>
+                                        <option value="surrogacy">Surrogacy Services</option>
+                                        <option value="reproductive-endocrinology">Reproductive Endocrinology</option>
+                                    </optgroup>
+                                    
+                                    <!-- Other Specialties -->
+                                    <optgroup label="Other Specialties">
+                                        <option value="orthopedic-surgery">Orthopedic Surgery</option>
+                                        <option value="cosmetic-surgery">Cosmetic Surgery</option>
+                                        <option value="dental-treatment">Dental Treatment</option>
+                                        <option value="eye-surgery">Eye Surgery</option>
+                                        <option value="weight-loss-surgery">Weight Loss Surgery</option>
+                                        <option value="neurosurgery">Neurosurgery</option>
+                                        <option value="organ-transplant">Organ Transplant</option>
+                                        <option value="other">Other (specify in message)</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            <!-- Urgency -->
+                            <div class="form-group">
+                                <label for="urgency">Treatment Urgency *</label>
+                                <select id="urgency" name="urgency" required>
+                                    <option value="">Select urgency level</option>
+                                    <option value="immediate">Immediate (Within 1 month)</option>
+                                    <option value="soon">Soon (1-3 months)</option>
+                                    <option value="planning">Planning ahead (3-6 months)</option>
+                                    <option value="research">Research phase (6+ months)</option>
+                                </select>
+                            </div>
+
+                            <!-- Preferred Destination -->
+                            <div class="form-group">
+                                <label for="destination">Preferred Destination</label>
+                                <select id="destination" name="destination">
+                                    <option value="">No preference</option>
+                                    <option value="india">India</option>
+                                    <option value="thailand">Thailand</option>
+                                    <option value="turkey">Turkey</option>
+                                    <option value="singapore">Singapore</option>
+                                    <option value="south-korea">South Korea</option>
+                                    <option value="malaysia">Malaysia</option>
+                                    <option value="dubai">Dubai, UAE</option>
+                                    <option value="germany">Germany</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Additional Information -->
+                            <div class="form-group">
+                                <label for="additionalInfo">Additional Information</label>
+                                <textarea id="additionalInfo" name="additionalInfo" rows="3" placeholder="Please provide any additional details about your condition, previous treatments, or specific requirements..."></textarea>
+                            </div>
+
+                            <!-- Medical Reports Upload -->
+                            <div class="form-group">
+                                <label for="medicalReports">Upload Medical Reports</label>
+                                <div class="file-upload-section">
+                                    <div class="file-upload-area" id="fileUploadArea">
+                                        <div class="upload-icon">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                        </div>
+                                        <div class="upload-text">
+                                            <p><strong>Drag & drop your medical reports here</strong></p>
+                                            <p>or <span class="upload-link">browse files</span></p>
+                                            <small>Supported formats: PDF, JPG, PNG, DOC, DOCX (Max 10MB per file)</small>
+                                        </div>
+                                        <input type="file" id="medicalReports" name="medicalReports" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" hidden>
+                                    </div>
+                                    <div class="uploaded-files" id="uploadedFiles"></div>
+                                </div>
+                            </div>
+
+                            <!-- Consent -->
+                            <div class="consent-section">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
+                                    <span class="checkmark"></span>
+                                    <span class="checkbox-text">I consent to the processing of my personal data for medical tourism consultation purposes.</span>
+                                </label>
+                                <label class="checkbox-container">
+                                    <input type="checkbox" id="communicationConsent" name="communicationConsent">
+                                    <span class="checkmark"></span>
+                                    <span class="checkbox-text">I agree to receive treatment information and updates via email or phone.</span>
+                                </label>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="form-submit">
+                                <button type="submit" class="submit-btn">
+                                    <i class="fas fa-paper-plane"></i>
+                                    <span>Start My Journey</span>
+                                </button>
+                                <p class="submit-note">
+                                    <i class="fas fa-info-circle"></i>
+                                    Our medical tourism specialists will contact you within 24 hours with personalized treatment options and cost estimates.
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Steps -->
+        <section class="process-section">
+            <div class="container">
+                <h2>Your Medical Tourism Journey</h2>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <i class="fas fa-clipboard-check"></i>
+                        <h3>Consultation</h3>
+                        <p>Submit your medical information and receive personalized treatment recommendations</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <i class="fas fa-search"></i>
+                        <h3>Hospital Selection</h3>
+                        <p>We match you with the best specialists and accredited hospitals worldwide</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <i class="fas fa-plane"></i>
+                        <h3>Travel Arrangement</h3>
+                        <p>Complete travel coordination including visa assistance and accommodation</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <i class="fas fa-user-md"></i>
+                        <h3>Treatment</h3>
+                        <p>Receive world-class medical care with dedicated support throughout your stay</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <i class="fas fa-home"></i>
+                        <h3>Follow-up</h3>
+                        <p>Continued care coordination and follow-up support after returning home</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Promotional Section -->
+        <section class="promo-section">
+            <div class="container">
+                <div class="promo-content">
+                    <div class="promo-image">
+                        <img src="images/aeroplane.jpg" alt="Medical Tourism Travel" loading="lazy">
+                    </div>
+                    <div class="promo-text">
+                        <h2>Ready to Start Your Medical Journey?</h2>
+                        <p>Experience world-class healthcare combined with the comfort of personalized travel arrangements. Our expert team handles every detail from consultation to recovery, ensuring you receive the best care at leading international medical facilities.</p>
+                        <div class="promo-features">
+                            <div class="promo-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Expert Medical Consultation</span>
+                            </div>
+                            <div class="promo-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Complete Travel Coordination</span>
+                            </div>
+                            <div class="promo-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>24/7 Support Throughout Journey</span>
+                            </div>
+                        </div>
+                        <a href="appointment.html" class="consult-btn">
+                            <i class="fas fa-user-md"></i>
+                            <span>Consult a Doctor</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Motivational Footer Section -->
+    <section class="motivation-footer">
+        <div class="container">
+            <div class="motivation-content">
+                <div class="motivation-text">
+                    <h3>Living with a chronic illness? You're not alone.</h3>
+                    <p>Our specialized team understands your journey and is here to provide compassionate care and expert guidance every step of the way.</p>
+                </div>
+                <div class="motivation-action">
+                    <a href="appointment.html" class="counselling-btn">
+                        <i class="fas fa-heart"></i>
+                        <span>Seek Counselling</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Contact Button -->
+    <div class="floating-contact">
+        <button class="floating-contact-btn" id="floatingContactBtn" title="WhatsApp Us">
+            <i class="fab fa-whatsapp"></i>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="medical-tourism.js"></script>
+</body>
+</html>

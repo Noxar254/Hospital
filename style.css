@@ -5515,6 +5515,7 @@ body.no-scroll {
     bottom: 30px;
     right: 30px;
     z-index: 9999;
+    pointer-events: none;
 }
 
 .floating-contact-btn {
@@ -5535,6 +5536,10 @@ body.no-scroll {
     animation: float 3s ease-in-out infinite;
     position: relative;
     overflow: hidden;
+    pointer-events: all;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .floating-contact-btn::before {
