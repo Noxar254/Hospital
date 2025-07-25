@@ -6783,64 +6783,78 @@ body.no-scroll {
 
 /* Mobile styles */
 @media (max-width: 768px) {
+    .medical-tourism-promo-banner {
+        min-height: 180px;
+        overflow: hidden;
+    }
+    
     .medical-tourism-banner-container {
         flex-direction: column;
         height: auto;
-        min-height: 200px;
+        min-height: 180px;
     }
     
     .medical-tourism-banner-image {
         flex: none;
-        height: 100px;
         width: 100%;
+        height: 80px;
+        overflow: hidden;
+        position: relative;
     }
     
     .medical-tourism-promo-image {
         width: 100%;
-        height: 100px;
-        transform: scale(1);
+        height: 80px;
+        object-fit: cover;
+        object-position: center;
+        transform: none;
         position: static;
+        left: auto;
     }
     
     .medical-tourism-banner-content {
         flex-direction: column;
+        padding: 1.2rem 1rem;
         text-align: center;
-        padding: 1.5rem 1rem;
+        gap: 1rem;
         height: auto;
         min-height: 100px;
-    }
-    
-    .medical-tourism-banner-text {
-        margin-bottom: 1rem;
+        background: var(--primary-blue);
+        color: var(--white);
     }
     
     .medical-tourism-banner-text h3 {
-        font-size: 1.2rem;
-        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+        margin-bottom: 0.4rem;
+        color: var(--white);
+        text-shadow: none;
     }
     
     .medical-tourism-banner-text p {
-        font-size: 0.85rem;
-        margin-bottom: 1rem;
+        font-size: 0.8rem;
+        margin-bottom: 0.8rem;
+        color: var(--white);
+        text-shadow: none;
+        opacity: 0.95;
         line-height: 1.3;
     }
     
     .medical-tourism-cta-btn {
         padding: 0.6rem 1.2rem;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         gap: 0.4rem;
+        margin-bottom: 0.5rem;
     }
     
     .medical-tourism-banner-feature {
-        padding: 0.5rem 1rem;
-        font-size: 0.75rem;
-        gap: 0.5rem;
-        border-radius: 15px;
-        margin-top: 0.5rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
+        gap: 0.4rem;
+        border-radius: 12px;
     }
     
     .medical-tourism-banner-feature i {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
 }
 
@@ -6889,74 +6903,5 @@ body.no-scroll {
     
     .medical-tourism-banner-feature i {
         font-size: 1rem;
-    }
-}
-
-/* Mobile styles for Medical Tourism Banner */
-@media (max-width: 768px) {
-    .medical-tourism-promo-banner {
-        min-height: 200px;
-    }
-    
-    .medical-tourism-banner-container {
-        flex-direction: column;
-        height: auto;
-    }
-    
-    .medical-tourism-banner-image {
-        flex: none;
-        width: 100%;
-        height: 120px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-    
-    .medical-tourism-promo-image {
-        height: 120px;
-        width: 100%;
-        object-fit: cover;
-        object-position: center;
-        transform: scale(1.05);
-    }
-    
-    .medical-tourism-banner-content {
-        flex-direction: column;
-        padding: 1.5rem;
-        text-align: center;
-        gap: 1.2rem;
-        height: auto;
-        background: var(--primary-blue);
-        color: var(--white);
-    }
-    
-    .medical-tourism-banner-text h3 {
-        font-size: 1.3rem;
-        margin-bottom: 0.5rem;
-        color: var(--white);
-        text-shadow: none;
-    }
-    
-    .medical-tourism-banner-text p {
-        font-size: 0.85rem;
-        margin-bottom: 1rem;
-        color: var(--white);
-        text-shadow: none;
-        opacity: 0.95;
-    }
-    
-    .medical-tourism-cta-btn {
-        padding: 0.7rem 1.4rem;
-        font-size: 0.8rem;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-    }
-    
-    .medical-tourism-banner-feature {
-        font-size: 0.8rem;
-        padding: 0.6rem 1rem;
-        background: rgba(255, 255, 255, 0.2);
-        color: var(--white);
-        border: 1px solid rgba(255, 255, 255, 0.3);
     }
 }
