@@ -3005,66 +3005,193 @@ body.no-scroll {
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+    .medical-tourism-section {
+        padding: 2rem 0;
+    }
+
+    .medical-tourism-section .section-header {
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+    }
+
     .tourism-content {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 2rem;
+        padding: 0 1rem;
     }
     
     .medical-tourism-section .section-header h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        line-height: 1.2;
+    }
+
+    .medical-tourism-section .section-header p {
+        font-size: 1rem;
+        line-height: 1.5;
+        padding: 0 0.5rem;
     }
     
+    .tourism-intro {
+        text-align: left;
+    }
+
     .tourism-intro h3 {
-        font-size: 1.5rem;
-        margin-bottom: 1.2rem;
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+        text-align: left;
     }
     
     .tourism-intro p {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         text-align: left;
-        margin-bottom: 1.2rem;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+        padding: 0;
     }
     
     .tourism-cta-btn {
-        padding: 0.9rem 1.8rem;
-        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
         width: auto;
         justify-content: flex-start;
-        border-radius: 0;
+        margin-top: 0.5rem;
+    }
+
+    .partner-hospitals {
+        margin-top: 1.5rem;
+    }
+
+    .partner-hospitals h4 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
         text-align: left;
     }
     
     .hospital-item {
-        padding: 0.8rem;
-        flex-direction: row;
+        padding: 1rem;
+        flex-direction: column;
         gap: 0.8rem;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        align-items: flex-start;
     }
     
     .hospital-content {
-        gap: 0.6rem;
+        width: 100%;
+        gap: 0.8rem;
     }
-    
+
     .hospital-details {
         text-align: left;
+        flex: 1;
     }
     
     .hospital-flag {
-        width: 25px;
-        height: 25px;
-        font-size: 1rem;
+        width: 30px;
+        height: 30px;
+        font-size: 1.1rem;
     }
     
     .hospital-details h5 {
-        font-size: 0.9rem;
+        font-size: 1rem;
+        margin-bottom: 0.2rem;
+        line-height: 1.2;
+    }
+
+    .hospital-details span {
+        font-size: 0.85rem;
+        margin-bottom: 0.3rem;
+        display: block;
     }
     
     .hospital-specialty {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
+        line-height: 1.3;
+        margin: 0;
+        word-wrap: break-word;
     }
     
     .hospital-learn-more {
-        padding: 0.3rem 0.6rem;
+        width: 100%;
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+        text-align: center;
+        border-radius: 4px;
+        margin-top: 0.5rem;
+    }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+    .medical-tourism-section {
+        padding: 1.5rem 0;
+    }
+
+    .medical-tourism-section .section-header {
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .medical-tourism-section .section-header h2 {
+        font-size: 1.6rem;
+        line-height: 1.2;
+    }
+
+    .medical-tourism-section .section-header p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .tourism-content {
+        padding: 0 0.5rem;
+        gap: 1.5rem;
+    }
+
+    .tourism-intro h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .tourism-intro p {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        margin-bottom: 0.8rem;
+    }
+
+    .tourism-cta-btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.85rem;
+    }
+
+    .partner-hospitals h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .hospital-item {
+        padding: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hospital-details h5 {
+        font-size: 0.9rem;
+        line-height: 1.1;
+    }
+
+    .hospital-details span {
+        font-size: 0.8rem;
+    }
+
+    .hospital-specialty {
         font-size: 0.75rem;
+        line-height: 1.2;
+    }
+
+    .hospital-learn-more {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.8rem;
     }
 }
 
@@ -4979,40 +5106,44 @@ body.no-scroll {
     }
 
     .partner-hospitals h4 {
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
-        text-align: center;
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+        text-align: left;
     }
 
     .hospitals-grid {
-        gap: 1rem;
+        gap: 0.8rem;
     }
 
     .hospital-item {
-        padding: 1rem;
-        border-radius: 10px;
+        padding: 0.8rem;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .hospital-details h5 {
-        font-size: 1rem;
-        margin-bottom: 0.3rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+        line-height: 1.1;
     }
 
     .hospital-details span {
-        font-size: 0.85rem;
-        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
+        margin-bottom: 0.3rem;
     }
 
     .hospital-specialty {
-        font-size: 0.8rem;
-        margin-bottom: 0.8rem;
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
     }
 
     .hospital-learn-more {
         width: 100%;
-        padding: 0.6rem 1rem;
-        font-size: 0.85rem;
-        border-radius: 6px;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.75rem;
+        border-radius: 4px;
     }
 
     /* Contact Section Mobile */
