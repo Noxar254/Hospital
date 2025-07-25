@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle service-specific placeholders
     setupServiceSpecificContent();
+    
+    // Setup service type change handler
+    setupServiceTypeHandler();
 });
 
 // Initialize home care form
@@ -170,6 +173,291 @@ function updateServicePlaceholder(serviceType, textarea) {
     } else {
         textarea.placeholder = 'Please describe your medical needs, symptoms, or specific requirements for the home service...';
     }
+}
+
+// Setup service type handler for special options
+function setupServiceTypeHandler() {
+    const serviceSelect = document.getElementById('serviceType');
+    
+    if (serviceSelect) {
+        serviceSelect.addEventListener('change', handleServiceTypeChange);
+    }
+}
+
+// Handle service type change to show/hide additional options
+function handleServiceTypeChange() {
+    const serviceType = document.getElementById('serviceType');
+    const serviceOptionsContainer = document.getElementById('serviceOptionsContainer');
+    
+    if (serviceType && serviceOptionsContainer) {
+        const selectedValue = serviceType.value;
+        
+        // Clear existing options
+        serviceOptionsContainer.innerHTML = '';
+        serviceOptionsContainer.style.display = 'none';
+        
+        if (selectedValue === 'drug-delivery') {
+            showDrugDeliveryOptions();
+        } else if (selectedValue === 'lab-tests') {
+            showLabTestOptions();
+        }
+    }
+}
+
+// Show drug delivery specific options
+function showDrugDeliveryOptions() {
+    const serviceOptionsContainer = document.getElementById('serviceOptionsContainer');
+    
+    const optionsHTML = `
+        <div class="service-options-header">
+            <h4><i class="fas fa-pills"></i> Drug Delivery Options</h4>
+            <p>Choose how you'd like to proceed with your medication needs:</p>
+        </div>
+        <div class="service-options-grid">
+            <div class="option-card" data-option="upload-prescription">
+                <div class="option-icon">
+                    <i class="fas fa-upload"></i>
+                </div>
+                <h5>Upload Prescription</h5>
+                <p>Have a valid prescription? Upload it here for quick processing.</p>
+                <button type="button" class="option-btn" onclick="showPrescriptionUpload()">
+                    <i class="fas fa-file-medical"></i>
+                    Upload Prescription
+                </button>
+            </div>
+            <div class="option-card" data-option="consult-doctor">
+                <div class="option-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h5>Consult a Doctor</h5>
+                <p>Need a prescription? Consult with our licensed doctors first.</p>
+                <button type="button" class="option-btn" onclick="consultDoctor('drug-delivery')">
+                    <i class="fas fa-video"></i>
+                    Consult Doctor
+                </button>
+            </div>
+        </div>
+        <div id="prescriptionUploadSection" class="upload-section" style="display: none;">
+            <div class="upload-container">
+                <h5><i class="fas fa-file-upload"></i> Upload Your Prescription</h5>
+                <div class="file-upload-area" id="prescriptionUpload">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag and drop your prescription here or click to browse</p>
+                    <input type="file" id="prescriptionFile" name="prescriptionFile" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                    <small>Supported formats: PDF, JPG, PNG (Max 5MB per file)</small>
+                </div>
+                <div id="uploadedFiles" class="uploaded-files"></div>
+            </div>
+        </div>
+    `;
+    
+    serviceOptionsContainer.innerHTML = optionsHTML;
+    serviceOptionsContainer.style.display = 'block';
+}
+
+// Show lab test specific options
+function showLabTestOptions() {
+    const serviceOptionsContainer = document.getElementById('serviceOptionsContainer');
+    
+    const optionsHTML = `
+        <div class="service-options-header">
+            <h4><i class="fas fa-vial"></i> Lab Test Options</h4>
+            <p>Choose how you'd like to proceed with your lab test requirements:</p>
+        </div>
+        <div class="service-options-grid">
+            <div class="option-card" data-option="upload-lab-request">
+                <div class="option-icon">
+                    <i class="fas fa-upload"></i>
+                </div>
+                <h5>Upload Lab Request</h5>
+                <p>Have a lab request form from your doctor? Upload it here.</p>
+                <button type="button" class="option-btn" onclick="showLabRequestUpload()">
+                    <i class="fas fa-file-medical-alt"></i>
+                    Upload Lab Request
+                </button>
+            </div>
+            <div class="option-card" data-option="consult-doctor">
+                <div class="option-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h5>Consult a Doctor</h5>
+                <p>Need lab tests prescribed? Consult with our doctors first.</p>
+                <button type="button" class="option-btn" onclick="consultDoctor('lab-tests')">
+                    <i class="fas fa-video"></i>
+                    Consult Doctor
+                </button>
+            </div>
+        </div>
+        <div id="labRequestUploadSection" class="upload-section" style="display: none;">
+            <div class="upload-container">
+                <h5><i class="fas fa-file-upload"></i> Upload Your Lab Request Form</h5>
+                <div class="file-upload-area" id="labRequestUpload">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag and drop your lab request form here or click to browse</p>
+                    <input type="file" id="labRequestFile" name="labRequestFile" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                    <small>Supported formats: PDF, JPG, PNG (Max 5MB per file)</small>
+                </div>
+                <div id="uploadedLabFiles" class="uploaded-files"></div>
+            </div>
+        </div>
+    `;
+    
+    serviceOptionsContainer.innerHTML = optionsHTML;
+    serviceOptionsContainer.style.display = 'block';
+}
+
+// Show prescription upload section
+function showPrescriptionUpload() {
+    const uploadSection = document.getElementById('prescriptionUploadSection');
+    if (uploadSection) {
+        uploadSection.style.display = 'block';
+        uploadSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        setupFileUpload('prescriptionUpload', 'prescriptionFile', 'uploadedFiles');
+    }
+}
+
+// Show lab request upload section
+function showLabRequestUpload() {
+    const uploadSection = document.getElementById('labRequestUploadSection');
+    if (uploadSection) {
+        uploadSection.style.display = 'block';
+        uploadSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        setupFileUpload('labRequestUpload', 'labRequestFile', 'uploadedLabFiles');
+    }
+}
+
+// Setup file upload functionality
+function setupFileUpload(uploadAreaId, fileInputId, uploadedFilesId) {
+    const uploadArea = document.getElementById(uploadAreaId);
+    const fileInput = document.getElementById(fileInputId);
+    const uploadedFilesContainer = document.getElementById(uploadedFilesId);
+    
+    if (!uploadArea || !fileInput) return;
+    
+    // Click to upload
+    uploadArea.addEventListener('click', () => {
+        fileInput.click();
+    });
+    
+    // Drag and drop functionality
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('drag-over');
+    });
+    
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('drag-over');
+    });
+    
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('drag-over');
+        const files = e.dataTransfer.files;
+        handleFileUpload(files, uploadedFilesContainer);
+    });
+    
+    // File input change
+    fileInput.addEventListener('change', (e) => {
+        const files = e.target.files;
+        handleFileUpload(files, uploadedFilesContainer);
+    });
+}
+
+// Handle file upload
+function handleFileUpload(files, container) {
+    Array.from(files).forEach(file => {
+        if (validateFile(file)) {
+            displayUploadedFile(file, container);
+        }
+    });
+}
+
+// Validate uploaded file
+function validateFile(file) {
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
+    
+    if (file.size > maxSize) {
+        showNotification('File size must be less than 5MB', 'error');
+        return false;
+    }
+    
+    if (!allowedTypes.includes(file.type)) {
+        showNotification('Only PDF, JPG, and PNG files are allowed', 'error');
+        return false;
+    }
+    
+    return true;
+}
+
+// Display uploaded file
+function displayUploadedFile(file, container) {
+    const fileItem = document.createElement('div');
+    fileItem.className = 'uploaded-file-item';
+    
+    const fileIcon = file.type === 'application/pdf' ? 'fas fa-file-pdf' : 'fas fa-file-image';
+    const fileSize = (file.size / 1024 / 1024).toFixed(2);
+    
+    fileItem.innerHTML = `
+        <div class="file-info">
+            <i class="${fileIcon}"></i>
+            <div class="file-details">
+                <span class="file-name">${file.name}</span>
+                <span class="file-size">${fileSize} MB</span>
+            </div>
+        </div>
+        <button type="button" class="remove-file-btn" onclick="removeFile(this)">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+    
+    container.appendChild(fileItem);
+    showNotification('File uploaded successfully', 'success');
+}
+
+// Remove uploaded file
+function removeFile(button) {
+    const fileItem = button.closest('.uploaded-file-item');
+    if (fileItem) {
+        fileItem.remove();
+        showNotification('File removed', 'info');
+    }
+}
+
+// Consult doctor function
+function consultDoctor(serviceType) {
+    const consultMessage = serviceType === 'drug-delivery' 
+        ? 'I need a consultation for medication prescription. Can you help me get the right prescription for my condition?'
+        : 'I need a consultation for lab tests. Can you help me determine what tests I need and provide a lab request form?';
+    
+    const whatsappUrl = `https://wa.me/254796780345?text=${encodeURIComponent(consultMessage)}`;
+    window.open(whatsappUrl, '_blank');
+}
+
+// Show notification
+function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+            <span>${message}</span>
+        </div>
+        <button class="notification-close" onclick="this.parentElement.remove()">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentElement) {
+            notification.remove();
+        }
+    }, 5000);
 }
 
 // Setup form validation
