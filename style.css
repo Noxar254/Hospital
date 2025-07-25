@@ -3611,28 +3611,37 @@ body.no-scroll {
 
 @media (max-width: 768px) {
     .contact-section {
-        padding: 2.5rem 0;
+        padding: 2rem 0;
     }
     
     .contact-content {
         grid-template-columns: 1fr;
         gap: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .contact-info .section-header {
+        margin-bottom: 1.5rem;
+        text-align: left;
     }
     
     .contact-info .section-header h2 {
         font-size: 1.8rem;
-        text-align: center;
+        text-align: left;
         margin-bottom: 0.75rem;
+        line-height: 1.2;
     }
     
     .contact-info .section-header p {
-        text-align: center;
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
+        text-align: left;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+        padding: 0;
     }
     
     .contact-details {
-        gap: 1.5rem;
+        gap: 1rem;
         margin-bottom: 1rem;
     }
     
@@ -3640,6 +3649,9 @@ body.no-scroll {
         padding: 1rem;
         gap: 1rem;
         border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+        border: 1px solid rgba(37, 99, 235, 0.1);
     }
     
     .contact-icon {
@@ -3647,7 +3659,95 @@ body.no-scroll {
         height: 40px;
         font-size: 1rem;
         border-radius: 8px;
+        flex-shrink: 0;
     }
+    
+    .contact-text {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .contact-text h4 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+        line-height: 1.2;
+    }
+    
+    .contact-text a {
+        font-size: 0.9rem;
+        word-wrap: break-word;
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+    
+    .contact-text span {
+        font-size: 0.8rem;
+        line-height: 1.3;
+        word-wrap: break-word;
+    }
+    
+    .contact-form {
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin: 0;
+    }
+    
+    .thin-form {
+        gap: 1rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 1rem 0.9rem 1rem 2.8rem;
+        font-size: 0.9rem;
+        border-radius: 8px;
+        border-width: 2px;
+    }
+    
+    .form-icon {
+        left: 0.9rem;
+        font-size: 0.85rem;
+    }
+    
+    .form-select-icon {
+        right: 0.9rem;
+        font-size: 0.75rem;
+    }
+    
+    .form-group textarea {
+        min-height: 100px;
+        padding-top: 1rem;
+    }
+    
+    .form-group textarea + .form-icon {
+        top: 1.4rem;
+    }
+    
+    .checkbox-container {
+        gap: 0.6rem;
+        align-items: flex-start;
+    }
+    
+    .checkmark {
+        width: 18px;
+        height: 18px;
+        margin-top: 2px;
+    }
+    
+    .checkbox-text {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+    
+    .submit-btn {
+        padding: 1rem 1.5rem;
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+        min-height: 48px;
+        width: 100%;
+    }
+}
     
     .contact-text h4 {
         font-size: 1rem;
@@ -3725,19 +3825,30 @@ body.no-scroll {
 
 @media (max-width: 480px) {
     .contact-section {
-        padding: 2rem 0;
+        padding: 1.5rem 0;
     }
     
     .contact-content {
         gap: 1.5rem;
+        padding: 0 0.5rem;
     }
     
     .contact-info .section-header h2 {
         font-size: 1.6rem;
+        line-height: 1.2;
+    }
+
+    .contact-info .section-header p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+    
+    .contact-details {
+        gap: 0.8rem;
     }
     
     .contact-item {
-        padding: 0.9rem;
+        padding: 0.8rem;
         gap: 0.8rem;
         text-align: left;
     }
@@ -3747,6 +3858,80 @@ body.no-scroll {
         height: 36px;
         font-size: 0.9rem;
     }
+    
+    .contact-text h4 {
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+        line-height: 1.1;
+    }
+    
+    .contact-text a {
+        font-size: 0.85rem;
+        margin-bottom: 0.1rem;
+    }
+    
+    .contact-text span {
+        font-size: 0.75rem;
+        line-height: 1.2;
+    }
+    
+    .contact-form {
+        padding: 1.2rem;
+        border-radius: 10px;
+    }
+    
+    .thin-form {
+        gap: 0.8rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.9rem 0.8rem 0.9rem 2.5rem;
+        font-size: 0.85rem;
+        border-radius: 6px;
+    }
+    
+    .form-icon {
+        left: 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .form-select-icon {
+        right: 0.8rem;
+        font-size: 0.7rem;
+    }
+    
+    .form-group textarea {
+        min-height: 80px;
+        padding-top: 0.9rem;
+    }
+    
+    .form-group textarea + .form-icon {
+        top: 1.2rem;
+    }
+    
+    .checkbox-container {
+        gap: 0.5rem;
+    }
+    
+    .checkmark {
+        width: 16px;
+        height: 16px;
+        margin-top: 1px;
+    }
+    
+    .checkbox-text {
+        font-size: 0.8rem;
+        line-height: 1.3;
+    }
+    
+    .submit-btn {
+        padding: 0.9rem 1.2rem;
+        font-size: 0.9rem;
+        min-height: 44px;
+    }
+}
     
     .contact-text h4 {
         font-size: 0.95rem;
@@ -5148,8 +5333,9 @@ body.no-scroll {
 
     /* Contact Section Mobile */
     .contact-content {
-        flex-direction: column;
-        gap: 2rem;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 0.5rem;
     }
 
     .contact-info,
@@ -5158,14 +5344,15 @@ body.no-scroll {
     }
 
     .contact-details {
-        gap: 1rem;
+        gap: 0.8rem;
     }
 
     .contact-item {
-        padding: 1rem;
-        border-radius: 10px;
-        background: rgba(37, 99, 235, 0.05);
+        padding: 0.8rem;
+        border-radius: 8px;
+        background: #fff;
         border: 1px solid rgba(37, 99, 235, 0.1);
+        box-shadow: 0 2px 6px rgba(37, 99, 235, 0.08);
     }
 
     .contact-text h4 {
