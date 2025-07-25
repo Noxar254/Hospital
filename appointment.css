@@ -585,3 +585,103 @@
     align-items: center;
     gap: 0.25rem;
 }
+
+/* WhatsApp Booking Section */
+.whatsapp-booking-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--light-gray);
+}
+
+.whatsapp-divider {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.whatsapp-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--light-gray);
+    z-index: 1;
+}
+
+.whatsapp-divider span {
+    background: var(--white);
+    padding: 0 1rem;
+    color: var(--text-gray);
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+}
+
+.whatsapp-booking-content {
+    text-align: center;
+}
+
+.whatsapp-booking-content h3 {
+    color: var(--dark-gray);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.whatsapp-booking-content h3 i {
+    color: #25D366;
+}
+
+.whatsapp-booking-content p {
+    color: var(--text-gray);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.whatsapp-booking-btn {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: var(--white);
+    border: none;
+    padding: 0.875rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.whatsapp-booking-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-booking-btn:active {
+    transform: translateY(0);
+}
+
+.whatsapp-booking-btn i {
+    font-size: 1.2rem;
+}
+
+/* Mobile Responsiveness for WhatsApp Section */
+@media (max-width: 768px) {
+    .whatsapp-booking-content h3 {
+        font-size: 1.25rem;
+    }
+    
+    .whatsapp-booking-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem 2rem;
+    }
+}

@@ -562,6 +562,8 @@ body {
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .enquire-btn::after {
@@ -1066,6 +1068,9 @@ body {
         padding: 0.8rem 1.5rem;
         font-size: 0.9rem;
         min-height: 44px;
+        text-decoration: none;
+        display: inline-block;
+        color: var(--white);
     }
 
     /* Services Description Mobile */
@@ -1643,6 +1648,8 @@ body {
     .enquire-btn {
         padding: 0.4rem 0;
         font-size: 0.85rem;
+        text-decoration: none;
+        color: var(--white);
     }
     
     .view-all-btn {
@@ -1929,6 +1936,8 @@ html {
     padding: 0.5rem 0;
     margin-top: auto;
     align-self: stretch;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .consult-btn::after {
@@ -4783,6 +4792,10 @@ body.no-scroll {
         font-size: 0.9rem;
         border-radius: 8px;
         width: 100%;
+        text-decoration: none;
+        color: var(--white);
+        display: inline-block;
+        text-align: center;
     }
 
     .view-all-btn {
@@ -4835,6 +4848,9 @@ body.no-scroll {
         padding: 0.8rem 1rem;
         font-size: 0.9rem;
         border-radius: 8px;
+        text-decoration: none;
+        text-align: center;
+        display: inline-block;
     }
 
     .rating {

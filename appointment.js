@@ -18,6 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle urgency color coding
     setupUrgencyColorCoding();
+    
+    // Setup WhatsApp booking
+    setupWhatsAppBooking();
+    
+    // Handle URL parameters for service pre-selection
+    handleServicePreSelection();
 });
 
 // Initialize appointment form
@@ -629,3 +635,457 @@ function showNotification(message, type = 'info') {
 
 // Make closeSuccessModal globally available
 window.closeSuccessModal = closeSuccessModal;
+
+// Setup WhatsApp booking functionality
+function setupWhatsAppBooking() {
+    const whatsappBtn = document.getElementById('whatsappBookingBtn');
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', function() {
+            const message = generateWhatsAppMessage();
+            const phoneNumber = '+254796780345'; // Hospital's WhatsApp number
+            const whatsappUrl = `https://wa.me/${phoneNumber.replace('+', '')}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+    }
+}
+
+// Generate custom WhatsApp message based on service and form data
+function generateWhatsAppMessage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceType = urlParams.get('service');
+    
+    // Get form data if available
+    const firstName = document.getElementById('firstName')?.value || '';
+    const lastName = document.getElementById('lastName')?.value || '';
+    const phone = document.getElementById('phone')?.value || '';
+    const department = document.getElementById('department')?.value || '';
+    const appointmentType = document.getElementById('appointmentType')?.value || '';
+    const reasonForVisit = document.getElementById('reasonForVisit')?.value || '';
+    
+    let message = '';
+    
+    // Service-specific message templates
+    switch(serviceType) {
+        case 'outpatient':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to book an Out-Patient consultation.\n\n`;
+            break;
+        case 'obs-gynecology':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to schedule an OBS & Gynecology appointment.\n\n`;
+            break;
+        case 'dental':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to book a Dental Services appointment.\n\n`;
+            break;
+        case 'pediatrics':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to schedule a Pediatrics consultation for my child.\n\n`;
+            break;
+        case 'inpatient':
+            message = `Hello Hopewell Hospital! 👋\n\nI need information about In-Patient Care services.\n\n`;
+            break;
+        case 'minor-surgery':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to schedule a Minor Surgery consultation.\n\n`;
+            break;
+        case 'psychiatrist':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to book a consultation with Dr. Sarah Mitchell (Psychiatrist).\n\n`;
+            break;
+        case 'psychologist':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to schedule an appointment with Dr. James Anderson (Psychologist).\n\n`;
+            break;
+        case 'therapist':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to book a therapy session with Maria Rodriguez (Therapist).\n\n`;
+            break;
+        case 'counsellor':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to schedule counselling with Michael Thompson (Counsellor).\n\n`;
+            break;
+        case 'home-consultation':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to schedule a Home Consultation service.\n\n`;
+            break;
+        case 'home-counselling':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to book Couple Home Counselling services.\n\n`;
+            break;
+        case 'home-imaging':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to schedule Home Imaging & Test Scans services.\n\n`;
+            break;
+        case 'home-lab-tests':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to book Home Lab Tests services.\n\n`;
+            break;
+        case 'home-nursing':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to schedule Home Nursing Care services.\n\n`;
+            break;
+        case 'drug-delivery':
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to request Drug Delivery services.\n\n`;
+            break;
+        default:
+            message = `Hello Hopewell Hospital! 👋\n\nI would like to book an appointment.\n\n`;
+    }
+    
+    // Add patient details if available
+    if (firstName || lastName) {
+        message += `👤 **Patient Details:**\n`;
+        message += `Name: ${firstName} ${lastName}\n`;
+        if (phone) message += `Phone: ${phone}\n`;
+        message += `\n`;
+    }
+    
+    // Add appointment preferences if available
+    if (department || appointmentType) {
+        message += `📅 **Appointment Preferences:**\n`;
+        if (department) message += `Department: ${department}\n`;
+        if (appointmentType) message += `Type: ${appointmentType}\n`;
+        message += `\n`;
+    }
+    
+    // Add reason for visit if available
+    if (reasonForVisit) {
+        message += `📋 **Reason for Visit:**\n${reasonForVisit}\n\n`;
+    }
+    
+    // Add professional closing
+    message += `I would appreciate if someone could get back to me to confirm the appointment details and timing.\n\n`;
+    message += `Thank you! 🙏\n\n`;
+    message += `*This message was sent via Hopewell Hospital's appointment booking system.*`;
+    
+    return message;
+}
+
+// Handle service pre-selection from URL parameters
+function handleServicePreSelection() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceType = urlParams.get('service');
+    
+    if (serviceType) {
+        // Pre-select department based on service
+        const departmentSelect = document.getElementById('department');
+        if (departmentSelect) {
+            switch(serviceType) {
+                case 'outpatient':
+                    departmentSelect.value = 'general-medicine';
+                    break;
+                case 'obs-gynecology':
+                    departmentSelect.value = 'obs-gynecology';
+                    break;
+                case 'dental':
+                    departmentSelect.value = 'dental';
+                    break;
+                case 'pediatrics':
+                    departmentSelect.value = 'pediatrics';
+                    break;
+                case 'psychiatrist':
+                case 'psychologist':
+                case 'therapist':
+                case 'counsellor':
+                    departmentSelect.value = 'mental-health';
+                    break;
+                case 'inpatient':
+                    departmentSelect.value = 'general-medicine';
+                    break;
+                case 'minor-surgery':
+                    departmentSelect.value = 'general-medicine';
+                    break;
+                case 'home-consultation':
+                case 'home-counselling':
+                case 'home-imaging':
+                case 'home-lab-tests':
+                case 'home-nursing':
+                case 'drug-delivery':
+                    // For home services, set appointment type to home visit
+                    const appointmentTypeSelect = document.getElementById('appointmentType');
+                    if (appointmentTypeSelect) {
+                        appointmentTypeSelect.value = 'home-visit';
+                    }
+                    departmentSelect.value = 'general-medicine';
+                    break;
+            }
+        }
+        
+        // Pre-fill reason for visit with service-specific placeholder
+        const reasonTextarea = document.getElementById('reasonForVisit');
+        if (reasonTextarea && !reasonTextarea.value) {
+            switch(serviceType) {
+                case 'outpatient':
+                    reasonTextarea.placeholder = 'Please describe your symptoms or health concerns for the consultation...';
+                    break;
+                case 'obs-gynecology':
+                    reasonTextarea.placeholder = 'Please describe your gynecological or maternity care needs...';
+                    break;
+                case 'dental':
+                    reasonTextarea.placeholder = 'Please describe your dental concerns or treatment needs...';
+                    break;
+                case 'pediatrics':
+                    reasonTextarea.placeholder = 'Please describe your child\'s symptoms or health concerns...';
+                    break;
+                case 'psychiatrist':
+                    reasonTextarea.placeholder = 'Please describe your mental health concerns or symptoms...';
+                    break;
+                case 'psychologist':
+                    reasonTextarea.placeholder = 'Please describe what you would like to discuss in therapy...';
+                    break;
+                case 'therapist':
+                    reasonTextarea.placeholder = 'Please describe your therapeutic needs or goals...';
+                    break;
+                case 'counsellor':
+                    reasonTextarea.placeholder = 'Please describe what you would like counselling support for...';
+                    break;
+                case 'home-consultation':
+                    reasonTextarea.placeholder = 'Please describe your medical needs for the home consultation...';
+                    break;
+                case 'home-counselling':
+                    reasonTextarea.placeholder = 'Please describe your relationship counselling needs...';
+                    break;
+                case 'home-imaging':
+                    reasonTextarea.placeholder = 'Please specify what type of imaging or scans you need...';
+                    break;
+                case 'home-lab-tests':
+                    reasonTextarea.placeholder = 'Please specify what lab tests you need...';
+                    break;
+                case 'home-nursing':
+                    reasonTextarea.placeholder = 'Please describe your nursing care needs...';
+                    break;
+                case 'drug-delivery':
+                    reasonTextarea.placeholder = 'Please list the medications you need delivered...';
+                    break;
+            }
+        }
+    }
+}
+
+// Setup WhatsApp booking functionality
+function setupWhatsAppBooking() {
+    const whatsappBtn = document.getElementById('whatsappBookingBtn');
+    
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', function() {
+            const message = generateWhatsAppMessage();
+            const phoneNumber = '+254796780345'; // Hospital WhatsApp number
+            const whatsappUrl = `https://wa.me/${phoneNumber.replace('+', '')}?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappUrl, '_blank');
+        });
+    }
+}
+
+// Generate WhatsApp message based on selected service and form data
+function generateWhatsAppMessage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const service = urlParams.get('service') || 'general';
+    
+    // Get form data for personalization (if filled)
+    const firstName = document.getElementById('firstName')?.value || '';
+    const lastName = document.getElementById('lastName')?.value || '';
+    const phone = document.getElementById('phone')?.value || '';
+    const email = document.getElementById('email')?.value || '';
+    const appointmentType = document.getElementById('appointmentType')?.value || '';
+    const preferredDate = document.getElementById('preferredDate')?.value || '';
+    const preferredTime = document.getElementById('preferredTime')?.value || '';
+    const reasonForVisit = document.getElementById('reasonForVisit')?.value || '';
+    
+    let serviceName = getServiceName(service);
+    let customMessage = getServiceSpecificMessage(service);
+    
+    // Base message
+    let message = `🏥 *Hopewell Hospital Appointment Request*\n\n`;
+    message += `Hello! I would like to book an appointment for *${serviceName}*.\n\n`;
+    message += `${customMessage}\n\n`;
+    
+    // Add personal details if provided
+    if (firstName && lastName) {
+        message += `👤 *Patient Details:*\n`;
+        message += `• Name: ${firstName} ${lastName}\n`;
+        if (phone) message += `• Phone: ${phone}\n`;
+        if (email) message += `• Email: ${email}\n`;
+        message += `\n`;
+    }
+    
+    // Add appointment preferences if provided
+    if (appointmentType || preferredDate || preferredTime) {
+        message += `📅 *Appointment Preferences:*\n`;
+        if (appointmentType) message += `• Type: ${getAppointmentTypeText(appointmentType)}\n`;
+        if (preferredDate) message += `• Date: ${formatDate(preferredDate)}\n`;
+        if (preferredTime) message += `• Time: ${formatTime(preferredTime)}\n`;
+        message += `\n`;
+    }
+    
+    // Add reason if provided
+    if (reasonForVisit) {
+        message += `📝 *Reason for Visit:*\n${reasonForVisit}\n\n`;
+    }
+    
+    message += `Please confirm my appointment and let me know the next steps.\n\n`;
+    message += `Thank you! 🙏`;
+    
+    return message;
+}
+
+// Get service name from service code
+function getServiceName(service) {
+    const serviceNames = {
+        'outpatient': 'Out-Patient Services',
+        'obs-gynecology': 'OBS & Gynecology',
+        'dental': 'Dental Services',
+        'pediatrics': 'Pediatrics',
+        'inpatient': 'In-Patient Care',
+        'minor-surgery': 'Minor Surgery',
+        'psychiatrist': 'Psychiatrist Consultation',
+        'psychologist': 'Psychologist Consultation',
+        'therapist': 'Therapy Session',
+        'counsellor': 'Counselling Session',
+        'home-consultation': 'Home Medical Consultation',
+        'home-counselling': 'Home Counselling',
+        'home-imaging': 'Home Imaging & Test Scans',
+        'home-lab-tests': 'Home Lab Tests',
+        'home-nursing': 'Home Nursing Care',
+        'drug-delivery': 'Drug Delivery Service',
+        'general': 'General Medical Consultation'
+    };
+    
+    return serviceNames[service] || 'Medical Consultation';
+}
+
+// Get service-specific message
+function getServiceSpecificMessage(service) {
+    const serviceMessages = {
+        'outpatient': '🩺 I need a same-day consultation for outpatient services. Please help me schedule an appointment at your convenience.',
+        
+        'obs-gynecology': '🤱 I would like to book an appointment for women\'s health and maternity care services. I need professional gynecological consultation.',
+        
+        'dental': '🦷 I need dental care services and would like to schedule an appointment with your dental team for oral health consultation.',
+        
+        'pediatrics': '👶 I need to book a pediatric appointment for specialized children\'s medical care. Please help me schedule with a pediatrician.',
+        
+        'inpatient': '🏥 I require in-patient care services with 24/7 hospital monitoring. Please help me understand the admission process.',
+        
+        'minor-surgery': '🔬 I need consultation for minor surgery procedures. Please schedule me with the appropriate surgical team.',
+        
+        'psychiatrist': '🧠 I would like to schedule a consultation with Dr. Sarah Mitchell for psychiatric evaluation and mental health treatment.',
+        
+        'psychologist': '💭 I need to book a session with Dr. James Anderson for psychological assessment and therapy.',
+        
+        'therapist': '🤝 I would like to schedule a therapy session with Maria Rodriguez for therapeutic intervention and support.',
+        
+        'counsellor': '💬 I need counselling services with Michael Thompson for guidance and personal growth support.',
+        
+        'home-consultation': '🏠 I would like to book a home medical consultation. Please arrange for a doctor to visit my home for professional medical assessment.',
+        
+        'home-counselling': '💝 I need home counselling services for relationship/couple therapy in the privacy of my home.',
+        
+        'home-imaging': '📱 I require portable imaging and diagnostic scan services at home. Please arrange for X-rays/ultrasounds at my location.',
+        
+        'home-lab-tests': '🧪 I need home laboratory testing services. Please arrange for professional sample collection at my home.',
+        
+        'home-nursing': '👩‍⚕️ I require professional nursing care services at home for post-operative care or chronic condition management.',
+        
+        'drug-delivery': '💊 I need prescription drugs and medications delivered to my home safely and securely.',
+        
+        'general': '🩺 I would like to book a general medical consultation. Please help me schedule an appointment with your healthcare team.'
+    };
+    
+    return serviceMessages[service] || serviceMessages['general'];
+}
+
+// Format appointment type for display
+function getAppointmentTypeText(type) {
+    const types = {
+        'telemedicine': 'Telemedicine (Video Call)',
+        'in-person': 'In-Person Visit',
+        'phone-consultation': 'Phone Consultation',
+        'home-visit': 'Home Visit'
+    };
+    
+    return types[type] || type;
+}
+
+// Format date for display
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+}
+
+// Format time for display
+function formatTime(timeString) {
+    const [hours, minutes] = timeString.split(':');
+    const hour = parseInt(hours);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const displayHour = hour % 12 || 12;
+    return `${displayHour}:${minutes} ${ampm}`;
+}
+
+// Handle URL parameters for service pre-selection
+function handleServicePreSelection() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const service = urlParams.get('service');
+    
+    if (service) {
+        // Pre-select department based on service
+        const departmentSelect = document.getElementById('department');
+        if (departmentSelect) {
+            const departmentMapping = {
+                'outpatient': 'general-medicine',
+                'obs-gynecology': 'obs-gynecology',
+                'dental': 'dental',
+                'pediatrics': 'pediatrics',
+                'inpatient': 'general-medicine',
+                'minor-surgery': 'general-medicine',
+                'psychiatrist': 'mental-health',
+                'psychologist': 'mental-health',
+                'therapist': 'mental-health',
+                'counsellor': 'mental-health',
+                'home-consultation': 'general-medicine',
+                'home-counselling': 'mental-health',
+                'home-imaging': 'general-medicine',
+                'home-lab-tests': 'general-medicine',
+                'home-nursing': 'general-medicine',
+                'drug-delivery': 'general-medicine'
+            };
+            
+            const mappedDepartment = departmentMapping[service];
+            if (mappedDepartment) {
+                departmentSelect.value = mappedDepartment;
+            }
+        }
+        
+        // Pre-select appointment type for home services
+        const appointmentTypeSelect = document.getElementById('appointmentType');
+        if (appointmentTypeSelect && service.startsWith('home-')) {
+            appointmentTypeSelect.value = 'home-visit';
+            // Trigger change event to show telemedicine consent if needed
+            appointmentTypeSelect.dispatchEvent(new Event('change'));
+        }
+        
+        // Pre-fill reason for visit with service context
+        const reasonTextarea = document.getElementById('reasonForVisit');
+        if (reasonTextarea && !reasonTextarea.value) {
+            const serviceContext = getServiceReasonContext(service);
+            if (serviceContext) {
+                reasonTextarea.placeholder = serviceContext;
+            }
+        }
+    }
+}
+
+// Get service-specific reason context
+function getServiceReasonContext(service) {
+    const contexts = {
+        'outpatient': 'Please describe your symptoms or health concerns for the outpatient consultation...',
+        'obs-gynecology': 'Please describe your women\'s health concerns or maternity care needs...',
+        'dental': 'Please describe your dental concerns or oral health issues...',
+        'pediatrics': 'Please describe your child\'s symptoms or health concerns...',
+        'inpatient': 'Please describe why you need in-patient care and monitoring...',
+        'minor-surgery': 'Please describe the type of minor surgery you need...',
+        'psychiatrist': 'Please describe your mental health concerns for psychiatric evaluation...',
+        'psychologist': 'Please describe what you\'d like to address in psychological therapy...',
+        'therapist': 'Please describe the therapeutic support you\'re seeking...',
+        'counsellor': 'Please describe the areas you\'d like guidance and counselling support...',
+        'home-consultation': 'Please describe your medical concerns for the home consultation...',
+        'home-counselling': 'Please describe the counselling support needed at home...',
+        'home-imaging': 'Please describe what type of imaging or diagnostic scans you need...',
+        'home-lab-tests': 'Please describe what laboratory tests you need...',
+        'home-nursing': 'Please describe the nursing care services you require at home...',
+        'drug-delivery': 'Please list the medications you need delivered...'
+    };
+    
+    return contexts[service] || null;
+}

@@ -795,8 +795,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Enhanced touch interactions
     if (isMobile) {
         
-        // Add touch feedback to buttons
-        const buttons = document.querySelectorAll('button, .btn, .cta-button, .learn-more-btn, .enquire-btn, .consult-btn, .home-care-cta, .submit-btn');
+        // Add touch feedback to buttons (excluding links)
+        const buttons = document.querySelectorAll('button, .btn, .cta-button, .learn-more-btn, .home-care-cta, .submit-btn');
         
         buttons.forEach(button => {
             button.addEventListener('touchstart', function() {
