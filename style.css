@@ -4820,6 +4820,242 @@ body.no-scroll {
 }
 
 /* ===========================
+   NEWSLETTER PROMOTIONAL BANNER
+   =========================== */
+
+.newsletter-promo-banner {
+    width: 100%;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.newsletter-banner-container {
+    display: flex;
+    align-items: center;
+    min-height: 280px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.newsletter-banner-image {
+    flex: 0 0 50%;
+    height: 280px;
+    overflow: hidden;
+    position: relative;
+}
+
+.newsletter-promo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.newsletter-banner-content {
+    flex: 1;
+    padding: 2.5rem 3rem;
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.newsletter-banner-text h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: var(--text-dark);
+}
+
+.newsletter-banner-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: rgba(0, 0, 0, 0.7);
+    max-width: 90%;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: stretch;
+}
+
+.newsletter-input {
+    flex: 1;
+    padding: 0.75rem 1.2rem;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--text-dark);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    max-width: 300px;
+}
+
+.newsletter-input::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.newsletter-input:focus {
+    outline: none;
+    border-color: var(--pink-accent);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+}
+
+.newsletter-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: linear-gradient(135deg, var(--pink-accent), var(--pink-hover));
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.newsletter-cta-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--pink-hover), var(--pink-accent));
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+}
+
+.newsletter-cta-btn i {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.newsletter-cta-btn:hover i {
+    transform: translateX(3px);
+}
+
+.newsletter-banner-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.95rem;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 500;
+}
+
+.newsletter-banner-feature i {
+    font-size: 1.1rem;
+    color: var(--pink-accent);
+}
+
+/* Newsletter Banner Mobile Styles */
+@media (max-width: 768px) {
+    .newsletter-banner-container {
+        flex-direction: column;
+        min-height: 120px;
+    }
+    
+    .newsletter-banner-image {
+        flex: none;
+        width: 100%;
+        height: 80px;
+        order: 1;
+    }
+    
+    .newsletter-promo-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: none !important;
+    }
+    
+    .newsletter-banner-content {
+        flex: none;
+        width: 100%;
+        padding: 1.5rem 1.2rem;
+        order: 2;
+        text-align: left;
+    }
+    
+    .newsletter-banner-text h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .newsletter-banner-text p {
+        font-size: 0.9rem;
+        margin-bottom: 1.2rem;
+        max-width: 100%;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-bottom: 1rem;
+    }
+    
+    .newsletter-input {
+        max-width: 100%;
+        padding: 0.65rem 1rem;
+        font-size: 0.9rem;
+        border-radius: 6px;
+    }
+    
+    .newsletter-cta-btn {
+        padding: 0.65rem 1.2rem;
+        font-size: 0.9rem;
+        justify-content: center;
+        border-radius: 6px;
+    }
+    
+    .newsletter-banner-feature {
+        font-size: 0.8rem;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .newsletter-banner-content {
+        padding: 1.2rem 1rem;
+    }
+    
+    .newsletter-banner-text h3 {
+        font-size: 1.2rem;
+    }
+    
+    .newsletter-banner-text p {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+    
+    .newsletter-input {
+        padding: 0.6rem 0.9rem;
+        font-size: 0.85rem;
+        border-radius: 6px;
+    }
+    
+    .newsletter-cta-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        border-radius: 6px;
+    }
+}
+
+/* ===========================
    TESTIMONIALS SECTION STYLES
    =========================== */
 
