@@ -25,13 +25,24 @@ document.addEventListener('DOMContentLoaded', function() {
 // Navigation Bar Scroll Behavior
 let lastScrollTop = 0;
 let ticking = false;
+let isScrolling = false;
 
 function updateNavbar() {
     const navbar = document.querySelector('.navbar');
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    if (!navbar) return;
     
-    // More sensitive for mobile - hide after 50px instead of 100px
-    const threshold = window.innerWidth <= 768 ? 50 : 100;
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const isMobile = window.innerWidth <= 768;
+    
+    // Different thresholds for mobile and desktop
+    const threshold = isMobile ? 30 : 100;
+    const scrollDifference = Math.abs(currentScroll - lastScrollTop);
+    
+    // Only trigger if scroll difference is significant enough
+    if (scrollDifference < 5) {
+        ticking = false;
+        return;
+    }
     
     if (currentScroll > lastScrollTop && currentScroll > threshold) {
         // Scrolling down - hide navbar
@@ -54,13 +65,39 @@ function requestNavbarUpdate() {
     }
 }
 
-// Initialize navbar as visible
+// Initialize navbar as visible and add scroll listener
 document.addEventListener('DOMContentLoaded', function() {
     const navbar = document.querySelector('.navbar');
-    navbar.classList.add('visible');
+    if (navbar) {
+        navbar.classList.add('visible');
+        navbar.classList.remove('hidden');
+    }
+    
+    // Add scroll listener with proper mobile handling
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        isScrolling = true;
+        clearTimeout(scrollTimeout);
+        requestNavbarUpdate();
+        
+        // Reset scrolling flag after 150ms
+        scrollTimeout = setTimeout(function() {
+            isScrolling = false;
+        }, 150);
+    }, { passive: true });
+    
+    // Handle orientation change for mobile
+    window.addEventListener('orientationchange', function() {
+        setTimeout(function() {
+            const navbar = document.querySelector('.navbar');
+            if (navbar) {
+                navbar.classList.add('visible');
+                navbar.classList.remove('hidden');
+            }
+            lastScrollTop = 0;
+        }, 500);
+    });
 });
-
-window.addEventListener('scroll', requestNavbarUpdate, { passive: true });
 
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', function() {
