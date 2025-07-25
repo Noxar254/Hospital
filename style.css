@@ -313,6 +313,247 @@ body {
     padding-left: 2rem;
 }
 
+/* Home Care Promotional Banner - Clean Rectangle with Sharp Edges */
+.homecare-promo-banner {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background: #f8fafc;
+    overflow: hidden;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.homecare-banner-container {
+    display: flex;
+    align-items: center;
+    height: 160px;
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: none;
+    background: var(--white);
+    border: 1px solid #e2e8f0;
+}
+
+.homecare-banner-image {
+    flex: 0 0 30%;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 0;
+}
+
+.promo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(1.05) contrast(1.1);
+    border-radius: 0;
+}
+
+.homecare-banner-content {
+    flex: 1;
+    padding: 1.5rem 2rem;
+    background: var(--primary-blue);
+    color: var(--white);
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0;
+}
+
+.banner-text {
+    flex: 1;
+}
+
+.banner-text h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--white);
+    line-height: 1.3;
+}
+
+.banner-text p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin: 0 0 0.75rem 0;
+    opacity: 0.9;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.homecare-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--pink-accent);
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: none;
+    font-family: 'Montserrat', sans-serif;
+    border: 2px solid var(--pink-accent);
+}
+
+.homecare-cta-btn:hover {
+    background: var(--pink-hover);
+    border-color: var(--pink-hover);
+    transform: translateY(-1px);
+}
+
+.homecare-cta-btn i {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.homecare-cta-btn:hover i {
+    transform: translateX(3px);
+}
+
+.banner-contact {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    margin-left: 1.5rem;
+}
+
+.banner-contact i {
+    color: var(--pink-accent);
+    font-size: 1rem;
+}
+
+.banner-contact a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.banner-contact a:hover {
+    color: var(--pink-accent);
+}
+
+/* Mobile Responsive for Rectangle Home Care Banner */
+@media (max-width: 768px) {
+    .homecare-promo-banner {
+        padding: 0;
+    }
+
+    .homecare-banner-container {
+        flex-direction: column;
+        height: auto;
+        border-radius: 0;
+        border: 1px solid #e2e8f0;
+        margin: 0;
+    }
+
+    .homecare-banner-image {
+        flex: none;
+        width: 100%;
+        height: 80px;
+        order: 1;
+        border-radius: 0;
+    }
+
+    .promo-image {
+        border-radius: 0;
+    }
+
+    .homecare-banner-content {
+        order: 2;
+        height: auto;
+        padding: 1.25rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        border-radius: 0;
+    }
+
+    .banner-text {
+        width: 100%;
+    }
+
+    .banner-text h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .banner-text p {
+        font-size: 0.85rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .homecare-cta-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+        align-self: flex-start;
+        border-radius: 0;
+        border: 2px solid var(--pink-accent);
+    }
+
+    .banner-contact {
+        font-size: 0.8rem;
+        margin-left: 0;
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 480px) {
+    .homecare-banner-container {
+        border-radius: 0;
+        margin: 0;
+    }
+
+    .homecare-banner-image {
+        height: 70px;
+        border-radius: 0;
+    }
+
+    .promo-image {
+        border-radius: 0;
+    }
+
+    .homecare-banner-content {
+        padding: 1rem 1.25rem;
+        gap: 0.6rem;
+        border-radius: 0;
+    }
+
+    .banner-text h3 {
+        font-size: 1.1rem;
+    }
+
+    .banner-text p {
+        font-size: 0.8rem;
+    }
+
+    .homecare-cta-btn {
+        padding: 0.45rem 0.9rem;
+        font-size: 0.8rem;
+        border-radius: 0;
+        border: 2px solid var(--pink-accent);
+    }
+
+    .banner-contact {
+        font-size: 0.75rem;
+    }
+}
+
 /* Services Section */
 .services-section {
     background: var(--white);
