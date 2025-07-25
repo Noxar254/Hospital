@@ -5,11 +5,32 @@
     box-sizing: border-box;
 }
 
+/* Prevent horizontal scrolling globally */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+html {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
     color: #333;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Main content container */
+main {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
 }
 
 /* Loading Screen Styles */
@@ -19,16 +40,36 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(37, 99, 235, 0.95); /* Semi-transparent blue */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(37, 99, 235, 0.98); /* More opaque blue for better visibility */
+    background-image: url('images/stethscope.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10000;
+    z-index: 99999; /* Increased z-index for maximum visibility */
     opacity: 1;
     visibility: visible;
     transition: all 0.5s ease;
+    /* Ensure it covers everything */
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.loading-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(37, 99, 235, 0.92);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    z-index: -1;
 }
 
 .loading-screen.fade-out {
@@ -38,14 +79,16 @@ body {
 
 .loading-container {
     text-align: center;
-    max-width: 400px;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    max-width: 450px;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.15); /* More visible background */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 25px;
+    border: 2px solid rgba(255, 255, 255, 0.3); /* More prominent border */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3); /* Stronger shadow for depth */
+    position: relative;
+    z-index: 1;
 }
 
 .loading-logo {
@@ -75,17 +118,19 @@ body {
 
 .loading-title {
     color: var(--white);
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.5); /* Stronger text shadow for visibility */
+    letter-spacing: 0.5px;
 }
 
 .loading-subtitle {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.1rem;
     margin-bottom: 2rem;
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); /* Enhanced text shadow */
+    font-weight: 500;
 }
 
 .loading-progress {
@@ -475,12 +520,8 @@ body {
 
 /* Home Care Promotional Banner - Clean Rectangle with Sharp Edges */
 .homecare-promo-banner {
-    width: 100vw;
+    width: 100%;
     position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
     background: #f8fafc;
     overflow: hidden;
     margin-top: 0;
@@ -610,12 +651,8 @@ body {
 
 /* Pharmacy Promotional Banner - Slim Rectangle with Sharp Edges */
 .pharmacy-promo-banner {
-    width: 100vw;
+    width: 100%;
     position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
     background: #f8fafc;
     overflow: hidden;
     margin-top: 0;
@@ -2019,6 +2056,9 @@ body {
 .section {
     padding: 5rem 0;
     min-height: 60vh;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
 }
 
 .section:nth-child(even) {
@@ -2030,6 +2070,9 @@ body {
     margin: 0 auto;
     padding: 0 1rem;
     text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .section h2 {
@@ -2847,7 +2890,7 @@ html {
 body.no-scroll {
     overflow: hidden !important;
     position: fixed;
-    width: 100vw;
+    width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -3166,8 +3209,7 @@ body.no-scroll {
     text-align: center;
     position: relative;
     overflow: hidden;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
+    width: 100%;
     border-top: 1px solid var(--gray-light);
     border-bottom: 1px solid var(--gray-light);
 }
@@ -3922,12 +3964,8 @@ body.no-scroll {
 
 /* Medical Tourism Video Section - Edge to Edge */
 .medical-tourism-video {
-    width: 100vw;
+    width: 100%;
     position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
     margin-top: 3rem;
     height: 400px;
     overflow: hidden;
