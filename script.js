@@ -1,3 +1,27 @@
+// Loading Screen functionality
+window.addEventListener('load', function() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    
+    // Hide loading screen after 2 seconds
+    setTimeout(function() {
+        loadingScreen.classList.add('fade-out');
+        
+        // Remove loading screen from DOM after fade animation
+        setTimeout(function() {
+            loadingScreen.style.display = 'none';
+            document.body.style.overflow = 'visible';
+        }, 500);
+    }, 2000);
+});
+
+// Prevent scrolling while loading screen is visible
+document.addEventListener('DOMContentLoaded', function() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (loadingScreen) {
+        document.body.style.overflow = 'hidden';
+    }
+});
+
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', function() {
     const mobileToggle = document.getElementById('mobileToggle');

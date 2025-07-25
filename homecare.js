@@ -1,6 +1,19 @@
 // Home Care Page JavaScript Functionality
 
+// Loading Screen Logic
 document.addEventListener('DOMContentLoaded', function() {
+    // Hide loading screen after 2 seconds
+    setTimeout(function() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        if (loadingScreen) {
+            loadingScreen.classList.add('fade-out');
+            // Remove from DOM after animation completes
+            setTimeout(function() {
+                loadingScreen.remove();
+            }, 500);
+        }
+    }, 2000);
+
     // Initialize home care form
     initializeHomeCareForm();
     
