@@ -1614,7 +1614,7 @@ main {
 
     /* Hero Section Mobile Optimizations - Slimmer Design */
     .hero {
-        height: 55vh;
+        height: 70vh;
         margin-top: 80px; /* Adjusted for mobile navbar */
         position: relative;
         overflow: hidden;
@@ -1624,7 +1624,7 @@ main {
     }
 
     .hero-video {
-        position: fixed;
+        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
@@ -1654,17 +1654,19 @@ main {
         position: relative;
         z-index: 3;
         text-align: center;
+        padding-top: 3rem;
     }
 
     .hero-content h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         line-height: 1.2;
-        margin-bottom: 0.8rem;
+        margin-bottom: 1rem;
+        margin-top: 2rem;
     }
 
     .hero-content p {
-        font-size: 0.95rem;
-        margin-bottom: 1.5rem;
+        font-size: 1rem;
+        margin-bottom: 1.8rem;
         line-height: 1.4;
     }
 
@@ -1677,10 +1679,10 @@ main {
 
     .cta-button {
         width: 100%;
-        max-width: 260px;
-        padding: 1rem 1.8rem;
-        font-size: 0.95rem;
-        min-height: 44px;
+        max-width: 220px;
+        padding: 0.8rem 1.4rem !important;
+        font-size: 0.75rem !important;
+        min-height: 42px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -2270,9 +2272,9 @@ main {
 @media (max-width: 768px) {
     .hero {
         margin-top: 0;
-        padding: 1.5rem 1rem;
-        height: 55vh;
-        min-height: 55vh;
+        padding: 1.5rem;
+        height: 70vh;
+        min-height: 70vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -2280,15 +2282,16 @@ main {
     }
 
     .hero-content h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         line-height: 1.2;
-        margin-bottom: 0.8rem;
+        margin-bottom: 1rem;
+        margin-top: 2rem;
     }
 
     .hero-content p {
-        font-size: 0.95rem;
+        font-size: 1rem;
         line-height: 1.4;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.8rem;
     }
 
     .section h2 {
@@ -5941,8 +5944,9 @@ body.no-scroll {
     /* Hero Section Mobile Perfection - Slimmer Design */
     .hero {
         margin-top: 70px;
-        min-height: 55vh;
-        padding: 1.5rem 0;
+        min-height: 70vh;
+        height: 70vh;
+        padding: 2rem 0;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -5955,14 +5959,15 @@ body.no-scroll {
     }
 
     .hero-content h1 {
-        font-size: 2rem;
-        margin-bottom: 0.8rem;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
         line-height: 1.2;
+        margin-top: 2rem;
     }
 
     .hero-content p {
-        font-size: 0.95rem;
-        margin-bottom: 1.5rem;
+        font-size: 1rem;
+        margin-bottom: 1.8rem;
         opacity: 0.95;
         line-height: 1.4;
     }
@@ -5976,11 +5981,11 @@ body.no-scroll {
 
     .cta-button {
         width: 100%;
-        max-width: 260px;
-        padding: 1rem 1.8rem;
-        font-size: 0.95rem;
-        border-radius: 10px;
-        min-height: 44px;
+        max-width: 220px;
+        padding: 0.8rem 1.4rem !important;
+        font-size: 0.75rem !important;
+        border-radius: 6px !important;
+        min-height: 42px;
     }
 
     /* About Section Mobile Polish */
@@ -6496,7 +6501,7 @@ body.no-scroll {
     .hero {
         position: relative;
         overflow: hidden;
-        height: 100vh;
+        height: 70vh;
         width: 100%;
     }
 
@@ -6549,5 +6554,57 @@ body.no-scroll {
         width: 100%;
         max-width: 100%;
         padding: 0 1rem;
+    }
+}
+
+/* Additional mobile hero optimization for small screens */
+@media (max-width: 768px) {
+    .hero {
+        height: 70vh !important;
+        min-height: 70vh !important;
+        max-height: 70vh !important;
+    }
+    
+    .hero-video {
+        position: absolute !important;
+        height: 100% !important;
+        width: 100% !important;
+        top: 0 !important;
+        left: 0 !important;
+    }
+    
+    .hero .cta-button {
+        font-size: 0.75rem !important;
+        border-radius: 6px !important;
+        padding: 0.8rem 1.4rem !important;
+        max-width: 220px !important;
+    }
+}
+
+/* Navigation Bar Scroll Behavior */
+.navbar {
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.navbar.hidden {
+    transform: translateY(-100%) !important;
+    opacity: 0;
+}
+
+.navbar.visible {
+    transform: translateY(0) !important;
+    opacity: 1;
+}
+
+/* Mobile specific scroll behavior */
+@media (max-width: 768px) {
+    .navbar.hidden {
+        transform: translateY(-100%) !important;
+        opacity: 0 !important;
+    }
+    
+    .navbar.visible {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
     }
 }

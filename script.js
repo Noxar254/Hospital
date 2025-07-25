@@ -22,6 +22,46 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Navigation Bar Scroll Behavior
+let lastScrollTop = 0;
+let ticking = false;
+
+function updateNavbar() {
+    const navbar = document.querySelector('.navbar');
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // More sensitive for mobile - hide after 50px instead of 100px
+    const threshold = window.innerWidth <= 768 ? 50 : 100;
+    
+    if (currentScroll > lastScrollTop && currentScroll > threshold) {
+        // Scrolling down - hide navbar
+        navbar.classList.add('hidden');
+        navbar.classList.remove('visible');
+    } else if (currentScroll < lastScrollTop || currentScroll <= threshold) {
+        // Scrolling up or at top - show navbar
+        navbar.classList.remove('hidden');
+        navbar.classList.add('visible');
+    }
+    
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    ticking = false;
+}
+
+function requestNavbarUpdate() {
+    if (!ticking) {
+        requestAnimationFrame(updateNavbar);
+        ticking = true;
+    }
+}
+
+// Initialize navbar as visible
+document.addEventListener('DOMContentLoaded', function() {
+    const navbar = document.querySelector('.navbar');
+    navbar.classList.add('visible');
+});
+
+window.addEventListener('scroll', requestNavbarUpdate, { passive: true });
+
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', function() {
     const mobileToggle = document.getElementById('mobileToggle');
