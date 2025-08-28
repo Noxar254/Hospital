@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive medical services at Hopewell Hospital including speciality care, diagnostics, and patient-centered healthcare solutions.">
+    <meta name="keywords" content="medical services, hospital services, healthcare, specialty care, diagnostic services, patient care">
+    <title>Medical Services | Hopewell Hospital - Comprehensive Healthcare</title>
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://hopewellhospital.com/services/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Medical Services | Hopewell Hospital">
+    <meta property="og:description" content="Comprehensive medical services and specialty care at Hopewell Hospital.">
+    <meta property="og:url" content="https://hopewellhospital.com/services/">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Font loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    
+    <!-- Services Directory Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Hopewell Hospital Medical Services",
+        "description": "Comprehensive medical services and specialty care offered at Hopewell Hospital",
+        "url": "https://hopewellhospital.com/services/",
+        "numberOfItems": 5,
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                    "@type": "MedicalOrganization",
+                    "name": "Homecare Services",
+                    "url": "https://hopewellhospital.com/homecare.html",
+                    "description": "Professional home healthcare services and medical support"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                    "@type": "DiagnosticLab", 
+                    "name": "Laboratory Services",
+                    "url": "https://hopewellhospital.com/services/laboratory.html",
+                    "description": "Comprehensive diagnostic testing and laboratory services"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                    "@type": "MedicalOrganization",
+                    "name": "Maternity Services",
+                    "url": "https://hopewellhospital.com/services/maternity.html", 
+                    "description": "Expert maternity care and maternal health services"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 4,
+                "item": {
+                    "@type": "PsychologicalTreatment",
+                    "name": "Mental Health Services",
+                    "url": "https://hopewellhospital.com/services/mental-health.html",
+                    "description": "Comprehensive mental health and psychological support"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 5,
+                "item": {
+                    "@type": "MedicalOrganization",
+                    "name": "Fertility Services", 
+                    "url": "https://hopewellhospital.com/services/fertility.html",
+                    "description": "Advanced fertility treatments and reproductive health"
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <style>
+        .services-hero {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .services-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-bottom: 3px solid;
+        }
+        
+        .service-header.homecare { border-bottom-color: #2563eb; }
+        .service-header.laboratory { border-bottom-color: #059669; }
+        .service-header.maternity { border-bottom-color: #ec4899; }
+        .service-header.mental-health { border-bottom-color: #10b981; }
+        .service-header.fertility { border-bottom-color: #8b5cf6; }
+        
+        .service-header h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .service-header.homecare h3 { color: #2563eb; }
+        .service-header.laboratory h3 { color: #059669; }
+        .service-header.maternity h3 { color: #ec4899; }
+        .service-header.mental-health h3 { color: #10b981; }
+        .service-header.fertility h3 { color: #8b5cf6; }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-body {
+            padding: 2rem;
+        }
+        
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        
+        .service-features li {
+            padding: 0.5rem 0;
+            color: #4b5563;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .service-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+        
+        .service-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .service-btn.homecare { background: #2563eb; }
+        .service-btn.laboratory { background: #059669; }
+        .service-btn.maternity { background: #ec4899; }
+        .service-btn.mental-health { background: #10b981; }
+        .service-btn.fertility { background: #8b5cf6; }
+        
+        .service-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-section {
+            background: #f9fafb;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .main-btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .main-btn:hover {
+            background: #1d4ed8;
+        }
+        
+        .main-btn-secondary {
+            background: #6b7280;
+        }
+        
+        .main-btn-secondary:hover {
+            background: #4b5563;
+        }
+    </style>
+</head>
+<body>
+    <section class="services-hero">
+        <div class="services-content">
+            <h1>Our Medical Services</h1>
+            <p>Comprehensive healthcare services designed to meet all your medical needs</p>
+        </div>
+    </section>
+    
+    <div class="services-content">
+        <section>
+            <h2>Specialized Care Departments</h2>
+            <p>At Hopewell Hospital, we offer a complete range of medical services delivered by experienced healthcare professionals using the latest medical technology and evidence-based practices.</p>
+            
+            <div class="services-grid">
+                <!-- Homecare Services -->
+                <div class="service-card">
+                    <div class="service-header homecare">
+                        <div class="service-icon">
+                            <i class="fas fa-home" style="color: #2563eb;"></i>
+                        </div>
+                        <h3>Homecare Services</h3>
+                        <p>Professional home healthcare bringing medical care to your doorstep</p>
+                    </div>
+                    <div class="service-body">
+                        <ul class="service-features">
+                            <li>Skilled nursing care at home</li>
+                            <li>Physical therapy and rehabilitation</li>
+                            <li>Medical equipment and supplies</li>
+                            <li>Chronic disease management</li>
+                            <li>Post-surgical care</li>
+                        </ul>
+                        <a href="../homecare.html" class="service-btn homecare">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Laboratory Services -->
+                <div class="service-card">
+                    <div class="service-header laboratory">
+                        <div class="service-icon">
+                            <i class="fas fa-microscope" style="color: #059669;"></i>
+                        </div>
+                        <h3>Laboratory Services</h3>
+                        <p>State-of-the-art diagnostic testing for accurate health assessment</p>
+                    </div>
+                    <div class="service-body">
+                        <ul class="service-features">
+                            <li>Complete blood testing panels</li>
+                            <li>Pathology and microbiology</li>
+                            <li>Genetic testing services</li>
+                            <li>Rapid diagnostic testing</li>
+                            <li>Specialized biomarker analysis</li>
+                        </ul>
+                        <a href="laboratory.html" class="service-btn laboratory">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Maternity Services -->
+                <div class="service-card">
+                    <div class="service-header maternity">
+                        <div class="service-icon">
+                            <i class="fas fa-baby" style="color: #ec4899;"></i>
+                        </div>
+                        <h3>Maternity Services</h3>
+                        <p>Comprehensive maternal care for a safe pregnancy journey</p>
+                    </div>
+                    <div class="service-body">
+                        <ul class="service-features">
+                            <li>Prenatal care and monitoring</li>
+                            <li>Labor and delivery services</li>
+                            <li>High-risk pregnancy management</li>
+                            <li>Postpartum care and support</li>
+                            <li>Newborn care and pediatrics</li>
+                        </ul>
+                        <a href="maternity.html" class="service-btn maternity">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Mental Health Services -->
+                <div class="service-card">
+                    <div class="service-header mental-health">
+                        <div class="service-icon">
+                            <i class="fas fa-brain" style="color: #10b981;"></i>
+                        </div>
+                        <h3>Mental Health Services</h3>
+                        <p>Professional psychological support and mental wellness care</p>
+                    </div>
+                    <div class="service-body">
+                        <ul class="service-features">
+                            <li>Individual and group therapy</li>
+                            <li>Psychiatric evaluation and treatment</li>
+                            <li>Crisis intervention services</li>
+                            <li>Family and couples counseling</li>
+                            <li>Addiction recovery programs</li>
+                        </ul>
+                        <a href="mental-health.html" class="service-btn mental-health">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Fertility Services -->
+                <div class="service-card">
+                    <div class="service-header fertility">
+                        <div class="service-icon">
+                            <i class="fas fa-heart" style="color: #8b5cf6;"></i>
+                        </div>
+                        <h3>Fertility Services</h3>
+                        <p>Advanced reproductive medicine for your family-building journey</p>
+                    </div>
+                    <div class="service-body">
+                        <ul class="service-features">
+                            <li>IVF and assisted reproduction</li>
+                            <li>Fertility testing and evaluation</li>
+                            <li>Egg and sperm freezing</li>
+                            <li>Male fertility treatments</li>
+                            <li>Genetic counseling services</li>
+                        </ul>
+                        <a href="fertility.html" class="service-btn fertility">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <section class="cta-section">
+        <div class="services-content">
+            <h2>Ready to Experience Exceptional Healthcare?</h2>
+            <p>Contact us today to schedule an appointment or learn more about our services</p>
+            <a href="../appointment.html" class="main-btn">Book Appointment</a>
+            <a href="../index.html" class="main-btn main-btn-secondary">Back to Home</a>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - Hopewell Hospital</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Firebase v9 SDK -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbqzF5Yxgy-_O13bNeRogIkLb4MThlBYE",
+            authDomain: "hopewell-health-3bf9a.firebaseapp.com",
+            projectId: "hopewell-health-3bf9a",
+            storageBucket: "hopewell-health-3bf9a.firebasestorage.app",
+            messagingSenderId: "500281950350",
+            appId: "1:500281950350:web:0a77ec2c5ec06a76bc49df",
+            measurementId: "G-RS8YX8146F"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Make Firebase available globally
+        window.firebase = { auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut };
+        
+        console.log("🔥 Firebase Auth initialized");
+    </script>
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --dark-blue: #1d4ed8;
+            --pink-accent: #ec4899;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-600: #4b5563;
+            --gray-800: #1f2937;
+            --success-green: #10b981;
+            --error-red: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .signin-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            max-width: 1100px;
+            width: 100%;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo-section .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo-section .logo img {
+            width: 100px;
+            height: 100px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .logo-section .logo-text {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2563eb;
+            letter-spacing: -0.5px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-section .tagline {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+
+        .signin-container {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .signin-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--pink-accent));
+            border-radius: 16px 16px 0 0;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-600);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.875rem 1rem 0.875rem 2.75rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .signin-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: var(--white);
+            padding: 0.875rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .signin-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .signup-btn {
+            width: 100%;
+            background: var(--white);
+            color: var(--primary-blue);
+            padding: 0.875rem;
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        .divider span {
+            background: var(--white);
+            padding: 0 1rem;
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            position: relative;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+
+        .error-message {
+            background: var(--error-red);
+            color: var(--white);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .success-message {
+            background: var(--success-green);
+            color: var(--white);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+                align-items: flex-start;
+                padding-top: 2rem;
+            }
+            
+            .signin-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                max-width: 400px;
+                width: 100%;
+            }
+            
+            .logo-section {
+                order: 1;
+                padding: 2rem 1rem;
+                margin-bottom: 1rem;
+                background: rgba(255, 255, 255, 0.95);
+                -webkit-backdrop-filter: blur(10px);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(37, 99, 235, 0.1);
+            }
+            
+            .logo-section .logo img {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .logo-section .logo-text {
+                font-size: 1.9rem;
+                margin-top: 0.5rem;
+            }
+            
+            .logo-section .tagline {
+                font-size: 1rem;
+                margin-top: 0.5rem;
+            }
+            
+            .signin-container {
+                order: 2;
+                padding: 2.5rem 1.5rem;
+                margin-top: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.25rem;
+                padding-top: 1.5rem;
+            }
+            
+            .signin-wrapper {
+                gap: 2.5rem;
+                max-width: 350px;
+            }
+            
+            .logo-section {
+                padding: 1.5rem 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .logo-section .logo img {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .logo-section .logo-text {
+                font-size: 1.7rem;
+            }
+            
+            .logo-section .tagline {
+                font-size: 0.95rem;
+            }
+            
+            .signin-container {
+                padding: 2rem 1.25rem;
+                margin-top: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .input-group input {
+                padding: 1rem 1rem 1rem 2.75rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Extra small screens and landscape phones */
+        @media (max-width: 375px) {
+            .signin-wrapper {
+                gap: 2rem;
+                max-width: 320px;
+            }
+            
+            .logo-section {
+                padding: 1.25rem 0.75rem;
+                margin-bottom: 1rem;
+            }
+            
+            .logo-section .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .signin-container {
+                padding: 1.75rem 1rem;
+                margin-top: 1rem;
+            }
+        }
+
+        /* Landscape orientation for phones */
+        @media (max-height: 600px) and (orientation: landscape) {
+            body {
+                padding: 0.5rem;
+                align-items: flex-start;
+            }
+            
+            .signin-wrapper {
+                gap: 1.5rem;
+                min-height: auto;
+            }
+            
+            .logo-section {
+                padding: 1rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .logo-section .logo img {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .logo-section .logo-text {
+                font-size: 1.4rem;
+            }
+            
+            .signin-container {
+                padding: 1.5rem;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signin-wrapper">
+        <!-- Left Column - Logo Section -->
+        <div class="logo-section">
+            <div class="logo">
+                <img src="images/logo.png" alt="Hopewell Hospital Logo">
+                <span class="logo-text">Hopewell Hospital</span>
+            </div>
+            <div class="tagline">Admin Portal</div>
+        </div>
+
+        <!-- Right Column - Sign In Form -->
+        <div class="signin-container">
+            <div class="header">
+                <h1>Admin Access</h1>
+                <p>Sign in to the hospital management system</p>
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i>
+                <span></span>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <span></span>
+            </div>
+
+            <form id="signinForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="signin-btn" id="signinBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Sign In</span>
+                </button>
+            </form>
+
+            <div class="divider">
+                <span>Need admin account access?</span>
+            </div>
+
+            <button type="button" class="signup-btn" id="signupBtn">
+                <i class="fas fa-user-shield"></i>
+                <span>Request Access</span>
+            </button>
+
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Hospital</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const signinForm = document.getElementById('signinForm');
+            const signupBtn = document.getElementById('signupBtn');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+
+            // Sign In Form Handler
+            signinForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const signinBtn = document.getElementById('signinBtn');
+                
+                if (!email || !password) {
+                    showError('Please fill in all fields');
+                    return;
+                }
+
+                // Show loading state
+                signinBtn.disabled = true;
+                signinBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Signing In...</span>';
+                hideMessages();
+
+                try {
+                    // Sign in with Firebase
+                    const userCredential = await window.firebase.signInWithEmailAndPassword(
+                        window.firebase.auth, 
+                        email, 
+                        password
+                    );
+                    
+                    const user = userCredential.user;
+                    console.log('✅ Sign in successful:', user.uid);
+                    
+                    showSuccess(`Admin access granted! Welcome ${user.email}`);
+                    
+                    // Redirect to admin dashboard after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 2000);
+                    
+                } catch (error) {
+                    console.error('❌ Sign in error:', error);
+                    handleAuthError(error);
+                } finally {
+                    // Reset button
+                    signinBtn.disabled = false;
+                    signinBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> <span>Sign In</span>';
+                }
+            });
+
+            // Sign Up Button Handler
+            signupBtn.addEventListener('click', async function() {
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                
+                if (!email || !password) {
+                    showError('Please fill in email and password to request admin access');
+                    return;
+                }
+
+                if (password.length < 6) {
+                    showError('Password must be at least 6 characters long');
+                    return;
+                }
+
+                // Show loading state
+                signupBtn.disabled = true;
+                signupBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Requesting Access...</span>';
+                hideMessages();
+
+                try {
+                    // Create account with Firebase
+                    const userCredential = await window.firebase.createUserWithEmailAndPassword(
+                        window.firebase.auth, 
+                        email, 
+                        password
+                    );
+                    
+                    const user = userCredential.user;
+                    console.log('✅ Account created:', user.uid);
+                    
+                    showSuccess(`Admin account created successfully! Welcome ${user.email}`);
+                    
+                    // Redirect to admin dashboard after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 2000);
+                    
+                } catch (error) {
+                    console.error('❌ Sign up error:', error);
+                    handleAuthError(error);
+                } finally {
+                    // Reset button
+                    signupBtn.disabled = false;
+                    signupBtn.innerHTML = '<i class="fas fa-user-shield"></i> <span>Request Access</span>';
+                }
+            });
+
+            function handleAuthError(error) {
+                let message = 'An error occurred. Please try again.';
+                
+                switch (error.code) {
+                    case 'auth/user-not-found':
+                        message = 'No account found with this email address.';
+                        break;
+                    case 'auth/wrong-password':
+                        message = 'Incorrect password.';
+                        break;
+                    case 'auth/email-already-in-use':
+                        message = 'An account with this email already exists.';
+                        break;
+                    case 'auth/weak-password':
+                        message = 'Password is too weak. Please choose a stronger password.';
+                        break;
+                    case 'auth/invalid-email':
+                        message = 'Please enter a valid email address.';
+                        break;
+                    case 'auth/too-many-requests':
+                        message = 'Too many failed attempts. Please try again later.';
+                        break;
+                    default:
+                        message = error.message || message;
+                }
+                
+                showError(message);
+            }
+
+            function showError(message) {
+                errorMessage.querySelector('span').textContent = message;
+                errorMessage.style.display = 'flex';
+                successMessage.style.display = 'none';
+            }
+
+            function showSuccess(message) {
+                successMessage.querySelector('span').textContent = message;
+                successMessage.style.display = 'flex';
+                errorMessage.style.display = 'none';
+            }
+
+            function hideMessages() {
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

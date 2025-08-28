@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="format-detection" content="telephone=yes">
+    
+    <!-- SEO Meta Tags -->
+    <title>Book Medical Appointment Online | Hopewell Hospital - Easy Scheduling</title>
+    <meta name="description" content="Book your medical appointment online at Hopewell Hospital. Easy scheduling for consultations, check-ups, specialist visits, diagnostic tests, and medical procedures. Available 24/7 online booking.">
+    <meta name="keywords" content="book appointment, medical appointment, doctor consultation, hospital appointment, online booking, medical check-up, specialist appointment, diagnostic appointment, health screening, medical examination">
+    <meta name="author" content="Hopewell Hospital">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Book Medical Appointment Online | Hopewell Hospital">
+    <meta property="og:description" content="Easy online appointment booking for medical consultations, check-ups, and specialist visits at Hopewell Hospital. Book your appointment in minutes.">
+    <meta property="og:image" content="https://hopewellhospital.com/images/appointment-og.jpg">
+    <meta property="og:url" content="https://hopewellhospital.com/appointment.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Book Medical Appointment Online | Hopewell Hospital">
+    <meta name="twitter:description" content="Easy online appointment booking for medical consultations and specialist visits. Book your appointment in minutes.">
+    <meta name="twitter:image" content="https://hopewellhospital.com/images/appointment-twitter.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://hopewellhospital.com/appointment.html">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Optimized font loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="appointment.css">
+    
+    <!-- Medical Appointment Booking Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MedicalBusiness",
+        "name": "Hopewell Hospital Appointment Booking",
+        "description": "Online appointment booking system for medical consultations, check-ups, specialist visits, and diagnostic procedures at Hopewell Hospital.",
+        "url": "https://hopewellhospital.com/appointment.html",
+        "parentOrganization": {
+            "@type": "Hospital",
+            "name": "Hopewell Hospital",
+            "url": "https://hopewellhospital.com"
+        },
+        "availableService": [
+            {
+                "@type": "MedicalProcedure",
+                "name": "General Consultation",
+                "description": "Comprehensive medical consultation with experienced physicians"
+            },
+            {
+                "@type": "MedicalProcedure",
+                "name": "Specialist Consultation",
+                "description": "Consultation with medical specialists in various fields"
+            },
+            {
+                "@type": "DiagnosticProcedure",
+                "name": "Health Check-up",
+                "description": "Comprehensive health screening and preventive care examination"
+            },
+            {
+                "@type": "DiagnosticProcedure",
+                "name": "Laboratory Tests",
+                "description": "Various diagnostic laboratory tests and blood work"
+            },
+            {
+                "@type": "ImagingTest",
+                "name": "Medical Imaging",
+                "description": "X-rays, ultrasounds, and other diagnostic imaging services"
+            }
+        ],
+        "medicalSpecialty": [
+            "Family Medicine",
+            "Internal Medicine",
+            "Cardiology",
+            "Dermatology",
+            "Endocrinology",
+            "Gastroenterology",
+            "Neurology",
+            "Obstetrics and Gynecology",
+            "Orthopedics",
+            "Pediatrics",
+            "Psychiatry",
+            "Pulmonology",
+            "Urology"
+        ],
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "08:00",
+                "closes": "18:00"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Saturday"],
+                "opens": "09:00",
+                "closes": "15:00"
+            }
+        ],
+        "telephone": "+1-555-HOPEWELL",
+        "email": "appointments@hopewellhospital.com",
+        "acceptsReservations": true,
+        "priceRange": "$$"
+    }
+    </script>
+    
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://hopewellhospital.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Book Appointment",
+                "item": "https://hopewellhospital.com/appointment.html"
+            }
+        ]
+    }
+    </script>
+    
+    <!-- WebApplication Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Hopewell Hospital Appointment Booking System",
+        "description": "Online appointment booking system for scheduling medical consultations and procedures",
+        "url": "https://hopewellhospital.com/appointment.html",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web Browser",
+        "browserRequirements": "Modern web browser with JavaScript enabled",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "description": "Free online appointment booking service"
+        },
+        "featureList": [
+            "Online appointment scheduling",
+            "Doctor selection",
+            "Time slot booking",
+            "Appointment confirmation",
+            "Medical department selection"
+        ]
+    }
+    </script>
+    
+    <!-- Firebase v9 SDK -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js';
+        import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbqzF5Yxgy-_O13bNeRogIkLb4MThlBYE",
+            authDomain: "hopewell-health-3bf9a.firebaseapp.com",
+            projectId: "hopewell-health-3bf9a",
+            storageBucket: "hopewell-health-3bf9a.firebasestorage.app",
+            messagingSenderId: "500281950350",
+            appId: "1:500281950350:web:0a77ec2c5ec06a76bc49df",
+            measurementId: "G-RS8YX8146F"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        // Make Firebase available globally for appointment.js
+        window.firebase = { db, collection, addDoc, serverTimestamp };
+        
+        console.log("🔥 Firebase initialized for appointment page");
+    </script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <!-- Top Navigation (Desktop Only) -->
+        <div class="nav-top">
+            <div class="nav-container">
+                <div class="logo-section">
+                    <div class="logo">
+                        <img src="images/logo.png" alt="Hopewell Hospital Logo" class="logo-image">
+                        <span class="logo-text">Hopewell Hospital</span>
+                    </div>
+                </div>
+                <div class="social-media">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation (Desktop) / Main Navigation (Mobile) -->
+        <div class="nav-bottom">
+            <div class="nav-container">
+                <!-- Mobile Logo and Toggle -->
+                <div class="mobile-header">
+                    <div class="mobile-logo">
+                        <img src="images/logo.png" alt="Hopewell Hospital Logo" class="logo-image">
+                        <span class="logo-text">Hopewell Hospital</span>
+                    </div>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+
+                <!-- Navigation Menu -->
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#about" class="nav-link">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="index.html#services" class="nav-link active">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html#obstetrics-gynecology">OBS & Gynecology</a></li>
+                            <li><a href="index.html#pediatrics">Pediatrics</a></li>
+                            <li><a href="index.html#dental-services">Dental Services</a></li>
+                            <li><a href="index.html#minor-surgery">Minor Surgery</a></li>
+                            <li><a href="index.html#major-surgery">Major Surgery</a></li>
+                            <li><a href="index.html#referrals">Referrals</a></li>
+                            <li><a href="index.html#specialist-doctors">Specialists</a></li>
+                            <li><a href="index.html#inpatient">In-Patient</a></li>
+                            <li><a href="index.html#outpatient">Out-Patient</a></li>
+                            <li><a href="index.html#family-planning">Family Planning</a></li>
+                            <li><a href="index.html#mother-child-care">Mother & Child Care</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#mental-health" class="nav-link">Mental Health</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#home-care" class="nav-link">Home Care</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#medical-tourism" class="nav-link">Medical Tourism</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#contact" class="nav-link contact-btn">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="appointment-main">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-video-container">
+                <video autoplay muted loop playsinline preload="auto" class="hero-video">
+                    <source src="images/doctor.mp4" type="video/mp4">
+                    <source src="images/doctor.webm" type="video/webm">
+                    <img src="images/doctor.jpg" alt="Doctor consultation" class="hero-fallback-image">
+                </video>
+                <div class="hero-overlay">
+                    <div class="hero-content">
+                        <h1>Book Your Appointment</h1>
+                        <p>Schedule your consultation with our healthcare professionals</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Appointment Form Section -->
+        <section class="appointment-form-section">
+            <div class="container">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h2>Schedule Your Healthcare Consultation</h2>
+                        <p>Fill out the form below and we'll get back to you within 24 hours to confirm your appointment.</p>
+                    </div>
+
+                    <form class="appointment-form" id="appointmentForm">
+                        <!-- Personal Information -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-user"></i> Personal Information</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number *</label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dateOfBirth">Date of Birth *</label>
+                                    <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">Gender *</label>
+                                    <select id="gender" name="gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                        <option value="prefer-not-to-say">Prefer not to say</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Appointment Details -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-calendar-alt"></i> Appointment Details</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="appointmentType">Appointment Type *</label>
+                                    <select id="appointmentType" name="appointmentType" required>
+                                        <option value="">Select Appointment Type</option>
+                                        <option value="telemedicine">Telemedicine (Video Call)</option>
+                                        <option value="in-person">In-Person Visit</option>
+                                        <option value="phone-consultation">Phone Consultation</option>
+                                        <option value="home-visit">Home Visit</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="department">Department/Service *</label>
+                                    <select id="department" name="department" required>
+                                        <option value="">Select Department</option>
+                                        <option value="general-medicine">General Medicine</option>
+                                        <option value="obs-gynecology">OBS & Gynecology</option>
+                                        <option value="pediatrics">Pediatrics</option>
+                                        <option value="dental">Dental Services</option>
+                                        <option value="mental-health">Mental Health</option>
+                                        <option value="cardiology">Cardiology</option>
+                                        <option value="dermatology">Dermatology</option>
+                                        <option value="orthopedics">Orthopedics</option>
+                                        <option value="ophthalmology">Ophthalmology</option>
+                                        <option value="ent">ENT (Ear, Nose, Throat)</option>
+                                        <option value="emergency">Emergency Care</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="preferredDate">Preferred Date *</label>
+                                    <input type="date" id="preferredDate" name="preferredDate" required min="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="preferredTime">Preferred Time *</label>
+                                    <select id="preferredTime" name="preferredTime" required>
+                                        <option value="">Select Time</option>
+                                        <option value="08:00">08:00 AM</option>
+                                        <option value="08:30">08:30 AM</option>
+                                        <option value="09:00">09:00 AM</option>
+                                        <option value="09:30">09:30 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="10:30">10:30 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="11:30">11:30 AM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                        <option value="12:30">12:30 PM</option>
+                                        <option value="13:00">01:00 PM</option>
+                                        <option value="13:30">01:30 PM</option>
+                                        <option value="14:00">02:00 PM</option>
+                                        <option value="14:30">02:30 PM</option>
+                                        <option value="15:00">03:00 PM</option>
+                                        <option value="15:30">03:30 PM</option>
+                                        <option value="16:00">04:00 PM</option>
+                                        <option value="16:30">04:30 PM</option>
+                                        <option value="17:00">05:00 PM</option>
+                                        <option value="17:30">05:30 PM</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="urgency">Urgency Level *</label>
+                                    <select id="urgency" name="urgency" required>
+                                        <option value="">Select Urgency</option>
+                                        <option value="routine" data-color="#10b981">Routine (1-2 weeks)</option>
+                                        <option value="priority" data-color="#f59e0b">Priority (3-5 days)</option>
+                                        <option value="urgent" data-color="#ef4444">Urgent (Within 24 hours)</option>
+                                        <option value="emergency" data-color="#dc2626">Emergency (Immediate)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="reasonForVisit">Reason for Visit *</label>
+                                    <textarea id="reasonForVisit" name="reasonForVisit" rows="3" placeholder="Please describe your symptoms, concerns, or reason for the appointment..." required></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Medical History -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-notes-medical"></i> Medical Information</h3>
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label for="currentMedications">Current Medications</label>
+                                    <textarea id="currentMedications" name="currentMedications" rows="2" placeholder="List any medications you are currently taking..."></textarea>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="allergies">Allergies</label>
+                                    <textarea id="allergies" name="allergies" rows="2" placeholder="List any known allergies (medications, food, environmental)..."></textarea>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="medicalHistory">Previous Medical History</label>
+                                    <textarea id="medicalHistory" name="medicalHistory" rows="3" placeholder="Any previous surgeries, chronic conditions, or significant medical history..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Insurance & Emergency Contact -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-shield-alt"></i> Insurance & Emergency Contact</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="insuranceProvider">Insurance Provider</label>
+                                    <input type="text" id="insuranceProvider" name="insuranceProvider" placeholder="Your insurance company">
+                                </div>
+                                <div class="form-group">
+                                    <label for="policyNumber">Policy Number</label>
+                                    <input type="text" id="policyNumber" name="policyNumber" placeholder="Insurance policy number">
+                                </div>
+                                <div class="form-group">
+                                    <label for="emergencyContactName">Emergency Contact Name *</label>
+                                    <input type="text" id="emergencyContactName" name="emergencyContactName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="emergencyContactPhone">Emergency Contact Phone *</label>
+                                    <input type="tel" id="emergencyContactPhone" name="emergencyContactPhone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="emergencyContactRelation">Relationship *</label>
+                                    <select id="emergencyContactRelation" name="emergencyContactRelation" required>
+                                        <option value="">Select Relationship</option>
+                                        <option value="spouse">Spouse</option>
+                                        <option value="parent">Parent</option>
+                                        <option value="child">Child</option>
+                                        <option value="sibling">Sibling</option>
+                                        <option value="friend">Friend</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-info-circle"></i> Additional Information</h3>
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label for="specialRequests">Special Requests or Accommodations</label>
+                                    <textarea id="specialRequests" name="specialRequests" rows="3" placeholder="Any special accommodations, accessibility needs, or requests..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="preferredLanguage">Preferred Language</label>
+                                    <select id="preferredLanguage" name="preferredLanguage">
+                                        <option value="english">English</option>
+                                        <option value="swahili">Swahili</option>
+                                        <option value="kikuyu">Kikuyu</option>
+                                        <option value="luo">Luo</option>
+                                        <option value="luhya">Luhya</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="hearAboutUs">How did you hear about us?</label>
+                                    <select id="hearAboutUs" name="hearAboutUs">
+                                        <option value="">Select Option</option>
+                                        <option value="website">Website</option>
+                                        <option value="social-media">Social Media</option>
+                                        <option value="referral">Referral from Friend/Family</option>
+                                        <option value="doctor-referral">Doctor Referral</option>
+                                        <option value="insurance">Insurance Provider</option>
+                                        <option value="advertisement">Advertisement</option>
+                                        <option value="search-engine">Search Engine</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Consent and Terms -->
+                        <div class="form-section">
+                            <div class="consent-section">
+                                <div class="consent-item">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="hipaaConsent" name="hipaaConsent" required>
+                                        <span class="checkmark"></span>
+                                        <span class="checkbox-text">I consent to the collection, use, and disclosure of my health information as outlined in the <a href="#" class="privacy-link">Privacy Policy</a> and HIPAA Authorization.</span>
+                                    </label>
+                                </div>
+                                <div class="consent-item">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="appointmentTerms" name="appointmentTerms" required>
+                                        <span class="checkmark"></span>
+                                        <span class="checkbox-text">I agree to the <a href="#" class="privacy-link">Terms and Conditions</a> for appointment scheduling and understand the cancellation policy.</span>
+                                    </label>
+                                </div>
+                                <div class="consent-item">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="communicationConsent" name="communicationConsent">
+                                        <span class="checkmark"></span>
+                                        <span class="checkbox-text">I consent to receive appointment reminders and health-related communications via email, SMS, or phone.</span>
+                                    </label>
+                                </div>
+                                <div class="consent-item">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="telemedicineConsent" name="telemedicineConsent">
+                                        <span class="checkmark"></span>
+                                        <span class="checkbox-text">If selecting telemedicine, I understand the benefits and limitations of virtual consultations and consent to this mode of care.</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-submit">
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Book Appointment</span>
+                            </button>
+                            <p class="submit-note">
+                                <i class="fas fa-info-circle"></i>
+                                You will receive a confirmation email within 24 hours. For urgent matters, please call our emergency line at <a href="tel:+254796780345">+254 796 780 345</a>.
+                            </p>
+                        </div>
+
+                        <!-- WhatsApp Booking Alternative -->
+                        <div class="whatsapp-booking-section">
+                            <div class="whatsapp-divider">
+                                <span>OR</span>
+                            </div>
+                            <div class="whatsapp-booking-content">
+                                <h3><i class="fab fa-whatsapp"></i> Book via WhatsApp</h3>
+                                <p>Prefer a quick booking? Send us a WhatsApp message and we'll confirm your appointment instantly!</p>
+                                <button type="button" class="whatsapp-booking-btn" id="whatsappBookingBtn">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <span>Book on WhatsApp</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency Contact Section -->
+        <section class="emergency-contact">
+            <div class="container">
+                <div class="emergency-content">
+                    <div class="emergency-text">
+                        <h3>Need Immediate Medical Attention?</h3>
+                        <p>For life-threatening emergencies, don't wait for an appointment. Contact our emergency services immediately.</p>
+                    </div>
+                    <div class="emergency-actions">
+                        <a href="tel:+254796780345" class="emergency-btn">
+                            <i class="fas fa-phone"></i>
+                            <span>Emergency Hotline</span>
+                        </a>
+                        <a href="tel:911" class="emergency-btn secondary">
+                            <i class="fas fa-ambulance"></i>
+                            <span>Call 911</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Contact Button -->
+    <div class="floating-contact">
+        <button class="floating-contact-btn" id="floatingContactBtn" title="WhatsApp Us">
+            <i class="fab fa-whatsapp"></i>
+        </button>
+    </div>
+
+    <!-- Floating Contact Button -->
+    <div class="floating-contact">
+        <button class="floating-contact-btn" id="floatingContactBtn" title="WhatsApp Us">
+            <i class="fab fa-whatsapp"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="appointment.js"></script>
+</body>
+</html>

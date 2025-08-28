@@ -1,0 +1,35 @@
+User-agent: *
+Allow: /
+
+# Disallow admin areas
+Disallow: /signin.html
+Disallow: /dashboard.html
+Disallow: /firebase-*
+
+# Allow important files
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# Sitemap location
+Sitemap: https://www.hopewellhospital.online/sitemap.xml
+
+# Crawl delay for polite crawling
+Crawl-delay: 1
+
+# Google-specific directives
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Bing-specific directives  
+User-agent: bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block specific files that shouldn't be indexed
+Disallow: /firebase-config.js
+Disallow: /firebase-forms.js
+Disallow: /*.log
+Disallow: /README.md
+Disallow: /EMAIL_SETUP_GUIDE.md
+Disallow: /FIREBASE_*.md

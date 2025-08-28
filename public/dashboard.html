@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Hopewell Hospital</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Firebase v9 SDK -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getAuth, signOut } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+        import { getFirestore, collection, onSnapshot, query, orderBy, limit, doc, updateDoc } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbqzF5Yxgy-_O13bNeRogIkLb4MThlBYE",
+            authDomain: "hopewell-health-3bf9a.firebaseapp.com",
+            projectId: "hopewell-health-3bf9a",
+            storageBucket: "hopewell-health-3bf9a.firebasestorage.app",
+            messagingSenderId: "500281950350",
+            appId: "1:500281950350:web:0a77ec2c5ec06a76bc49df",
+            measurementId: "G-RS8YX8146F"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Make Firebase available globally
+        window.firebase = { auth, db, signOut, collection, onSnapshot, query, orderBy, limit, doc, updateDoc };
+        
+        console.log("🔥 Firebase initialized for dashboard");
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #2563eb;
+            --dark-blue: #1d4ed8;
+            --light-blue: #dbeafe;
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+            --error-red: #ef4444;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            /* Light theme (default) */
+            --bg-primary: var(--gray-50);
+            --bg-secondary: var(--white);
+            --text-primary: var(--gray-900);
+            --text-secondary: var(--gray-600);
+            --border-color: var(--gray-200);
+            --hover-bg: var(--gray-50);
+            --shadow: rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --hover-bg: #334155;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --gray-50: #334155;
+            --gray-100: #475569;
+            --gray-200: #64748b;
+            --white: #1e293b;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .header-info h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .header-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn-secondary {
+            background: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px var(--shadow);
+            border-left: 4px solid var(--primary-blue);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-card h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-change {
+            font-size: 0.875rem;
+            color: var(--success-green);
+        }
+
+        /* Data Sections */
+        .data-section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .refresh-btn {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            border: none;
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        /* Data Table */
+        .data-table {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            font-size: 0.875rem;
+            color: var(--text-primary);
+        }
+
+        tr:hover {
+            background: var(--hover-bg);
+        }
+
+        .timestamp {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        /* Empty states and loading */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--border-color);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .status-pending {
+            background: var(--warning-orange);
+            color: var(--white);
+        }
+
+        .status-completed {
+            background: var(--success-green);
+            color: var(--white);
+        }
+
+        .status-cancelled {
+            background: var(--error-red);
+            color: var(--white);
+        }
+
+        .status-confirmed {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* Status Dropdown */
+        .status-dropdown {
+            background: transparent;
+            border: 1px solid var(--gray-300);
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            min-width: 100px;
+            font-family: inherit;
+        }
+
+        .status-dropdown:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+        }
+
+        .status-dropdown option {
+            padding: 0.25rem;
+        }
+
+        .loading i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 0.5rem;
+            }
+
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+
+            .data-section {
+                padding: 1rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .data-table {
+                font-size: 0.8rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+
+            .btn {
+                font-size: 0.8rem;
+                padding: 0.5rem 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-info h1 {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
+            }
+
+            .data-table {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-info">
+                <h1>Admin Dashboard</h1>
+                <p>Hopewell Hospital Management System</p>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span>Real-time data</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="themeToggle" class="btn btn-secondary theme-toggle" title="Toggle dark/light mode">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                    <span id="themeText">Dark</span>
+                </button>
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-home"></i>
+                    Website
+                </a>
+                <button onclick="signOut()" class="btn btn-primary">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Sign Out
+                </button>
+            </div>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Contacts</h3>
+                <div class="stat-number" id="totalContacts">-</div>
+                <div class="stat-change">+12% from last month</div>
+            </div>
+            <div class="stat-card">
+                <h3>Newsletter Subscriptions</h3>
+                <div class="stat-number" id="totalNewsletters">-</div>
+                <div class="stat-change">+8% from last week</div>
+            </div>
+            <div class="stat-card">
+                <h3>Appointments</h3>
+                <div class="stat-number" id="totalAppointments">-</div>
+                <div class="stat-change">+15% from yesterday</div>
+            </div>
+            <div class="stat-card">
+                <h3>Home Care Bookings</h3>
+                <div class="stat-number" id="totalHomeCare">-</div>
+                <div class="stat-change">+5% from last week</div>
+            </div>
+        </div>
+
+        <!-- Recent Contact Submissions -->
+        <div class="data-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-envelope"></i>
+                    Recent Contact Submissions
+                </h2>
+                <button class="refresh-btn" onclick="refreshData()">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div class="data-table">
+                <div id="contactsLoading" class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Loading contact submissions...</p>
+                </div>
+                <div id="contactsData" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Service</th>
+                                <th>Message</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contactsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="contactsEmpty" class="empty-state" style="display: none;">
+                    <i class="fas fa-inbox"></i>
+                    <p>No contact submissions yet</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Appointments -->
+        <div class="data-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-calendar-alt"></i>
+                    Recent Appointments
+                </h2>
+                <button class="refresh-btn" onclick="refreshData()">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div class="data-table">
+                <div id="appointmentsLoading" class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Loading appointments...</p>
+                </div>
+                <div id="appointmentsData" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Department</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointmentsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="appointmentsEmpty" class="empty-state" style="display: none;">
+                    <i class="fas fa-calendar-times"></i>
+                    <p>No appointments yet</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter Subscriptions -->
+        <div class="data-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-newspaper"></i>
+                    Newsletter Subscriptions
+                </h2>
+                <button class="refresh-btn" onclick="refreshData()">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div class="data-table">
+                <div id="newsletterLoading" class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Loading newsletter subscriptions...</p>
+                </div>
+                <div id="newsletterData" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Source</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="newsletterTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="newsletterEmpty" class="empty-state" style="display: none;">
+                    <i class="fas fa-envelope-open"></i>
+                    <p>No newsletter subscriptions yet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let contactsListener, appointmentsListener, newsletterListener, homecareListener;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize real-time data listeners
+            initializeRealtimeData();
+            
+            // Initialize theme
+            initializeTheme();
+        });
+
+        function initializeRealtimeData() {
+            console.log('🔄 Initializing real-time data listeners...');
+
+            // Listen to contact submissions
+            listenToContactSubmissions();
+            
+            // Listen to appointments
+            listenToAppointments();
+            
+            // Listen to newsletter subscriptions
+            listenToNewsletterSubscriptions();
+            
+            // Listen to home care bookings
+            listenToHomeCareBookings();
+        }
+
+        function listenToContactSubmissions() {
+            const q = window.firebase.query(
+                window.firebase.collection(window.firebase.db, 'contact-submissions'),
+                window.firebase.orderBy('timestamp', 'desc'),
+                window.firebase.limit(10)
+            );
+
+            contactsListener = window.firebase.onSnapshot(q, (snapshot) => {
+                console.log('📬 Contact submissions updated:', snapshot.size);
+                
+                const contacts = [];
+                snapshot.forEach((doc) => {
+                    contacts.push({ id: doc.id, ...doc.data() });
+                });
+
+                updateContactsDisplay(contacts);
+                updateStats('totalContacts', snapshot.size);
+            }, (error) => {
+                console.error('❌ Error listening to contacts:', error);
+                showError('contactsData', 'Error loading contact submissions');
+            });
+        }
+
+        function listenToAppointments() {
+            const q = window.firebase.query(
+                window.firebase.collection(window.firebase.db, 'appointment-bookings'),
+                window.firebase.orderBy('timestamp', 'desc'),
+                window.firebase.limit(10)
+            );
+
+            appointmentsListener = window.firebase.onSnapshot(q, (snapshot) => {
+                console.log('📅 Appointments updated:', snapshot.size);
+                
+                const appointments = [];
+                snapshot.forEach((doc) => {
+                    appointments.push({ id: doc.id, ...doc.data() });
+                });
+
+                updateAppointmentsDisplay(appointments);
+                updateStats('totalAppointments', snapshot.size);
+            }, (error) => {
+                console.error('❌ Error listening to appointments:', error);
+                showError('appointmentsData', 'Error loading appointments');
+            });
+        }
+
+        function listenToNewsletterSubscriptions() {
+            const q = window.firebase.query(
+                window.firebase.collection(window.firebase.db, 'newsletter-subscriptions'),
+                window.firebase.orderBy('timestamp', 'desc'),
+                window.firebase.limit(10)
+            );
+
+            newsletterListener = window.firebase.onSnapshot(q, (snapshot) => {
+                console.log('📰 Newsletter subscriptions updated:', snapshot.size);
+                
+                const newsletters = [];
+                snapshot.forEach((doc) => {
+                    newsletters.push({ id: doc.id, ...doc.data() });
+                });
+
+                updateNewsletterDisplay(newsletters);
+                updateStats('totalNewsletters', snapshot.size);
+            }, (error) => {
+                console.error('❌ Error listening to newsletters:', error);
+                showError('newsletterData', 'Error loading newsletter subscriptions');
+            });
+        }
+
+        function listenToHomeCareBookings() {
+            const q = window.firebase.query(
+                window.firebase.collection(window.firebase.db, 'homecare-bookings'),
+                window.firebase.orderBy('timestamp', 'desc'),
+                window.firebase.limit(10)
+            );
+
+            homecareListener = window.firebase.onSnapshot(q, (snapshot) => {
+                console.log('🏠 Home care bookings updated:', snapshot.size);
+                updateStats('totalHomeCare', snapshot.size);
+            }, (error) => {
+                console.error('❌ Error listening to home care:', error);
+            });
+        }
+
+        function updateContactsDisplay(contacts) {
+            const loading = document.getElementById('contactsLoading');
+            const data = document.getElementById('contactsData');
+            const empty = document.getElementById('contactsEmpty');
+            const tbody = document.getElementById('contactsTableBody');
+
+            loading.style.display = 'none';
+
+            if (contacts.length === 0) {
+                data.style.display = 'none';
+                empty.style.display = 'block';
+                return;
+            }
+
+            empty.style.display = 'none';
+            data.style.display = 'block';
+
+            tbody.innerHTML = contacts.map(contact => `
+                <tr>
+                    <td>${contact.fullName || 'N/A'}</td>
+                    <td>${contact.email || 'N/A'}</td>
+                    <td>${contact.phone || contact.phoneNumber || 'N/A'}</td>
+                    <td>${contact.service || 'N/A'}</td>
+                    <td>${truncateText(contact.message || 'N/A', 50)}</td>
+                    <td class="timestamp">${formatTimestamp(contact.timestamp)}</td>
+                </tr>
+            `).join('');
+        }
+
+        function updateAppointmentsDisplay(appointments) {
+            const loading = document.getElementById('appointmentsLoading');
+            const data = document.getElementById('appointmentsData');
+            const empty = document.getElementById('appointmentsEmpty');
+            const tbody = document.getElementById('appointmentsTableBody');
+
+            loading.style.display = 'none';
+
+            if (appointments.length === 0) {
+                data.style.display = 'none';
+                empty.style.display = 'block';
+                return;
+            }
+
+            empty.style.display = 'none';
+            data.style.display = 'block';
+
+            tbody.innerHTML = appointments.map(appointment => `
+                <tr>
+                    <td>${(appointment.firstName || '') + ' ' + (appointment.lastName || '')}</td>
+                    <td>${appointment.email || 'N/A'}</td>
+                    <td>${appointment.phone || appointment.phoneNumber || 'N/A'}</td>
+                    <td>${appointment.department || 'N/A'}</td>
+                    <td>${appointment.preferredDate || 'N/A'}</td>
+                    <td>
+                        <select class="status-dropdown" 
+                                onchange="updateAppointmentStatus('${appointment.id}', this.value)"
+                                data-current-status="${appointment.status || 'pending'}">
+                            <option value="pending" ${(appointment.status || 'pending') === 'pending' ? 'selected' : ''}>Pending</option>
+                            <option value="confirmed" ${appointment.status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
+                            <option value="completed" ${appointment.status === 'completed' ? 'selected' : ''}>Completed</option>
+                            <option value="cancelled" ${appointment.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+                        </select>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateNewsletterDisplay(newsletters) {
+            const loading = document.getElementById('newsletterLoading');
+            const data = document.getElementById('newsletterData');
+            const empty = document.getElementById('newsletterEmpty');
+            const tbody = document.getElementById('newsletterTableBody');
+
+            loading.style.display = 'none';
+
+            if (newsletters.length === 0) {
+                data.style.display = 'none';
+                empty.style.display = 'block';
+                return;
+            }
+
+            empty.style.display = 'none';
+            data.style.display = 'block';
+
+            tbody.innerHTML = newsletters.map(newsletter => `
+                <tr>
+                    <td>${newsletter.email || 'N/A'}</td>
+                    <td>${newsletter.source || 'N/A'}</td>
+                    <td class="timestamp">${formatTimestamp(newsletter.timestamp)}</td>
+                </tr>
+            `).join('');
+        }
+
+        function updateStats(statId, count) {
+            const element = document.getElementById(statId);
+            if (element) {
+                element.textContent = count;
+            }
+        }
+
+        function formatTimestamp(timestamp) {
+            if (!timestamp) return 'N/A';
+            
+            let date;
+            if (timestamp.toDate) {
+                date = timestamp.toDate();
+            } else if (timestamp.seconds) {
+                date = new Date(timestamp.seconds * 1000);
+            } else {
+                date = new Date(timestamp);
+            }
+            
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
+
+        function truncateText(text, maxLength) {
+            if (text.length <= maxLength) return text;
+            return text.substring(0, maxLength) + '...';
+        }
+
+        function showError(containerId, message) {
+            const container = document.getElementById(containerId);
+            if (container) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>${message}</p>
+                    </div>
+                `;
+                container.style.display = 'block';
+            }
+        }
+
+        function refreshData() {
+            console.log('🔄 Refreshing data...');
+            // Real-time listeners will automatically update the data
+            // This function could trigger a manual refresh if needed
+        }
+
+        async function updateAppointmentStatus(appointmentId, newStatus) {
+            try {
+                console.log('🔄 Updating appointment status:', appointmentId, 'to', newStatus);
+                
+                const appointmentRef = window.firebase.doc(window.firebase.db, 'appointment-bookings', appointmentId);
+                await window.firebase.updateDoc(appointmentRef, {
+                    status: newStatus,
+                    lastUpdated: new Date(),
+                    updatedBy: 'admin'
+                });
+                
+                console.log('✅ Appointment status updated successfully');
+                
+                // Show success feedback
+                showStatusUpdateFeedback(appointmentId, newStatus);
+                
+            } catch (error) {
+                console.error('❌ Error updating appointment status:', error);
+                alert('Error updating appointment status. Please try again.');
+                
+                // Revert the dropdown to previous value
+                const dropdown = document.querySelector(`select[onchange*="${appointmentId}"]`);
+                if (dropdown) {
+                    const previousStatus = dropdown.dataset.currentStatus;
+                    dropdown.value = previousStatus;
+                }
+            }
+        }
+
+        function showStatusUpdateFeedback(appointmentId, newStatus) {
+            // Find the dropdown that was updated
+            const dropdown = document.querySelector(`select[onchange*="${appointmentId}"]`);
+            if (dropdown) {
+                // Update the current status data attribute
+                dropdown.dataset.currentStatus = newStatus;
+                
+                // Add a temporary success indicator
+                const originalBorder = dropdown.style.borderColor;
+                dropdown.style.borderColor = 'var(--success-green)';
+                dropdown.style.boxShadow = '0 0 0 2px rgba(16, 185, 129, 0.1)';
+                
+                setTimeout(() => {
+                    dropdown.style.borderColor = originalBorder;
+                    dropdown.style.boxShadow = '';
+                }, 2000);
+            }
+        }
+
+        async function signOut() {
+            try {
+                await window.firebase.signOut(window.firebase.auth);
+                console.log('✅ User signed out');
+                window.location.href = 'signin.html';
+            } catch (error) {
+                console.error('❌ Sign out error:', error);
+                alert('Error signing out. Please try again.');
+            }
+        }
+
+        // Cleanup listeners when page is closed
+        window.addEventListener('beforeunload', function() {
+            if (contactsListener) contactsListener();
+            if (appointmentsListener) appointmentsListener();
+            if (newsletterListener) newsletterListener();
+            if (homecareListener) homecareListener();
+        });
+
+        // Theme Management
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('dashboard-theme') || 'light';
+            setTheme(savedTheme);
+            
+            // Add event listener to theme toggle button
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('dashboard-theme', theme);
+            
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            if (theme === 'dark') {
+                themeIcon.className = 'fas fa-sun';
+                themeText.textContent = 'Light';
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                themeText.textContent = 'Dark';
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+    </script>
+</body>
+</html>

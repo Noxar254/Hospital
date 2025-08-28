@@ -1,0 +1,48 @@
+// Firebase Firestore Security Rules for Hopewell Hospital
+// Copy and paste these rules into your Firebase Console under Firestore Database > Rules
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // TEMPORARY: Allow all read and write access for testing
+    // ⚠️ WARNING: These rules are very permissive and should be tightened for production
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+
+// INSTRUCTIONS TO APPLY THESE RULES:
+// 1. Go to Firebase Console: https://console.firebase.google.com/
+// 2. Select your project: hopewell-health-3bf9a
+// 3. Go to Firestore Database → Rules tab
+// 4. Replace ALL existing rules with the rules above
+// 5. Click "Publish" to save the changes
+// 6. Wait 1-2 minutes for changes to take effect
+
+// After testing, you can use these more secure rules:
+/*
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Allow only write access to contact-submissions
+    match /contact-submissions/{document} {
+      allow write: if true;
+      allow read: if false;
+    }
+    
+    // Allow only write access to newsletter-subscriptions
+    match /newsletter-subscriptions/{document} {
+      allow write: if true;
+      allow read: if false;
+    }
+    
+    // Deny access to all other collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+*/

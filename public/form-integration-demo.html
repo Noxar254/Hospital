@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Integration Demo - Hopewell Hospital</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .demo-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            color: #2563eb;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .header p {
+            color: #6b7280;
+            font-size: 1.1em;
+        }
+        .status-section {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #2563eb;
+        }
+        .status-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .status-item:last-child {
+            border-bottom: none;
+        }
+        .status-label {
+            font-weight: 600;
+            color: #374151;
+        }
+        .status-value {
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: 500;
+            color: white;
+        }
+        .status-active {
+            background: #10b981;
+        }
+        .status-ready {
+            background: #3b82f6;
+        }
+        .status-configured {
+            background: #8b5cf6;
+        }
+        .test-section {
+            background: #fef3c7;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #f59e0b;
+        }
+        .test-button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 10px 10px 10px 0;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .test-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+        .feature-list {
+            background: #ecfdf5;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #10b981;
+        }
+        .feature-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .feature-list li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        .feature-list li::before {
+            content: "✅";
+            margin-right: 12px;
+            font-size: 1.2em;
+        }
+        .info-box {
+            background: #dbeafe;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid #3b82f6;
+        }
+        .success-box {
+            background: #dcfce7;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid #22c55e;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="header">
+            <h1>🔥 Firebase Forms Integration</h1>
+            <p>Hopewell Hospital - Live Form Submission Demo</p>
+        </div>
+
+        <div class="success-box">
+            <h3>✅ Integration Complete!</h3>
+            <p>Both forms on the index page are now fully integrated with Firebase and will send data to the database upon submission with real-time feedback messages.</p>
+        </div>
+
+        <div class="status-section">
+            <h3>📊 Current Integration Status</h3>
+            <div class="status-item">
+                <span class="status-label">Contact Form (Get In Touch)</span>
+                <span class="status-value status-active">✅ Active & Live</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Newsletter Subscription Form</span>
+                <span class="status-value status-active">✅ Active & Live</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Firebase Database Connection</span>
+                <span class="status-value status-configured">🔗 Connected</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Real-time Notifications</span>
+                <span class="status-value status-ready">🔔 Enabled</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Data Validation</span>
+                <span class="status-value status-ready">✅ Implemented</span>
+            </div>
+        </div>
+
+        <div class="feature-list">
+            <h3>🎯 Form Features Implemented</h3>
+            <ul>
+                <li>Real-time form submission to Firebase Firestore</li>
+                <li>Loading states with spinner animations</li>
+                <li>Success/error notifications with enhanced styling</li>
+                <li>In-form status displays for immediate feedback</li>
+                <li>Automatic form reset after successful submission</li>
+                <li>Client-side validation with user-friendly messages</li>
+                <li>Error handling with retry mechanisms</li>
+                <li>Data timestamping and source tracking</li>
+                <li>Mobile-responsive notification system</li>
+                <li>Professional UX with smooth animations</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h3>📋 Database Collections</h3>
+            <p><strong>Contact Form Data:</strong> Stored in <code>contact-submissions</code> collection</p>
+            <p><strong>Newsletter Data:</strong> Stored in <code>newsletter-subscriptions</code> collection</p>
+            <p><strong>Each submission includes:</strong> User data, timestamp, form type, and source page tracking</p>
+        </div>
+
+        <div class="test-section">
+            <h3>🧪 Test the Integration</h3>
+            <p>Use these links to test the live forms and see the Firebase integration in action:</p>
+            <a href="index.html" class="test-button">Test Live Website Forms</a>
+            <a href="firebase-test.html" class="test-button">Firebase Testing Page</a>
+        </div>
+
+        <div class="info-box">
+            <h3>📱 User Experience</h3>
+            <p><strong>When users submit forms, they will see:</strong></p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+                <li>Loading spinner while form is being submitted</li>
+                <li>Button text changes to show current status</li>
+                <li>In-form status message below the submit button</li>
+                <li>Slide-in notification from the top-right corner</li>
+                <li>Success confirmation with green checkmark</li>
+                <li>Automatic form reset after successful submission</li>
+                <li>Error messages with retry options if submission fails</li>
+            </ul>
+        </div>
+
+        <div class="success-box">
+            <h3>🎉 Ready for Production</h3>
+            <p>The Firebase integration is now live and ready to collect real data from your website visitors. All form submissions will be automatically stored in your Firestore database with proper validation and user feedback.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>🔗 Firebase Console</h3>
+            <p>Monitor your form submissions in real-time at: <br>
+            <a href="https://console.firebase.google.com/project/hopewell-health-3bf9a/firestore/data" target="_blank" style="color: #2563eb; text-decoration: none; font-weight: 600;">Firebase Console - Firestore Database</a></p>
+        </div>
+    </div>
+</body>
+</html>

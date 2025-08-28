@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Connection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #console-output {
+            background: #000;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔥 Firebase Connection Debugger</h1>
+        <p>This page will help us identify exactly what's wrong with the Firebase connection.</p>
+        
+        <div id="test-results"></div>
+        
+        <h3>Quick Tests:</h3>
+        <button onclick="testFirebaseConnection()">Test Firebase Connection</button>
+        <button onclick="testContactSubmission()">Test Contact Form Submission</button>
+        <button onclick="testNewsletterSubmission()">Test Newsletter Submission</button>
+        <button onclick="clearResults()">Clear Results</button>
+        
+        <div id="console-output"></div>
+    </div>
+
+    <!-- Firebase v9 SDK -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js';
+        import { getFirestore, collection, addDoc, serverTimestamp, connectFirestoreEmulator } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+
+        let consoleOutput = '';
+        
+        // Override console methods to capture output
+        const originalLog = console.log;
+        const originalError = console.error;
+        
+        function addToConsole(message, type = 'log') {
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? '#ff4444' : type === 'warn' ? '#ffaa00' : '#00ff00';
+            consoleOutput += `<div style="color: ${color}">[${timestamp}] ${message}</div>`;
+            document.getElementById('console-output').innerHTML = consoleOutput;
+            document.getElementById('console-output').scrollTop = document.getElementById('console-output').scrollHeight;
+        }
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addToConsole(args.join(' '), 'log');
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addToConsole(args.join(' '), 'error');
+        };
+
+        // Firebase configuration (same as your main site)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbqzF5Yxgy-_O13bNeRogIkLb4MThlBYE",
+            authDomain: "hopewell-health-3bf9a.firebaseapp.com",
+            projectId: "hopewell-health-3bf9a",
+            storageBucket: "hopewell-health-3bf9a.firebasestorage.app",
+            messagingSenderId: "500281950350",
+            appId: "1:500281950350:web:0a77ec2c5ec06a76bc49df",
+            measurementId: "G-RS8YX8146F"
+        };
+
+        console.log("🔥 Initializing Firebase...");
+        
+        try {
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            console.log("✅ Firebase app initialized successfully");
+            
+            const analytics = getAnalytics(app);
+            console.log("✅ Firebase Analytics initialized");
+            
+            const db = getFirestore(app);
+            console.log("✅ Firestore initialized");
+            
+            // Make Firebase available globally for testing
+            window.firebase = { app, db, collection, addDoc, serverTimestamp };
+            
+            addResult("Firebase initialization successful", "success");
+            
+        } catch (error) {
+            console.error("❌ Firebase initialization failed:", error);
+            addResult(`Firebase initialization failed: ${error.message}`, "error");
+        }
+
+        function addResult(message, type) {
+            const resultsDiv = document.getElementById('test-results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `test-result ${type}`;
+            resultDiv.textContent = message;
+            resultsDiv.appendChild(resultDiv);
+        }
+
+        // Test functions
+        window.testFirebaseConnection = function() {
+            console.log("🧪 Testing Firebase connection...");
+            
+            if (window.firebase && window.firebase.db) {
+                addResult("✅ Firebase connection established", "success");
+                console.log("Firebase db object:", window.firebase.db);
+                console.log("Available functions:", Object.keys(window.firebase));
+            } else {
+                addResult("❌ Firebase connection failed", "error");
+                console.error("Firebase not properly initialized");
+            }
+        };
+
+        window.testContactSubmission = async function() {
+            console.log("🧪 Testing contact form submission...");
+            
+            try {
+                const { db, collection, addDoc, serverTimestamp } = window.firebase;
+                
+                const testData = {
+                    fullName: "Test User",
+                    email: "test@example.com",
+                    phone: "+1234567890",
+                    service: "general-consultation",
+                    message: "This is a test message",
+                    timestamp: serverTimestamp(),
+                    formType: 'contact',
+                    source: 'test-page'
+                };
+                
+                console.log("Submitting test contact data:", testData);
+                
+                const docRef = await addDoc(collection(db, "contact-submissions"), testData);
+                console.log("✅ Test contact submitted with ID:", docRef.id);
+                addResult(`✅ Contact submission successful! ID: ${docRef.id}`, "success");
+                
+            } catch (error) {
+                console.error("❌ Contact submission failed:", error);
+                addResult(`❌ Contact submission failed: ${error.code} - ${error.message}`, "error");
+                
+                if (error.code === 'permission-denied') {
+                    addResult("🔒 SOLUTION: Update your Firebase Security Rules to allow write access", "info");
+                }
+            }
+        };
+
+        window.testNewsletterSubmission = async function() {
+            console.log("🧪 Testing newsletter submission...");
+            
+            try {
+                const { db, collection, addDoc, serverTimestamp } = window.firebase;
+                
+                const testData = {
+                    email: "newsletter-test@example.com",
+                    timestamp: serverTimestamp(),
+                    formType: 'newsletter',
+                    source: 'test-page'
+                };
+                
+                console.log("Submitting test newsletter data:", testData);
+                
+                const docRef = await addDoc(collection(db, "newsletter-subscriptions"), testData);
+                console.log("✅ Test newsletter submitted with ID:", docRef.id);
+                addResult(`✅ Newsletter submission successful! ID: ${docRef.id}`, "success");
+                
+            } catch (error) {
+                console.error("❌ Newsletter submission failed:", error);
+                addResult(`❌ Newsletter submission failed: ${error.code} - ${error.message}`, "error");
+                
+                if (error.code === 'permission-denied') {
+                    addResult("🔒 SOLUTION: Update your Firebase Security Rules to allow write access", "info");
+                }
+            }
+        };
+
+        window.clearResults = function() {
+            document.getElementById('test-results').innerHTML = '';
+            consoleOutput = '';
+            document.getElementById('console-output').innerHTML = '';
+        };
+
+        // Auto-run connection test when page loads
+        setTimeout(() => {
+            testFirebaseConnection();
+        }, 1000);
+    </script>
+</body>
+</html>
