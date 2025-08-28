@@ -11,7 +11,7 @@ Allow: /sitemap.xml
 Allow: /robots.txt
 
 # Sitemap location
-Sitemap: https://www.hopewellhospital.online/sitemap.xml
+Sitemap: https://hopewellhospital.online/sitemap.xml
 
 # Crawl delay for polite crawling
 Crawl-delay: 1
