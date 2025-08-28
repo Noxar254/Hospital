@@ -75,10 +75,11 @@
         .signin-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1000px;
+            gap: 5rem;
+            max-width: 1100px;
             width: 100%;
             align-items: center;
+            min-height: 80vh;
         }
 
         .logo-section {
@@ -87,9 +88,13 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
             background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: 16px;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
         }
 
         .logo-section .logo {
@@ -296,33 +301,48 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+                align-items: flex-start;
+                padding-top: 2rem;
+            }
+            
             .signin-wrapper {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 3rem;
                 max-width: 400px;
+                width: 100%;
             }
             
             .logo-section {
                 order: 1;
-                padding: 1rem;
+                padding: 2rem 1rem;
+                margin-bottom: 1rem;
+                background: rgba(255, 255, 255, 0.95);
+                -webkit-backdrop-filter: blur(10px);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(37, 99, 235, 0.1);
             }
             
             .logo-section .logo img {
-                width: 70px;
-                height: 70px;
+                width: 80px;
+                height: 80px;
             }
             
             .logo-section .logo-text {
-                font-size: 1.8rem;
+                font-size: 1.9rem;
+                margin-top: 0.5rem;
             }
             
             .logo-section .tagline {
                 font-size: 1rem;
+                margin-top: 0.5rem;
             }
             
             .signin-container {
                 order: 2;
-                padding: 2rem 1.5rem;
+                padding: 2.5rem 1.5rem;
+                margin-top: 1rem;
             }
             
             .header h1 {
@@ -331,12 +351,100 @@
         }
 
         @media (max-width: 480px) {
+            body {
+                padding: 0.25rem;
+                padding-top: 1.5rem;
+            }
+            
+            .signin-wrapper {
+                gap: 2.5rem;
+                max-width: 350px;
+            }
+            
+            .logo-section {
+                padding: 1.5rem 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .logo-section .logo img {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .logo-section .logo-text {
+                font-size: 1.7rem;
+            }
+            
+            .logo-section .tagline {
+                font-size: 0.95rem;
+            }
+            
             .signin-container {
-                padding: 2rem 1.5rem;
+                padding: 2rem 1.25rem;
+                margin-top: 1.5rem;
             }
             
             .header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .input-group input {
+                padding: 1rem 1rem 1rem 2.75rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Extra small screens and landscape phones */
+        @media (max-width: 375px) {
+            .signin-wrapper {
+                gap: 2rem;
+                max-width: 320px;
+            }
+            
+            .logo-section {
+                padding: 1.25rem 0.75rem;
+                margin-bottom: 1rem;
+            }
+            
+            .logo-section .logo-text {
                 font-size: 1.5rem;
+            }
+            
+            .signin-container {
+                padding: 1.75rem 1rem;
+                margin-top: 1rem;
+            }
+        }
+
+        /* Landscape orientation for phones */
+        @media (max-height: 600px) and (orientation: landscape) {
+            body {
+                padding: 0.5rem;
+                align-items: flex-start;
+            }
+            
+            .signin-wrapper {
+                gap: 1.5rem;
+                min-height: auto;
+            }
+            
+            .logo-section {
+                padding: 1rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .logo-section .logo img {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .logo-section .logo-text {
+                font-size: 1.4rem;
+            }
+            
+            .signin-container {
+                padding: 1.5rem;
+                margin-top: 0.5rem;
             }
         }
     </style>
